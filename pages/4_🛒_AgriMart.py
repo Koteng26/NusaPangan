@@ -1,6 +1,6 @@
 """
 🛒 AgriMart — Marketplace Farm-to-Consumer
-Eliminasi tengkulak, petani jual langsung ke konsumen & institusi MBG
+Petani jual langsung ke SPPG/konsumen — memangkas rantai distribusi
 """
 import streamlit as st
 import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -85,7 +85,7 @@ df_farmers = load_data("farmers.csv")
 st.markdown("""
 <div class="mart-header">
     <h2 style="margin:0;">🛒 AgriMart — Farm to Consumer</h2>
-    <p style="margin:0.3rem 0 0 0; opacity:0.8;">Marketplace langsung petani ke konsumen & institusi MBG. Zero tengkulak.</p>
+    <p style="margin:0.3rem 0 0 0; opacity:0.8;">Marketplace langsung petani ke konsumen & institusi MBG. Memangkas rantai distribusi.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -295,4 +295,4 @@ with tab_escrow:
     imp1.metric("Total Transaksi", "Rp 847 jt", "+23% bulan ini")
     imp2.metric("Avg Savings vs Pasar", "18%", "konsumen hemat")
     imp3.metric("Avg Income Naik Petani", "+32%", "vs jual ke tengkulak")
-    imp4.metric("Tengkulak Tereliminasi", "100%", "dalam platform")
+    imp4.metric("Rantai Distribusi", "Dipangkas", "petani → SPPG langsung")

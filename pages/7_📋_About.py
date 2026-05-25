@@ -338,7 +338,7 @@ with tab3:
         {"icon": "🔐", "title": "Enkripsi AES-256", "detail": "Seluruh data at-rest dan in-transit terenkripsi dengan standar militer AES-256. TLS 1.3 untuk komunikasi API."},
         {"icon": "🔑", "title": "OAuth2 + JWT + Zero Trust", "detail": "Autentikasi multi-factor. Setiap request diverifikasi ulang — tidak ada trusted zone. Token JWT dengan expiry 15 menit."},
         {"icon": "🔗", "title": "Blockchain Immutability", "detail": "Hyperledger Fabric (PBFT consensus). Data subsidi dan transaksi tidak bisa diubah sepihak. OJK/BPK sebagai auditor node independen."},
-        {"icon": "🆔", "title": "Biometrik & Dukcapil", "detail": "Verifikasi NIK real-time via API Dukcapil. Mencegah 100% profil fiktif. Data KTP diproses tanpa disimpan (zero-knowledge proof)."},
+        {"icon": "🆔", "title": "Biometrik & Dukcapil", "detail": "Verifikasi NIK real-time via API Dukcapil. Menurunkan risiko profil fiktif secara signifikan. Data KTP diproses tanpa disimpan (zero-knowledge proof)."},
         {"icon": "📡", "title": "IoT Security (MQTT TLS)", "detail": "Sensor IoT berkomunikasi lewat MQTT dengan TLS encryption. Device authentication per armada. Anomaly detection pada telemetri."},
         {"icon": "🗄️", "title": "Database Sharding", "detail": "PostgreSQL di-shard per wilayah. Backup otomatis setiap 6 jam. Disaster recovery RTO < 4 jam, RPO < 1 jam."},
     ]
@@ -389,10 +389,10 @@ with tab4:
     st.markdown("##### 🎯 Target Impact NusaPangan")
     
     kpi_data = [
-        {"kpi": "Kenaikan Pendapatan Petani", "target": "+30%", "current": "+32%", "status": "✅ On Track", "icon": "💰"},
-        {"kpi": "Penurunan Harga Konsumen", "target": "-20%", "current": "-18%", "status": "✅ On Track", "icon": "📉"},
-        {"kpi": "Reduksi Food Loss & Waste", "target": "-20%", "current": "-22%", "status": "✅ Exceeded", "icon": "🗑️"},
-        {"kpi": "Subsidi Fiktif Terdeteksi", "target": "100%", "current": "100%", "status": "✅ Achieved", "icon": "🔍"},
+        {"kpi": "Kenaikan Pendapatan Petani", "target": "+25-30%", "current": "Dalam validasi", "status": "🔄 Pilot", "icon": "💰"},
+        {"kpi": "Penurunan Harga Konsumen", "target": "-15-20%", "current": "Dalam validasi", "status": "🔄 Pilot", "icon": "📉"},
+        {"kpi": "Reduksi Food Loss & Waste", "target": "Signifikan", "current": "Dalam validasi", "status": "🔄 Pilot", "icon": "🗑️"},
+        {"kpi": "Deteksi Subsidi Fiktif", "target": ">95%", "current": "Audit trail aktif", "status": "🔄 Berjalan", "icon": "🔍"},
         {"kpi": "Petani Akses Keuangan Formal", "target": "80%", "current": "72%", "status": "🔄 Progress", "icon": "💳"},
         {"kpi": "Akurasi Prediksi Harga (LSTM)", "target": "R² > 0.90", "current": "R² = 0.94", "status": "✅ Exceeded", "icon": "🤖"},
     ]

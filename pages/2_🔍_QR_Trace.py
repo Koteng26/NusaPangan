@@ -343,7 +343,7 @@ for b in blocks:
 st.markdown("""
 > **Hyperledger Fabric (Permissioned Blockchain):** Setiap transaksi divalidasi oleh minimal 
 > 3 node (BPK Auditor, BGN, Kementan) menggunakan konsensus PBFT. Data tidak dapat diubah 
-> setelah tercatat — menjamin 100% transparansi supply chain MBG.
+> setelah tercatat — memperkuat transparansi dan auditability supply chain MBG secara signifikan.
 """)
 
 st.markdown("---")

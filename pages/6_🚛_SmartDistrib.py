@@ -322,7 +322,7 @@ with tab_route:
     st.markdown("---")
     st.markdown("##### 📊 Dampak SmartDistrib")
     d1, d2, d3, d4 = st.columns(4)
-    d1.metric("📉 Food Loss", "-22%", "vs tanpa IoT")
+    d1.metric("📉 Food Loss", "Berkurang", "estimasi signifikan")
     d2.metric("⛽ Efisiensi BBM", "+18%", "vs rute manual")
     d3.metric("🌡️ Insiden Suhu", "1 dari 10", "tertangani otomatis")
     d4.metric("💰 Saving Logistik", "Rp 127 jt/bln", "estimasi")
