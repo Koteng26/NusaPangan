@@ -15,7 +15,7 @@ st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
 # Sidebar
 with st.sidebar:
-    st.markdown("## 🌾 NusaPangan")
+    st.image("assets/logo.png", width=150)
     st.markdown("**Dari Sawah ke Piring Anak Indonesia**")
     st.markdown("---")
     st.markdown("##### Tim We Are Solution")

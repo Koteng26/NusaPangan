@@ -35,6 +35,10 @@ COMMON_CSS = """
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
     
+    /* White clean background */
+    .stApp { background-color: #ffffff !important; }
+    .main .block-container { background: #ffffff; }
+    
     .np-header {
         padding: 1.5rem 2rem;
         border-radius: 12px;
@@ -46,11 +50,13 @@ COMMON_CSS = """
     
     .np-card {
         background: white;
-        border: 1px solid #E8F5E9;
+        border: 1px solid #e0e0e0;
         border-radius: 12px;
         padding: 1.2rem;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        transition: box-shadow 0.2s;
     }
+    .np-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
     
     .np-badge {
         display: inline-block;
@@ -85,5 +91,6 @@ COMMON_CSS = """
         background: linear-gradient(180deg, #1B5E20 0%, #0D3B12 100%);
     }
     [data-testid="stSidebar"] * { color: white !important; }
+    [data-testid="stSidebar"] img { border-radius: 8px; margin-bottom: 8px; }
 </style>
 """
