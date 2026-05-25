@@ -263,8 +263,9 @@ with tab_predict:
     ))
     
     # Vertical line for "today"
-    fig_lstm.add_vline(x="2026-05-14", line_dash="dot", line_color="#888",
-                       annotation_text="Hari ini", annotation_position="top")
+    fig_lstm.add_shape(type="line", x0=14, x1=14, y0=0, y1=1, yref="paper",
+                       line=dict(dash="dot", color="#888", width=1))
+    fig_lstm.add_annotation(x=14, y=1, yref="paper", text="Hari ini", showarrow=False)
     
     fig_lstm.update_layout(
         height=400,

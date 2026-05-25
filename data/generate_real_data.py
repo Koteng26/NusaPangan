@@ -177,6 +177,16 @@ desa_banten = [
     ("Kemiri", "Kab. Tangerang", -6.1989, 106.4289),
     ("Sajira", "Kab. Lebak", -6.5734, 106.3123),
     ("Rangkasbitung", "Kab. Lebak", -6.3612, 106.2456),
+    ("Pandeglang", "Kab. Pandeglang", -6.3089, 106.1045),
+    ("Labuan", "Kab. Pandeglang", -6.3512, 105.8234),
+    ("Cipocok Jaya", "Kota Serang", -6.1234, 106.1523),
+    ("Kasemen", "Kota Serang", -6.1056, 106.1289),
+    ("Cilegon", "Kota Cilegon", -6.0034, 106.0523),
+    ("Cibeber", "Kota Cilegon", -6.0212, 106.0756),
+    ("Cipondoh", "Kota Tangerang", -6.2134, 106.6323),
+    ("Periuk", "Kota Tangerang", -6.1812, 106.6156),
+    ("Pamulang", "Kota Tangerang Selatan", -6.3434, 106.7323),
+    ("Serpong", "Kota Tangerang Selatan", -6.3212, 106.6856),
 ]
 
 varietas_padi = ["Ciherang", "IR64", "Inpari 32", "Mekongga", "Situ Bagendit"]

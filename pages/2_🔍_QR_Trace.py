@@ -103,7 +103,7 @@ with col_journey:
         <div class="step-title">TAHAP 1 — Sawah Petani</div>
         <div class="step-detail">
             <strong>Petani:</strong> {j['petani_nama']} (ID: {j['petani_id']})<br>
-            <strong>Lokasi:</strong> Desa {j['petani_desa']}, Kab. {j['petani_kab']}<br>
+            <strong>Lokasi:</strong> Desa {j['petani_desa']}, {j['petani_kab']}<br>
             <strong>Luas Lahan:</strong> {j['luas_lahan']} hektar<br>
             <strong>Tanggal Tanam:</strong> {j['tanggal_tanam']}<br>
             <strong>Tanggal Panen:</strong> {j['tanggal_panen']}<br>
@@ -122,7 +122,7 @@ with col_journey:
         <div class="step-icon">🏭</div>
         <div class="step-title">TAHAP 2 — Penggilingan</div>
         <div class="step-detail">
-            <strong>Mitra:</strong> {j['penggilingan']}, Kab. {j['penggilingan_kab']}<br>
+            <strong>Mitra:</strong> {j['penggilingan']}, {j['penggilingan_kab']}<br>
             <strong>Tanggal Giling:</strong> {j['tanggal_giling']}<br>
             <strong>Hasil Beras:</strong> {j['jumlah_beras_kg']:,} kg beras putih<br>
             <strong>Rendemen:</strong> {j['rendemen_pct']}% (GKG → Beras)<br>
@@ -139,7 +139,7 @@ with col_journey:
         <div class="step-icon">🏪</div>
         <div class="step-title">TAHAP 3 — Gudang & Cold Storage</div>
         <div class="step-detail">
-            <strong>Gudang:</strong> {j['gudang']}, Kab. {j['gudang_kab']}<br>
+            <strong>Gudang:</strong> {j['gudang']}, {j['gudang_kab']}<br>
             <strong>Tanggal Masuk:</strong> {j['tanggal_masuk_gudang']}<br>
             <strong>Suhu Gudang:</strong> {j['suhu_gudang_c']}°C<br>
             <strong>Kelembaban:</strong> {j['kelembaban_pct']}%<br>

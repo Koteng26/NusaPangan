@@ -86,7 +86,7 @@ with col_profile:
         <p style="text-align:center;color:#666;margin:0.3rem 0;">ID: {farmer['farmer_id']}</p>
         <p style="text-align:center;"><span class="verified-badge">✅ Verified Dukcapil</span></p>
         <hr>
-        <p><strong>NIK:</strong> {farmer['nik'][:6]}****{farmer['nik'][-4:]}</p>
+        <p><strong>NIK:</strong> {str(farmer['nik'])[:6]}****{str(farmer['nik'])[-4:]}</p>
         <p><strong>Desa:</strong> {farmer['desa']}</p>
         <p><strong>Kabupaten:</strong> {farmer['kabupaten']}</p>
         <p><strong>Kelompok Tani:</strong> {farmer['kelompok_tani']}</p>
