@@ -88,9 +88,10 @@ COMMON_CSS = """
     }
     
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1B5E20 0%, #0D3B12 100%);
+        background: #ffffff;
+        border-right: 1px solid #e0e0e0;
     }
-    [data-testid="stSidebar"] * { color: white !important; }
+    [data-testid="stSidebar"] * { color: #333333 !important; }
     [data-testid="stSidebar"] img { border-radius: 8px; margin-bottom: 8px; }
 </style>
 """
