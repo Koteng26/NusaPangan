@@ -2,21 +2,11 @@
 👨‍🌾 Farmer Dashboard — Identitas Digital Petani
 """
 import streamlit as st
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from utils import load_data, COMMON_CSS
 import pandas as pd
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import plotly.express as px
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import plotly.graph_objects as go
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 
 st.set_page_config(page_title="Farmer Dashboard", page_icon="👨‍🌾", layout="wide")
 

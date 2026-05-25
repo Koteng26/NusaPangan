@@ -2,29 +2,13 @@
 🔍 QR Trace — Lacak Perjalanan Beras dari Sawah ke Piring Siswa
 """
 import streamlit as st
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from utils import load_data, COMMON_CSS
 import pandas as pd
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import qrcode
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import io
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import base64
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import plotly.graph_objects as go
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 
 st.set_page_config(page_title="QR Trace", page_icon="🔍", layout="wide")
 
@@ -258,13 +242,7 @@ st.markdown("### 🔗 Blockchain Verification — Hyperledger Fabric")
 st.markdown("*Setiap perpindahan dalam journey direkam sebagai block immutable di distributed ledger.*")
 
 import hashlib
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import json
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 
 # Generate realistic block hashes
 def make_hash(data_str):

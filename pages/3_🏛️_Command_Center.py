@@ -2,12 +2,11 @@
 🏛️ Government Command Center — Data Real PIHPS + BPS + Inflasi
 """
 import streamlit as st
+import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from utils import load_data, COMMON_CSS
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 
 st.set_page_config(page_title="Command Center", page_icon="🏛️", layout="wide")
 st.markdown(COMMON_CSS, unsafe_allow_html=True)

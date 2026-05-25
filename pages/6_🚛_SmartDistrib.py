@@ -3,25 +3,12 @@
 Sensor IoT real-time (suhu/kelembaban/GPS) + AI routing optimization
 """
 import streamlit as st
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from utils import load_data, COMMON_CSS
 import pandas as pd
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import plotly.graph_objects as go
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import plotly.express as px
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 import numpy as np
-import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from utils import load_data, COMMON_CSS
 from datetime import datetime, timedelta
 
 st.set_page_config(page_title="SmartDistrib", page_icon="🚛", layout="wide")
