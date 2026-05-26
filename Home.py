@@ -22,6 +22,20 @@ with st.sidebar:
         "Dari Sawah ke Piring<br>Anak Indonesia"
     </p>
     """, unsafe_allow_html=True)
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("""
+    <div class="sidebar-footer">
+        <div class="line1">🌾 NusaPangan · Tim We Are Solution</div>
+        <div class="line2">PIDI DIGDAYA × HACKATHON 2026</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Load data
 df_farmers = load_data("farmers.csv")
