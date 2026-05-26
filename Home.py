@@ -12,21 +12,11 @@ from utils import load_data, COMMON_CSS
 
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-# Sidebar - logo centered and bigger
+# Sidebar - logo centered
 with st.sidebar:
-    st.markdown("""
-    <style>
-        [data-testid="stSidebar"] [data-testid="stImage"] {
-            display: flex;
-            justify-content: center;
-        }
-        [data-testid="stSidebar"] [data-testid="stImage"] img {
-            max-width: 180px !important;
-            width: 180px !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    st.image("assets/logo.png")
+    col_logo = st.columns([1, 3, 1])
+    with col_logo[1]:
+        st.image("assets/logo.png", use_container_width=True)
     st.markdown("""
     <p style="text-align:center;font-size:1.05rem;color:#1B5E20;font-weight:700;margin-top:0;line-height:1.4;">
         "Dari Sawah ke Piring<br>Anak Indonesia"
