@@ -12,7 +12,7 @@ from utils import load_data, COMMON_CSS
 
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-# Sidebar - logo centered
+# Sidebar - logo only
 with st.sidebar:
     col_logo = st.columns([1, 3, 1])
     with col_logo[1]:
@@ -21,20 +21,6 @@ with st.sidebar:
     <p style="text-align:center;font-size:1.05rem;color:#1B5E20;font-weight:700;margin-top:0;line-height:1.4;">
         "Dari Sawah ke Piring<br>Anak Indonesia"
     </p>
-    """, unsafe_allow_html=True)
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("""
-    <div class="sidebar-footer">
-        <div class="line1">🌾 NusaPangan · Tim We Are Solution</div>
-        <div class="line2">PIDI DIGDAYA × HACKATHON 2026</div>
-    </div>
     """, unsafe_allow_html=True)
 
 # Load data
