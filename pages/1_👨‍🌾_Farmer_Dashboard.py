@@ -165,20 +165,21 @@ with col_left:
     panen = pd.to_datetime(farmer["estimasi_panen"])
     
     phases = [
-        {"phase": "Tanam", "date": tanam.strftime("%d %b"), "color": "#4CAF50", "status": "✅"},
-        {"phase": "Tumbuh", "date": tumbuh.strftime("%d %b"), "color": "#66BB6A", "status": "✅"},
-        {"phase": "Berbunga", "date": bunga.strftime("%d %b"), "color": "#FFC107", "status": "🔄"},
-        {"phase": "Panen", "date": panen.strftime("%d %b"), "color": "#FF9800", "status": "⏳"},
+        {"phase": "Tanam", "date": tanam.strftime("%d %b"), "color": "#4CAF50", "icon": "🌱", "desc": "Bibit ditanam"},
+        {"phase": "Tumbuh", "date": tumbuh.strftime("%d %b"), "color": "#66BB6A", "icon": "🌿", "desc": "Tanaman tumbuh"},
+        {"phase": "Berbunga", "date": bunga.strftime("%d %b"), "color": "#FFC107", "icon": "🌾", "desc": "Padi berbunga"},
+        {"phase": "Panen", "date": panen.strftime("%d %b"), "color": "#FF9800", "icon": "👨‍🌾", "desc": "Siap panen"},
     ]
     
     phase_cols = st.columns(4)
     for i, p in enumerate(phases):
         with phase_cols[i]:
             st.markdown(f"""
-            <div style="background:{p['color']};color:#fff;border-radius:10px;padding:12px 8px;text-align:center;">
-                <div style="font-size:1.2rem;">{p['status']}</div>
-                <div style="font-size:0.9rem;font-weight:700;">{p['phase']}</div>
-                <div style="font-size:0.75rem;opacity:0.85;">{p['date']}</div>
+            <div style="background:{p['color']};color:#fff;border-radius:14px;padding:14px 8px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+                <div style="font-size:2rem;margin-bottom:4px;">{p['icon']}</div>
+                <div style="font-size:0.95rem;font-weight:700;">{p['phase']}</div>
+                <div style="font-size:0.72rem;opacity:0.85;margin-top:2px;">{p['desc']}</div>
+                <div style="font-size:0.75rem;opacity:0.9;margin-top:4px;font-weight:600;">{p['date']}</div>
             </div>""", unsafe_allow_html=True)
     
     st.markdown("")

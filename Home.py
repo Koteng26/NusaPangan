@@ -12,16 +12,23 @@ from utils import load_data, COMMON_CSS
 
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-# Sidebar - logo bigger, centered, tagline prominent
+# Sidebar - logo centered and bigger
 with st.sidebar:
     st.markdown("""
-    <div style="text-align:center;padding:8px 0;">
-        <img src="app/static/logo.png" width="160" onerror="this.style.display='none'">
-    </div>
+    <style>
+        [data-testid="stSidebar"] [data-testid="stImage"] {
+            display: flex;
+            justify-content: center;
+        }
+        [data-testid="stSidebar"] [data-testid="stImage"] img {
+            max-width: 180px !important;
+            width: 180px !important;
+        }
+    </style>
     """, unsafe_allow_html=True)
-    st.image("assets/logo.png", width=160, use_container_width=False)
+    st.image("assets/logo.png")
     st.markdown("""
-    <p style="text-align:center;font-size:1rem;color:#1B5E20;font-weight:700;margin-top:-4px;line-height:1.4;">
+    <p style="text-align:center;font-size:1.05rem;color:#1B5E20;font-weight:700;margin-top:0;line-height:1.4;">
         "Dari Sawah ke Piring<br>Anak Indonesia"
     </p>
     """, unsafe_allow_html=True)
