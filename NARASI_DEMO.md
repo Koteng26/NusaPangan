@@ -24,7 +24,7 @@ Seluruh demo dibangun mengelilingi kalimat ini.
 >
 > Tidak ada yang tahu. Dan itulah masalahnya.
 >
-> Program MBG mengalirkan Rp 335 triliun per tahun untuk 62 juta anak.
+> Program MBG mengalirkan Rp 268 triliun per tahun untuk 62 juta anak.
 > Tapi supply chain-nya gelap — tidak ada traceability."
 
 ---

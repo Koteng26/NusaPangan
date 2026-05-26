@@ -185,55 +185,74 @@ with col_journey:
 
 st.markdown("---")
 
-# Visual Journey Map using plotly
-st.markdown("### 🗺️ Visualisasi Peta Perjalanan")
+# Visual Journey Map - Banten → DKI Jakarta
+st.markdown("### 🗺️ Visualisasi Peta Perjalanan — Banten → DKI Jakarta")
 
-# Create a simple map visualization with plotly
 fig_map = go.Figure()
 
-# Define coordinates for the journey
-lats = [-6.32, -6.33, -6.33, -6.26, -7.26]
-lons = [107.30, 107.31, 107.30, 106.98, 112.75]
-labels = [
-    f"🌾 Sawah {j['petani_nama']}",
-    f"🏭 {j['penggilingan']}",
-    f"🏪 {j['gudang']}",
-    "🚛 Transit Hub",
-    f"🏫 {j['sekolah']}"
+# Real coordinates: Sawah (Banten) → Penggilingan → Gudang → Transit → Sekolah (DKI)
+lats = [
+    float(j.get('latitude', -6.28)) if 'latitude' in j.index else -6.28,  # Sawah
+    -6.28,   # Penggilingan Serang/Tangerang
+    -6.18,   # Gudang Bulog
+    -6.20,   # Transit - border Banten/DKI
+    -6.19,   # Sekolah DKI Jakarta
 ]
+lons = [
+    float(j.get('longitude', 106.20)) if 'longitude' in j.index else 106.20,
+    106.25,  # Penggilingan
+    106.55,  # Gudang
+    106.70,  # Transit
+    106.84,  # Sekolah DKI
+]
+labels = [
+    f"🌾 Sawah {j['petani_nama']}<br>{j['petani_desa']}, {j['petani_kab']}",
+    f"🏭 {j['penggilingan']}<br>{j['penggilingan_kab']}",
+    f"🏪 {j['gudang']}<br>{j['gudang_kab']}",
+    "🚛 Transit Banten→DKI",
+    f"🏫 {j['sekolah']}<br>{j['sekolah_kota']}"
+]
+colors = ['#4CAF50', '#FF9800', '#2196F3', '#9E9E9E', '#F44336']
+sizes = [18, 14, 14, 10, 18]
 
-# Path line
-fig_map.add_trace(go.Scattergeo(
+# Journey path line
+fig_map.add_trace(go.Scattermapbox(
     lat=lats, lon=lons,
     mode='lines',
-    line=dict(width=3, color='#43A047', dash='dot'),
+    line=dict(width=3, color='#1B5E20'),
     showlegend=False,
+    hoverinfo='skip',
 ))
 
-# Points
-fig_map.add_trace(go.Scattergeo(
-    lat=lats, lon=lons,
-    mode='markers+text',
-    marker=dict(size=[15, 12, 12, 10, 15], color=['#4CAF50', '#FF9800', '#2196F3', '#9E9E9E', '#F44336']),
-    text=labels,
-    textposition="top center",
-    textfont=dict(size=10),
-    showlegend=False,
-))
+# Journey points
+for i in range(len(lats)):
+    fig_map.add_trace(go.Scattermapbox(
+        lat=[lats[i]], lon=[lons[i]],
+        mode='markers+text',
+        marker=dict(size=sizes[i], color=colors[i]),
+        text=[labels[i].split('<br>')[0]],
+        textposition="top center",
+        textfont=dict(size=11, color=colors[i]),
+        hovertext=labels[i].replace('<br>', ' - '),
+        hoverinfo='text',
+        showlegend=False,
+    ))
 
-fig_map.update_geos(
-    visible=True,
-    resolution=50,
-    showcountries=True,
-    showland=True,
-    landcolor="rgb(243, 243, 243)",
-    countrycolor="rgb(200, 200, 200)",
-    center=dict(lat=-6.8, lon=109.5),
-    lonaxis_range=[105, 115],
-    lataxis_range=[-8.5, -5.5],
+fig_map.update_layout(
+    mapbox=dict(
+        style="open-street-map",
+        center=dict(lat=-6.22, lon=106.50),
+        zoom=8.5,
+    ),
+    height=450,
+    margin=dict(l=0, r=0, t=0, b=0),
 )
-fig_map.update_layout(height=400, margin=dict(l=0,r=0,t=0,b=0))
 st.plotly_chart(fig_map, use_container_width=True)
+
+st.markdown(f"""
+> 🗺️ **Rute:** {j['petani_desa']}, {j['petani_kab']} (Banten) → {j['penggilingan']} → {j['gudang']} → {j['sekolah']}, {j['sekolah_kota']} (DKI Jakarta)  
+> 📏 **Jarak:** ~{j.get('jarak_km', 80)} km · ⏱️ **Waktu:** {(pd.to_datetime(j['tanggal_tiba']) - pd.to_datetime(j['tanggal_panen'])).days} hari dari panen ke sekolah
+""")
 
 st.markdown("---")
 

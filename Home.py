@@ -15,20 +15,24 @@ st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
 # Sidebar with logo
 with st.sidebar:
-    st.image("assets/logo.png", width=180)
-    st.markdown("**Dari Sawah ke Piring Anak Indonesia**")
-    st.markdown("---")
-    st.markdown("##### Tim We Are Solution")
-    st.markdown("PIDI DIGDAYA × HACKATHON 2026")
+    st.markdown('<div style="text-align:center;">', unsafe_allow_html=True)
+    st.image("assets/logo.png", width=160)
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<p style="text-align:center;font-size:0.85rem;color:#555;margin-top:-8px;"><strong>Dari Sawah ke Piring Anak Indonesia</strong></p>', unsafe_allow_html=True)
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
+    st.markdown("")
     st.markdown("---")
     st.markdown("""
-    **Sumber Data:**
-    - SP2KP Kemendag 2026 (PIHPS)
-    - BPS Produksi Padi 2026
-    - Kemendikdasmen MBG
-    - Kementan/BPS Ekspor 2025
-    - Bank Indonesia Inflasi
-    """)
+    <div style="font-size:0.75rem;color:#999;">
+        <strong>Tim We Are Solution</strong><br>
+        PIDI DIGDAYA × HACKATHON 2026<br><br>
+        <strong>Sumber Data:</strong><br>
+        SP2KP Kemendag 2026 · BPS · Kemendikdasmen · Kementan · Bank Indonesia
+    </div>
+    """, unsafe_allow_html=True)
 
 # Load real data
 df_farmers = load_data("farmers.csv")
@@ -64,12 +68,11 @@ avg_harga_banten = df_harga[df_harga["provinsi"]=="Banten"]["harga_beras_medium_
 gap_harga = avg_harga_dki - avg_harga_banten
 
 st.markdown("### 📊 Data Real — Banten vs DKI Jakarta")
-c1, c2, c3, c4, c5 = st.columns(5)
+c1, c2, c3, c4 = st.columns(4)
 c1.metric("👨‍🌾 Petani Banten", f"{total_farmers}", "Verified Dukcapil")
 c2.metric("🔍 Journey Tracked", f"{total_journeys}", "Banten → DKI")
-c3.metric("🏫 Satpen MBG DKI", f"{total_mbg_dki:,}", "SD+SMP+SMA")
-c4.metric("🏫 Satpen MBG Banten", f"{total_mbg_banten:,}", "SD+SMP+SMA")
-c5.metric("💰 Gap Harga Beras", f"Rp {gap_harga:,.0f}/kg", "DKI vs Banten")
+c3.metric("🏫 Satpen MBG", f"{total_mbg_dki + total_mbg_banten:,}", "DKI + Banten")
+c4.metric("💰 Gap Harga", f"+Rp {gap_harga:,.0f}", "DKI lebih mahal/kg")
 
 st.markdown('<p class="np-source">Sumber: SP2KP Kemendag, BPS, Kemendikdasmen 2026</p>', unsafe_allow_html=True)
 
@@ -80,7 +83,7 @@ st.markdown("---")
 st.markdown("### ❓ Mengapa NusaPangan Dibutuhkan?")
 
 st.markdown("""
-Program MBG mengalirkan **Rp 335 triliun per tahun** untuk memberi makan **62 juta anak** 
+Program MBG mengalirkan **Rp 268 triliun (UU APBN 2026)** untuk memberi makan **62 juta anak** 
 di **280.023 sekolah**. Namun supply chain-nya masih gelap:
 """)
 
@@ -209,7 +212,7 @@ st.markdown("### 📖 Konteks Program MBG 2026")
 st.markdown("""
 | Indikator | Nilai |
 |---|---|
-| 💰 Anggaran 2026 | **Rp 335 triliun** |
+| 💰 Anggaran 2026 | **Rp 268 triliun (UU APBN 2026)** |
 | 👥 Penerima manfaat | **61,96 juta jiwa** |
 | 🏭 Jumlah SPPG | **27.735 dapur** |
 | 🏫 Satuan pendidikan | **280.023 sekolah** |
