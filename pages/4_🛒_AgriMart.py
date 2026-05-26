@@ -194,17 +194,20 @@ with tab_order:
         
         # Simulated matching
         matched = df_products.head(3)
-        total_cost_f2c = jumlah * matched.iloc[0]["harga_f2c"]
-        total_cost_pasar = jumlah * matched.iloc[0]["harga_pasar"]
-        savings = total_cost_pasar - total_cost_f2c
-        
-        st.success(f"""
-        **✅ Match ditemukan!** 3 petani terverifikasi di Karawang
-        
-        **Total biaya F2C:** Rp {total_cost_f2c:,.0f}  
-        **Harga pasar normal:** Rp {total_cost_pasar:,.0f}  
-        **💰 Penghematan:** Rp {savings:,.0f} ({int(savings/total_cost_pasar*100)}%)
-        """)
+        if len(matched) == 0:
+            st.warning("Belum ada produk tersedia untuk filter ini")
+        else:
+            total_cost_f2c = jumlah * matched.iloc[0]["harga_f2c"]
+            total_cost_pasar = jumlah * matched.iloc[0]["harga_pasar"]
+            savings = total_cost_pasar - total_cost_f2c
+            
+            st.success(f"""
+            **✅ Match ditemukan!** {len(matched)} petani terverifikasi
+            
+            **Total biaya F2C:** Rp {total_cost_f2c:,.0f}  
+            **Harga pasar normal:** Rp {total_cost_pasar:,.0f}  
+            **💰 Penghematan:** Rp {savings:,.0f} ({int(savings/max(total_cost_pasar,1)*100)}%)
+            """)
         
         for i, (_, m) in enumerate(matched.iterrows()):
             alloc = [250, 150, 100][i] if i < 3 else 0

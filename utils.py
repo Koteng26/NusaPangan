@@ -1,62 +1,55 @@
 """
-Helper utility for NusaPangan — handles data paths correctly
-Works both locally and on Streamlit Cloud
+Helper utility for NusaPangan
 """
 import os
 import pandas as pd
 
 def get_data_path(filename):
-    """Get correct path to data file regardless of where app is run from."""
-    # Try relative to this file first
     base = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(base, "data", filename)
     if os.path.exists(path):
         return path
-    
-    # Try from current working directory
     path2 = os.path.join("data", filename)
     if os.path.exists(path2):
         return path2
-    
-    # Try parent directory
     path3 = os.path.join(os.path.dirname(base), "data", filename)
     if os.path.exists(path3):
         return path3
-    
-    raise FileNotFoundError(f"Cannot find {filename} in any expected location")
+    raise FileNotFoundError(f"Cannot find {filename}")
 
 def load_data(filename):
-    """Load a CSV data file."""
     return pd.read_csv(get_data_path(filename))
 
-# Common CSS for all pages
 COMMON_CSS = """
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-    /* Light green theme */
-    .stApp { background-color: #f0fdf4 !important; }
-    .main .block-container { background: #f0fdf4; }
+
+    /* Warm light green gradient background */
+    .stApp { background: linear-gradient(180deg, #f0fdf4 0%, #ecfccb 50%, #f0fdf4 100%) !important; }
     
     .np-header {
         padding: 1.5rem 2rem;
-        border-radius: 14px;
+        border-radius: 16px;
         color: white;
         margin-bottom: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
     .np-header h2 { margin: 0; font-size: 1.4rem; }
-    .np-header p { margin: 0.3rem 0 0 0; opacity: 0.8; font-size: 0.9rem; }
+    .np-header p { margin: 0.3rem 0 0 0; opacity: 0.85; font-size: 0.9rem; }
     
     .np-card {
         background: white;
         border: 1px solid #c8e6c9;
-        border-radius: 14px;
+        border-radius: 16px;
         padding: 1.2rem;
-        box-shadow: 0 2px 8px rgba(27,94,32,0.06);
-        transition: box-shadow 0.2s;
+        box-shadow: 0 2px 12px rgba(27,94,32,0.06);
+        transition: all 0.25s;
     }
-    .np-card:hover { box-shadow: 0 4px 16px rgba(27,94,32,0.12); }
+    .np-card:hover { 
+        box-shadow: 0 6px 24px rgba(27,94,32,0.14);
+        transform: translateY(-2px);
+    }
     
     .np-badge {
         display: inline-block;
@@ -71,8 +64,8 @@ COMMON_CSS = """
     .np-badge-blue { background: #E3F2FD; color: #0D47A1; }
     
     .np-alert {
-        padding: 1rem;
-        border-radius: 12px;
+        padding: 1rem 1.2rem;
+        border-radius: 14px;
         margin-bottom: 0.5rem;
         font-size: 0.9rem;
     }
@@ -87,18 +80,18 @@ COMMON_CSS = """
         margin-top: 0.5rem;
     }
     
-    /* Sidebar - light green */
+    /* Sidebar */
     [data-testid="stSidebar"] {
-        background: #f0fdf4 !important;
-        border-right: 1px solid #c8e6c9;
+        background: white !important;
+        border-right: 1px solid #e0e0e0;
     }
     [data-testid="stSidebar"] * { color: #1B5E20 !important; }
-    [data-testid="stSidebar"] img { border-radius: 8px; }
     
-    /* Sidebar layout: logo on top, nav in middle, user content splits */
+    /* Logo + tagline above nav */
     [data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
         order: -1;
         padding-top: 0.5rem;
+        padding-bottom: 0;
     }
     [data-testid="stSidebar"] > div:first-child {
         display: flex;
@@ -106,38 +99,43 @@ COMMON_CSS = """
     }
     [data-testid="stSidebarNav"] {
         order: 0;
+        margin-top: -1rem;
     }
     
-    /* Active nav item styling */
+    /* Nav active */
     [data-testid="stSidebarNav"] a[aria-selected="true"] {
         background: #E8F5E9 !important;
-        border-radius: 8px;
+        border-radius: 10px;
     }
     
-    /* Metric cards on green bg */
+    /* Metrics */
     [data-testid="stMetric"] {
         background: white;
         border: 1px solid #c8e6c9;
-        border-radius: 12px;
-        padding: 12px;
-        box-shadow: 0 1px 4px rgba(27,94,32,0.06);
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 2px 8px rgba(27,94,32,0.06);
     }
     
-    /* Tabs styling */
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         background: white;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 4px;
+        border: 1px solid #c8e6c9;
     }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 8px;
-    }
+    .stTabs [data-baseweb="tab"] { border-radius: 10px; }
     
-    /* Dataframe styling */
+    /* Dataframe */
     [data-testid="stDataFrame"] {
         border: 1px solid #c8e6c9;
-        border-radius: 12px;
+        border-radius: 14px;
         overflow: hidden;
+    }
+    
+    /* Selectbox */
+    [data-testid="stSelectbox"] > div > div {
+        border-radius: 10px !important;
     }
 </style>
 """

@@ -251,13 +251,18 @@ st.plotly_chart(fig_map, use_container_width=True)
 
 st.markdown(f"""
 > 🗺️ **Rute:** {j['petani_desa']}, {j['petani_kab']} (Banten) → {j['penggilingan']} → {j['gudang']} → {j['sekolah']}, {j['sekolah_kota']} (DKI Jakarta)  
-> 📏 **Jarak:** ~{j.get('jarak_km', 80)} km · ⏱️ **Waktu:** {(pd.to_datetime(j['tanggal_tiba']) - pd.to_datetime(j['tanggal_panen'])).days} hari dari panen ke sekolah
 """)
 
 st.markdown("---")
 
 # Blockchain Verification Visual
 st.markdown("### 🔗 Blockchain Verification — Hyperledger Fabric")
+st.markdown("""
+> **Apa itu Blockchain di NusaPangan?** Bayangkan buku catatan yang dipegang bersama oleh banyak pihak 
+> (Kementan, Bank, Bulog, BPK, Bapanas). Setiap kali beras berpindah tangan — dari petani ke penggilingan, 
+> dari gudang ke sekolah — catatan otomatis tertulis dan **tidak bisa dihapus atau diubah** oleh siapapun. 
+> Ini menjamin transparansi penuh: tidak ada pihak yang bisa memanipulasi data supply chain MBG.
+""")
 st.markdown("*Setiap perpindahan dalam journey direkam sebagai block immutable di distributed ledger.*")
 
 import hashlib

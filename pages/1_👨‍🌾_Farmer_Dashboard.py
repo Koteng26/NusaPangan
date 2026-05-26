@@ -80,26 +80,32 @@ farmer = farmer_list[farmer_list["nama"]==farmer_name].iloc[0]
 income_est = int(farmer['estimasi_produksi_ton'] * 1000 * farmer['harga_gabah_petani_kg'])
 
 # ================================================================
-# GREETING + PROFILE BADGE
+# GREETING + PROFILE CARD (identity info integrated)
 # ================================================================
 hour = datetime.now().hour
 salam = "Selamat pagi" if hour < 11 else "Selamat siang" if hour < 15 else "Selamat sore" if hour < 18 else "Selamat malam"
 
-col_greet, col_profile = st.columns([3, 1])
-with col_greet:
-    st.markdown(f'<div class="greeting">{salam}, {farmer["nama"].split()[0]} 👋</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="greeting-sub">Kelola lahan dan panen Anda dengan lebih mudah</div>', unsafe_allow_html=True)
-with col_profile:
-    st.markdown(f"""
-    <div class="profile-mini">
-        <div class="profile-avatar">👨‍🌾</div>
-        <div>
-            <div style="font-size:0.85rem;font-weight:700;">{farmer["nama"].split()[0]}</div>
-            <div style="font-size:0.7rem;color:#999;">Petani · {farmer["desa"]}</div>
+st.markdown(f"""
+<div style="background:white;border-radius:16px;padding:20px;border:1px solid #c8e6c9;box-shadow:0 2px 12px rgba(27,94,32,0.06);margin-bottom:16px;">
+    <div style="display:flex;gap:16px;align-items:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:#E8F5E9;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;border:2px solid #c8e6c9;">👨‍🌾</div>
+        <div style="flex:1;">
+            <div style="font-size:1.3rem;font-weight:800;color:#1B5E20;">{salam}, {farmer["nama"].split()[0]} 👋</div>
+            <div style="font-size:0.85rem;color:#666;margin-top:2px;">{farmer["nama"]} · {farmer["farmer_id"]}</div>
+            <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                <span style="background:#E8F5E9;color:#1B5E20;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">✅ Verified Dukcapil</span>
+                <span style="background:#E3F2FD;color:#0D47A1;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">🌾 {farmer["varietas"]}</span>
+                <span style="background:#FFF3E0;color:#E65100;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">🟢 {farmer["status"]}</span>
+            </div>
         </div>
-    </div>""", unsafe_allow_html=True)
-
-st.markdown("")
+        <div style="text-align:right;font-size:0.78rem;color:#888;line-height:1.8;">
+            <strong>NIK:</strong> {str(farmer['nik'])[:6]}****{str(farmer['nik'])[-4:]}<br>
+            <strong>Desa:</strong> {farmer['desa']}, {farmer['kabupaten']}<br>
+            <strong>Poktan:</strong> {farmer['kelompok_tani']}
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # ================================================================
 # 4 STAT CARDS (like the design reference)
@@ -127,7 +133,7 @@ with s2:
 with s3:
     st.markdown(f"""
     <div class="stat-card">
-        <div class="stat-icon">📦</div>
+        <div class="stat-icon">🌾</div>
         <div class="stat-val">{farmer['estimasi_produksi_ton']} ton</div>
         <div class="stat-label">Est. Panen</div>
         <div class="stat-delta">Produktivitas {farmer['produktivitas_ton_ha']} ton/ha</div>
@@ -196,6 +202,7 @@ with col_left:
     
     # CREDIT SCORE
     st.markdown("##### 💳 Credit Score & Akses KUR")
+    st.markdown("*Credit Score = skor kelayakan kredit petani berdasarkan riwayat tanam, luas lahan, dan verifikasi identitas. Skor tinggi → lebih mudah mengajukan KUR (Kredit Usaha Rakyat) dari bank.*")
     
     score = farmer["credit_score"]
     grade = "A" if score >= 700 else "B" if score >= 650 else "C" if score >= 600 else "D"
@@ -286,23 +293,6 @@ with col_right:
             <div class="weather-detail">💨 {wind} km/jam<br><span style="font-size:0.7rem;">Angin</span></div>
         </div>
         <div style="font-size:0.65rem;color:#999;margin-top:8px;">Integrasi BMKG API</div>
-    </div>""", unsafe_allow_html=True)
-    
-    st.markdown("")
-    
-    # IDENTITAS DIGITAL
-    st.markdown("##### 🆔 Identitas Digital")
-    st.markdown(f"""
-    <div style="background:white;border:1px solid #e8e8e8;border-radius:12px;padding:14px;">
-        <div style="font-size:0.8rem;line-height:2;">
-            <strong>ID:</strong> {farmer['farmer_id']}<br>
-            <strong>NIK:</strong> {str(farmer['nik'])[:6]}****{str(farmer['nik'])[-4:]}<br>
-            <strong>Desa:</strong> {farmer['desa']}<br>
-            <strong>Kabupaten:</strong> {farmer['kabupaten']}<br>
-            <strong>Kelompok:</strong> {farmer['kelompok_tani']}<br>
-            <strong>Varietas:</strong> {farmer['varietas']}<br>
-            <span style="display:inline-block;background:#E8F5E9;color:#1B5E20;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600;margin-top:4px;">✅ Verified Dukcapil</span>
-        </div>
     </div>""", unsafe_allow_html=True)
 
 # ================================================================
