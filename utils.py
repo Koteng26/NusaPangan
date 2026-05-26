@@ -93,6 +93,19 @@ COMMON_CSS = """
         padding-top: 0.5rem;
         padding-bottom: 0;
     }
+    
+    /* Team info below nav using pseudo-element */
+    [data-testid="stSidebarNav"]::after {
+        content: "🌾 NusaPangan · Tim We Are Solution · PIDI DIGDAYA × HACKATHON 2026";
+        display: block;
+        text-align: center;
+        font-size: 0.68rem;
+        color: #999 !important;
+        padding: 16px 12px 8px;
+        line-height: 1.5;
+        border-top: 1px solid #e8e8e8;
+        margin-top: 12px;
+    }
     [data-testid="stSidebar"] > div:first-child {
         display: flex;
         flex-direction: column;
