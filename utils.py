@@ -92,6 +92,19 @@ COMMON_CSS = """
         border-right: 1px solid #e0e0e0;
     }
     [data-testid="stSidebar"] * { color: #333333 !important; }
-    [data-testid="stSidebar"] img { border-radius: 8px; margin-bottom: 8px; }
+    [data-testid="stSidebar"] img { border-radius: 8px; }
+    
+    /* Move sidebar user content ABOVE the page navigation */
+    [data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+        order: -1;
+        padding-top: 1rem;
+    }
+    [data-testid="stSidebar"] > div:first-child {
+        display: flex;
+        flex-direction: column;
+    }
+    [data-testid="stSidebarNav"] {
+        order: 0;
+    }
 </style>
 """

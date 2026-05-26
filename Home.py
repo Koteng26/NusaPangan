@@ -13,10 +13,9 @@ from utils import load_data, COMMON_CSS
 
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-# Sidebar
-st.logo("assets/logo.png")
-
+# Sidebar with logo
 with st.sidebar:
+    st.image("assets/logo.png", width=180)
     st.markdown("**Dari Sawah ke Piring Anak Indonesia**")
     st.markdown("---")
     st.markdown("##### Tim We Are Solution")
