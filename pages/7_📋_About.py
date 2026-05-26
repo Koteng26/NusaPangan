@@ -589,3 +589,13 @@ with tab6:
             <div class="arch-title">Pak Rudi (45 thn)</div>
             <div class="arch-sub">Analis Bapanas<br>Desktop + multi-screen<br>Akses: Command Center<br>Kebutuhan: data real-time, alert</div>
         </div>""", unsafe_allow_html=True)
+
+# Footer with tim info
+st.markdown("---")
+st.markdown("""
+<div style="text-align:center;padding:1rem 0;color:#888;font-size:0.8rem;">
+    <strong style="color:#1B5E20;">Tim We Are Solution</strong><br>
+    PIDI DIGDAYA × HACKATHON 2026<br><br>
+    <strong>Sumber Data:</strong> SP2KP Kemendag 2026 · BPS · Kemendikdasmen · Kementan · Bank Indonesia
+</div>
+""", unsafe_allow_html=True)

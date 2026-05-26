@@ -13,26 +13,12 @@ from utils import load_data, COMMON_CSS
 
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-# Sidebar with logo
+# Sidebar with logo on top, tim info at very bottom
 with st.sidebar:
     st.markdown('<div style="text-align:center;">', unsafe_allow_html=True)
-    st.image("assets/logo.png", width=160)
+    st.image("assets/logo.png", width=140)
     st.markdown('</div>', unsafe_allow_html=True)
-    st.markdown('<p style="text-align:center;font-size:0.85rem;color:#555;margin-top:-8px;"><strong>Dari Sawah ke Piring Anak Indonesia</strong></p>', unsafe_allow_html=True)
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("")
-    st.markdown("---")
-    st.markdown("""
-    <div style="font-size:0.75rem;color:#999;">
-        <strong>Tim We Are Solution</strong><br>
-        PIDI DIGDAYA × HACKATHON 2026<br><br>
-        <strong>Sumber Data:</strong><br>
-        SP2KP Kemendag 2026 · BPS · Kemendikdasmen · Kementan · Bank Indonesia
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<p style="text-align:center;font-size:0.8rem;color:#1B5E20;margin-top:-8px;font-weight:600;">Dari Sawah ke Piring Anak Indonesia</p>', unsafe_allow_html=True)
 
 # Load real data
 df_farmers = load_data("farmers.csv")

@@ -35,13 +35,13 @@ COMMON_CSS = """
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
     
-    /* White clean background */
-    .stApp { background-color: #ffffff !important; }
-    .main .block-container { background: #ffffff; }
+    /* Light green theme */
+    .stApp { background-color: #f0fdf4 !important; }
+    .main .block-container { background: #f0fdf4; }
     
     .np-header {
         padding: 1.5rem 2rem;
-        border-radius: 12px;
+        border-radius: 14px;
         color: white;
         margin-bottom: 1.5rem;
     }
@@ -50,13 +50,13 @@ COMMON_CSS = """
     
     .np-card {
         background: white;
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
+        border: 1px solid #c8e6c9;
+        border-radius: 14px;
         padding: 1.2rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        box-shadow: 0 2px 8px rgba(27,94,32,0.06);
         transition: box-shadow 0.2s;
     }
-    .np-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .np-card:hover { box-shadow: 0 4px 16px rgba(27,94,32,0.12); }
     
     .np-badge {
         display: inline-block;
@@ -72,7 +72,7 @@ COMMON_CSS = """
     
     .np-alert {
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 12px;
         margin-bottom: 0.5rem;
         font-size: 0.9rem;
     }
@@ -87,17 +87,18 @@ COMMON_CSS = """
         margin-top: 0.5rem;
     }
     
+    /* Sidebar - light green */
     [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+        background: #f0fdf4 !important;
+        border-right: 1px solid #c8e6c9;
     }
-    [data-testid="stSidebar"] * { color: #333333 !important; }
+    [data-testid="stSidebar"] * { color: #1B5E20 !important; }
     [data-testid="stSidebar"] img { border-radius: 8px; }
     
-    /* Move sidebar user content ABOVE the page navigation */
+    /* Sidebar layout: logo on top, nav in middle, user content splits */
     [data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
         order: -1;
-        padding-top: 1rem;
+        padding-top: 0.5rem;
     }
     [data-testid="stSidebar"] > div:first-child {
         display: flex;
@@ -105,6 +106,38 @@ COMMON_CSS = """
     }
     [data-testid="stSidebarNav"] {
         order: 0;
+    }
+    
+    /* Active nav item styling */
+    [data-testid="stSidebarNav"] a[aria-selected="true"] {
+        background: #E8F5E9 !important;
+        border-radius: 8px;
+    }
+    
+    /* Metric cards on green bg */
+    [data-testid="stMetric"] {
+        background: white;
+        border: 1px solid #c8e6c9;
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 1px 4px rgba(27,94,32,0.06);
+    }
+    
+    /* Tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        background: white;
+        border-radius: 10px;
+        padding: 4px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 8px;
+    }
+    
+    /* Dataframe styling */
+    [data-testid="stDataFrame"] {
+        border: 1px solid #c8e6c9;
+        border-radius: 12px;
+        overflow: hidden;
     }
 </style>
 """
