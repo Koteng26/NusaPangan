@@ -94,17 +94,21 @@ COMMON_CSS = """
         padding-bottom: 0;
     }
     
-    /* Team info below nav */
+    /* Team info below nav - two lines */
+    [data-testid="stSidebarNav"] {
+        padding-bottom: 60px !important;
+        position: relative;
+    }
     [data-testid="stSidebarNav"]::after {
-        content: "🌾 NusaPangan · Tim We Are Solution\a PIDI DIGDAYA × HACKATHON 2026";
+        content: "🌾 NusaPangan · Tim We Are Solution" "\a" "PIDI DIGDAYA × HACKATHON 2026";
+        white-space: pre-wrap;
         display: block;
         text-align: center;
         font-size: 0.68rem;
-        color: #999 !important;
+        color: #aaa !important;
         padding: 16px 12px 8px;
-        line-height: 1.6;
-        white-space: pre-line;
-        margin-top: 12px;
+        line-height: 1.8;
+        margin-top: 8px;
     }
     [data-testid="stSidebar"] > div:first-child {
         display: flex;
