@@ -4,34 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NusaPangan — Dari Sawah ke Piring Anak Indonesia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --green-900: #14532d;
-            --green-800: #166534;
-            --green-700: #15803d;
-            --green-600: #16a34a;
-            --green-500: #22c55e;
-            --green-100: #dcfce7;
-            --green-50: #f0fdf4;
-            --gold: #d4a012;
-            --gold-light: #fef3c7;
-            --navy: #1e293b;
-            --gray-50: #f8fafc;
-            --gray-100: #f1f5f9;
-            --gray-300: #cbd5e1;
-            --gray-500: #64748b;
-            --gray-700: #334155;
-            --gray-900: #0f172a;
-            --red-500: #ef4444;
-            --red-50: #fef2f2;
-            --orange-500: #f97316;
+            --green-900: #14532d; --green-800: #166534; --green-700: #15803d;
+            --green-600: #16a34a; --green-500: #22c55e; --green-100: #dcfce7; --green-50: #f0fdf4;
+            --gold: #d4a012; --gold-light: #fef3c7;
+            --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-300: #cbd5e1;
+            --gray-500: #64748b; --gray-700: #334155; --gray-900: #0f172a;
+            --red-500: #ef4444; --orange-500: #f97316;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--gray-900); background: #fff; overflow-x: hidden; }
-        
+
         /* NAVBAR */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -39,24 +24,18 @@
             padding: 12px 5%; background: rgba(255,255,255,0.95);
             backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.06);
         }
-        .nav-logo { display: flex; align-items: center; gap: 8px; }
         .nav-logo img { height: 44px; }
-        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links { display: flex; gap: 28px; }
         .nav-links a { text-decoration: none; color: var(--gray-700); font-size: 14px; font-weight: 600; transition: color 0.2s; }
         .nav-links a:hover { color: var(--green-700); }
-        .nav-cta { display: flex; gap: 10px; align-items: center; }
-        .btn { padding: 10px 22px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; display: inline-block; transition: all 0.25s; cursor: pointer; border: none; font-family: inherit; }
-        .btn-outline { color: var(--green-700); border: 2px solid var(--green-700); background: transparent; }
-        .btn-outline:hover { background: var(--green-50); }
-        .btn-primary { background: var(--green-700); color: #fff; border: 2px solid var(--green-700); }
+        .btn { padding: 10px 22px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; display: inline-block; transition: all 0.25s; border: none; font-family: inherit; }
+        .btn-primary { background: var(--green-700); color: #fff; }
         .btn-primary:hover { background: var(--green-800); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(22,101,52,0.3); }
-        .btn-gold { background: linear-gradient(135deg, #d4a012, #eab308); color: #fff; border: none; }
-        .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,160,18,0.4); }
         .btn-lg { padding: 14px 32px; font-size: 16px; border-radius: 12px; }
 
         /* HERO */
         .hero {
-            position: relative; min-height: 90vh; display: flex; align-items: center;
+            position: relative; min-height: 85vh; display: flex; align-items: center;
             background: linear-gradient(135deg, var(--green-50) 0%, #ecfccb 50%, var(--green-100) 100%);
             padding: 120px 5% 60px; overflow: hidden;
         }
@@ -66,12 +45,11 @@
             mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.5) 60%, transparent 100%);
             -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.5) 60%, transparent 100%);
         }
-        .hero-content { position: relative; z-index: 2; max-width: 600px; }
+        .hero-content { position: relative; z-index: 2; max-width: 580px; }
         .hero-badge { display: inline-block; background: var(--green-700); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 20px; }
-        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; color: var(--green-900); line-height: 1.15; margin-bottom: 16px; }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 900; color: var(--green-900); line-height: 1.15; margin-bottom: 16px; }
         .hero h1 span { color: var(--gold); }
-        .hero p { font-size: 18px; color: var(--gray-700); line-height: 1.7; margin-bottom: 28px; max-width: 500px; }
-        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+        .hero p { font-size: 17px; color: var(--gray-700); line-height: 1.7; max-width: 500px; }
 
         /* STATS BAR */
         .stats-bar {
@@ -81,8 +59,7 @@
         .stat-card {
             background: #fff; border-radius: 16px; padding: 24px 32px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 14px;
-            min-width: 220px; border: 1px solid rgba(0,0,0,0.04);
-            transition: transform 0.2s;
+            min-width: 220px; border: 1px solid rgba(0,0,0,0.04); transition: transform 0.2s;
         }
         .stat-card:hover { transform: translateY(-3px); }
         .stat-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
@@ -96,19 +73,18 @@
         .section { padding: 80px 5%; }
         .section-title { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; text-align: center; color: var(--green-900); margin-bottom: 12px; }
         .section-sub { font-size: 16px; color: var(--gray-500); text-align: center; max-width: 600px; margin: 0 auto 48px; line-height: 1.7; }
-        .section-alt { background: var(--gray-50); }
         .section-green { background: var(--green-50); }
+        .section-alt { background: var(--gray-50); }
 
         /* PROBLEM CARDS */
         .problems { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
         .problem-card {
             background: #fff; border-radius: 16px; padding: 32px 24px; text-align: center;
-            border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-            transition: all 0.25s;
+            border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: all 0.25s;
         }
         .problem-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
         .problem-card .icon { font-size: 48px; margin-bottom: 16px; }
-        .problem-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--gray-900); }
+        .problem-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
         .problem-card p { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
 
         /* COMPARISON */
@@ -137,7 +113,7 @@
         .feature-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
         .feature-card p { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
 
-        /* MBG STATS */
+        /* MBG */
         .mbg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
         .mbg-card {
             background: #fff; border-radius: 16px; padding: 24px 16px; text-align: center;
@@ -148,24 +124,21 @@
         .mbg-card .label { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
 
         /* PARTNERS */
-        .partners { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; align-items: center; padding: 20px 0; }
-        .partner { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--gray-700); opacity: 0.7; }
-        .partner-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 16px; }
-
-        /* CTA */
-        .cta-section {
-            background: linear-gradient(135deg, var(--green-800), var(--green-700));
-            padding: 60px 5%; text-align: center; color: #fff;
+        .partners {
+            display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+            align-items: center; padding: 40px 5%;
+            background: var(--green-50);
         }
-        .cta-section h2 { font-size: 28px; font-weight: 900; margin-bottom: 12px; }
-        .cta-section p { font-size: 16px; opacity: 0.85; margin-bottom: 24px; }
+        .partner-item { display: flex; align-items: center; gap: 10px; }
+        .partner-item img { height: 40px; object-fit: contain; }
+        .partner-item span { font-size: 13px; font-weight: 700; color: var(--gray-700); }
 
         /* FOOTER */
         .footer {
             background: var(--gray-900); color: #fff; padding: 40px 5% 24px;
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
         }
-        .footer-left { font-size: 13px; opacity: 0.6; }
+        .footer-left { font-size: 13px; opacity: 0.6; line-height: 1.8; }
         .footer-right { display: flex; gap: 24px; }
         .footer-right a { color: #fff; opacity: 0.6; text-decoration: none; font-size: 13px; }
         .footer-right a:hover { opacity: 1; }
@@ -176,9 +149,7 @@
         .delay-1 { animation-delay: 0.1s; opacity: 0; }
         .delay-2 { animation-delay: 0.2s; opacity: 0; }
         .delay-3 { animation-delay: 0.3s; opacity: 0; }
-        .delay-4 { animation-delay: 0.4s; opacity: 0; }
 
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero { min-height: auto; padding: 100px 5% 40px; }
@@ -188,6 +159,7 @@
             .compare { grid-template-columns: 1fr; gap: 16px; }
             .compare-vs { display: none; }
             .mbg-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners { gap: 24px; }
         }
     </style>
 </head>
@@ -195,18 +167,14 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-    <div class="nav-logo">
-        <img src="logo.png" alt="NusaPangan">
-    </div>
+    <div class="nav-logo"><img src="logo.png" alt="NusaPangan"></div>
     <div class="nav-links">
         <a href="#masalah">Masalah</a>
         <a href="#studi-kasus">Studi Kasus</a>
         <a href="#fitur">Fitur</a>
-        <a href="#mbg">Program MBG</a>
+        <a href="#mbg">MBG</a>
     </div>
-    <div class="nav-cta">
-        <a href="https://nusapangan.streamlit.app" class="btn btn-primary" target="_blank">Buka Prototype →</a>
-    </div>
+    <a href="https://nusapangan.streamlit.app" class="btn btn-primary" target="_blank">Buka Prototype →</a>
 </nav>
 
 <!-- HERO -->
@@ -215,10 +183,6 @@
         <div class="hero-badge fade-up">🌾 PLATFORM TRACEABILITY MBG</div>
         <h1 class="fade-up delay-1">Dari Sawah ke <span>Piring Anak</span> Indonesia</h1>
         <p class="fade-up delay-2">Setiap porsi makan bergizi gratis yang diterima anak Indonesia dapat ditelusuri kembali hingga petani yang menanamnya.</p>
-        <div class="hero-btns fade-up delay-3">
-            <a href="https://nusapangan.streamlit.app/Command_Center" class="btn btn-primary btn-lg" target="_blank">📊 Lihat Data Harga</a>
-            <a href="https://nusapangan.streamlit.app/QR_Trace" class="btn btn-gold btn-lg" target="_blank">🔍 Mulai Traceability</a>
-        </div>
     </div>
 </section>
 
@@ -256,7 +220,7 @@
         <div class="problem-card">
             <div class="icon">🗑️</div>
             <h3>Food Loss Tinggi</h3>
-            <p>Bappenas: 23-48 juta ton pangan terbuang setiap tahun — senilai ratusan triliun rupiah, akibat rantai distribusi yang tidak efisien.</p>
+            <p>Bappenas: 23-48 juta ton pangan terbuang setiap tahun — senilai ratusan triliun rupiah akibat rantai distribusi tidak efisien.</p>
         </div>
     </div>
 </section>
@@ -292,32 +256,32 @@
         <a href="https://nusapangan.streamlit.app/Farmer_Dashboard" target="_blank" class="feature-card">
             <div class="feature-icon" style="background:var(--green-100);">👨‍🌾</div>
             <h3>Identitas Petani</h3>
-            <p>Verifikasi Dukcapil, credit scoring digital, akses KUR, income tracking. Identitas ekonomi digital untuk petani kecil.</p>
+            <p>Verifikasi Dukcapil, credit scoring digital, akses KUR, income tracking.</p>
         </a>
         <a href="https://nusapangan.streamlit.app/QR_Trace" target="_blank" class="feature-card">
             <div class="feature-icon" style="background:#dbeafe;">🔍</div>
             <h3>QR Traceability</h3>
-            <p>Lacak perjalanan beras dari sawah ke piring siswa. Scan QR → lihat petani, penggilingan, gudang, sekolah. Blockchain audit trail.</p>
+            <p>Lacak beras dari sawah ke piring siswa. Scan QR, lihat seluruh journey. Blockchain audit trail.</p>
         </a>
         <a href="https://nusapangan.streamlit.app/Command_Center" target="_blank" class="feature-card">
             <div class="feature-icon" style="background:#e0e7ff;">🏛️</div>
             <h3>Dashboard Pemerintah</h3>
-            <p>Price Radar harga real PIHPS, MBG Monitor, early warning inflasi, anomaly detection Isolation Forest.</p>
+            <p>Price Radar harga real PIHPS, MBG Monitor, early warning inflasi.</p>
         </a>
         <a href="https://nusapangan.streamlit.app/AgriMart" target="_blank" class="feature-card">
             <div class="feature-icon" style="background:#ffedd5;">🛒</div>
             <h3>Marketplace F2C</h3>
-            <p>Petani jual langsung ke SPPG — memangkas rantai distribusi. Sistem escrow, hemat ~18% vs harga pasar.</p>
+            <p>Petani jual langsung ke SPPG — memangkas rantai distribusi, hemat ~18%.</p>
         </a>
         <a href="https://nusapangan.streamlit.app/PanganLink" target="_blank" class="feature-card">
             <div class="feature-icon" style="background:#ede9fe;">🔗</div>
             <h3>AI Matching</h3>
-            <p>LSTM prediksi harga 2 minggu. Matching otomatis surplus Banten → defisit DKI Jakarta. R² score 0.94.</p>
+            <p>LSTM prediksi harga. Matching otomatis surplus Banten → defisit DKI Jakarta.</p>
         </a>
         <a href="https://nusapangan.streamlit.app/SmartDistrib" target="_blank" class="feature-card">
             <div class="feature-icon" style="background:#ccfbf1;">🚛</div>
             <h3>IoT Cold-Chain</h3>
-            <p>Sensor suhu/kelembaban/GPS real-time. Algoritma Genetika optimasi rute. Alert otomatis jika suhu melebihi batas.</p>
+            <p>Sensor suhu/GPS real-time. Algoritma Genetika optimasi rute distribusi.</p>
         </a>
     </div>
 </section>
@@ -325,59 +289,34 @@
 <!-- MBG -->
 <section class="section section-alt" id="mbg">
     <h2 class="section-title">Program MBG 2026</h2>
-    <p class="section-sub">NusaPangan memperkuat transparansi dan efisiensi supply chain program Makan Bergizi Gratis.</p>
+    <p class="section-sub">NusaPangan memperkuat transparansi dan efisiensi supply chain Makan Bergizi Gratis.</p>
     <div class="mbg-grid">
-        <div class="mbg-card">
-            <div class="icon">💰</div>
-            <div class="val">Rp 268 T</div>
-            <div class="label">Anggaran (UU APBN)</div>
-        </div>
-        <div class="mbg-card">
-            <div class="icon">👥</div>
-            <div class="val">62,96 Jt</div>
-            <div class="label">Penerima</div>
-        </div>
-        <div class="mbg-card">
-            <div class="icon">🏭</div>
-            <div class="val">27.735</div>
-            <div class="label">Dapur SPPG</div>
-        </div>
-        <div class="mbg-card">
-            <div class="icon">🏫</div>
-            <div class="val">280.023</div>
-            <div class="label">Sekolah</div>
-        </div>
+        <div class="mbg-card"><div class="icon">💰</div><div class="val">Rp 268 T</div><div class="label">Anggaran (UU APBN)</div></div>
+        <div class="mbg-card"><div class="icon">👥</div><div class="val">62,96 Jt</div><div class="label">Penerima</div></div>
+        <div class="mbg-card"><div class="icon">🏭</div><div class="val">27.735</div><div class="label">Dapur SPPG</div></div>
+        <div class="mbg-card"><div class="icon">🏫</div><div class="val">280.023</div><div class="label">Sekolah</div></div>
     </div>
 </section>
 
-<!-- PARTNERS -->
-<section class="section">
-    <div class="partners">
-        <div class="partner"><div class="partner-icon">🏦</div> Bank Indonesia</div>
-        <div class="partner"><div class="partner-icon">🌾</div> Kementerian Pertanian</div>
-        <div class="partner"><div class="partner-icon">🍚</div> Badan Pangan Nasional</div>
-        <div class="partner"><div class="partner-icon">📊</div> Badan Pusat Statistik</div>
-        <div class="partner"><div class="partner-icon">🏫</div> Kemendikdasmen</div>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-    <h2>Lihat Prototype NusaPangan</h2>
-    <p>Demo interaktif dengan data real dari PIHPS Kemendag, BPS, dan Kemendikdasmen.</p>
-    <a href="https://nusapangan.streamlit.app" class="btn btn-gold btn-lg" target="_blank">🚀 Buka Prototype Sekarang</a>
+<!-- PARTNERS with real logos -->
+<section class="partners">
+    <div class="partner-item"><img src="logo-bi.png" alt="Bank Indonesia" style="height:36px;"></div>
+    <div class="partner-item"><img src="logo-pertanian.png" alt="Kementerian Pertanian" style="height:44px;"></div>
+    <div class="partner-item"><img src="badan-pangan.png" alt="Badan Pangan Nasional" style="height:36px;"></div>
+    <div class="partner-item" style="font-size:14px;font-weight:800;color:var(--gray-700);">📊 BPS</div>
+    <div class="partner-item" style="font-size:14px;font-weight:800;color:var(--gray-700);">🏫 Kemendikdasmen</div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-left">
-        🌾 NusaPangan · Tim We Are Solution · PIDI DIGDAYA × HACKATHON 2026<br>
+        🌾 NusaPangan · Tim We Are Solution<br>
+        PIDI DIGDAYA × HACKATHON 2026<br>
         Data: SP2KP Kemendag · BPS · Kemendikdasmen · Kementan · Bank Indonesia
     </div>
     <div class="footer-right">
-        <a href="https://nusapangan.streamlit.app">Prototype</a>
-        <a href="https://github.com/Koteng26/NusaPangan">GitHub</a>
-        <a href="mailto:info@nusapangan.id">Kontak</a>
+        <a href="https://nusapangan.streamlit.app" target="_blank">Prototype</a>
+        <a href="https://github.com/Koteng26/NusaPangan" target="_blank">GitHub</a>
     </div>
 </footer>
 
