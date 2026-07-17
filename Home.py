@@ -51,6 +51,28 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# WELCOME + ALUR
+if st.session_state.get("petani"):
+    _p = st.session_state["petani"]
+    st.markdown(f'<div class="np-alert np-alert-green">👋 Selamat datang kembali, <b>{_p["nama"]}</b> · <span style="font-family:monospace;">{_p["rice_id"]}</span> — paket <b>{_p["paket"]}</b>.</div>', unsafe_allow_html=True)
+
+st.markdown("### 🧭 Alur NusaPangan — dari daftar sampai tersalur")
+st.markdown("""
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#15803d;">1 · Daftar</b><br><small style="color:#666;">petani + Rice ID</small></div>
+  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#15803d;">2 · Dashboard</b><br><small style="color:#666;">profil &amp; panen</small></div>
+  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#E65100;">3 · AgriMart</b><br><small style="color:#666;">jual ke SPPG</small></div>
+  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#2196F3;">4 · QR Trace</b><br><small style="color:#666;">sawah → piring</small></div>
+  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#1A237E;">5 · Gov Dashboard</b><br><small style="color:#666;">intelijen pangan</small></div>
+</div>
+""", unsafe_allow_html=True)
+_c1, _c2 = st.columns(2)
+with _c1:
+    st.page_link("pages/0_📝_Pendaftaran.py", label="🌱 Mulai — Daftar sebagai Petani")
+with _c2:
+    st.page_link("pages/9_💳_Paket_Program.py", label="💳 Lihat Paket & Program")
+st.markdown("---")
+
 # STATS
 st.markdown("### 📊 Data Real — Banten vs DKI Jakarta")
 c1, c2, c3, c4 = st.columns(4)

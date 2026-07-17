@@ -24,6 +24,11 @@ except:
 st.set_page_config(page_title="Farmer Dashboard", page_icon="👨‍🌾", layout="wide")
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
+# Sambutan bila datang dari pendaftaran (session)
+if st.session_state.get("petani"):
+    _p = st.session_state["petani"]
+    st.markdown(f'<div class="np-alert np-alert-green">👋 Selamat datang, <b>{_p["nama"]}</b> · <span style="font-family:monospace;">{_p["rice_id"]}</span> — {_p["luas"]} ha · {_p["kabupaten"]} · {_p["varietas"]} · paket <b>{_p["paket"]}</b>.</div>', unsafe_allow_html=True)
+
 st.markdown("""
 <style>
     .greeting { font-size: 1.5rem; font-weight: 700; color: #1B5E20; margin-bottom: 0; }
