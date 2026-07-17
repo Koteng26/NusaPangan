@@ -152,6 +152,42 @@ section{position:relative}
 .fcard li:before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:var(--sprout)}
 .fnote{font-family:var(--mono);font-size:11px;color:var(--sky);background:var(--sky-l);padding:8px 12px;border-radius:8px;margin-top:8px}
 
+/* SHOWCASE (mockup app) */
+.showcase{background:linear-gradient(180deg,var(--mist),#fff)}
+.scgrid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.sctext .eyebrow{color:var(--sprout-d)}
+.sctext h2{font-size:clamp(26px,3.4vw,38px);margin:12px 0 14px}
+.sctext p{color:var(--muted);font-size:15px;margin-bottom:18px}
+.scfeat{list-style:none;margin:0 0 22px}
+.scfeat li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;font-size:14.5px}
+.scfeat .ic{width:32px;height:32px;border-radius:9px;background:var(--mist);display:grid;place-items:center;flex:none;font-size:15px}
+.scfeat b{display:block}
+.scfeat small{color:var(--muted);font-size:12.5px}
+.phones{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px}
+.phone{width:258px;height:534px;background:linear-gradient(160deg,#12251c,#0A1F17);border-radius:36px;padding:11px;box-shadow:0 40px 80px rgba(10,31,23,.4);position:relative}
+.phone:before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:86px;height:20px;background:#0A1F17;border-radius:0 0 13px 13px;z-index:3}
+.screen{width:100%;height:100%;border-radius:27px;overflow:hidden;background:#F0FDF4;position:relative}
+.phone.back{position:absolute;transform:rotate(-8deg) scale(.9) translateX(-58%);opacity:.97;z-index:1}
+.phone.front{z-index:2;transform:translateX(14%)}
+.appbar{background:linear-gradient(135deg,#14532d,#166534);color:#EAF3EE;padding:34px 15px 14px}
+.appbar .eb{font-size:7.5px;letter-spacing:.12em;opacity:.7;font-family:var(--mono);text-transform:uppercase}
+.appbar h5{font-family:var(--disp);font-size:15px;margin-top:3px;font-weight:700}
+.appbar p{font-size:9px;opacity:.85;margin-top:2px}
+.appbody{padding:12px}
+.stepsm{display:flex;gap:4px;margin-bottom:12px}
+.stepsm i{flex:1;height:4px;border-radius:2px;background:#c8e6c9}
+.stepsm i.on{background:#15803d}
+.fld{font-size:9px;color:#555;margin:9px 0 3px;font-weight:600}
+.inp{height:26px;background:#fff;border:1px solid #dbe7dd;border-radius:7px}
+.pdpm{font-size:8px;color:#1C6E8C;background:#E4F0F2;border-radius:6px;padding:6px 8px;margin-top:8px;line-height:1.45}
+.appbtn{background:#15803d;color:#fff;text-align:center;font-size:11px;font-weight:600;padding:9px;border-radius:8px;margin-top:12px}
+.stat3{display:flex;gap:6px;margin-bottom:8px}
+.stat3 div{flex:1;background:#fff;border:1px solid #dbe7dd;border-radius:9px;padding:8px 5px;text-align:center}
+.stat3 b{font-family:var(--disp);font-size:15px;color:#15803d;display:block}
+.stat3 small{font-size:6.5px;color:#888;letter-spacing:.03em}
+.barm{display:flex;align-items:flex-end;gap:5px;height:64px;padding:8px;background:#fff;border:1px solid #dbe7dd;border-radius:9px;margin-top:8px}
+.barm i{flex:1;background:linear-gradient(#39A96B,#2B8354);border-radius:3px 3px 0 0}
+@media(max-width:860px){.scgrid{grid-template-columns:1fr}.phones{min-height:520px}.phone.back{display:none}.phone.front{transform:none}}
 /* GOVERNANCE (dark) */
 .gov{background:var(--ink);color:#EAF3EE}
 .gov .eyebrow{color:var(--deficit)}
@@ -285,6 +321,7 @@ section{position:relative}
     <div class="nlinks">
       <a href="#pilar">Tiga Pilar</a>
       <a href="#fondasi">Fondasi</a>
+      <a href="#app">Aplikasi</a>
       <a href="#tatakelola">Tata Kelola</a>
       <a href="#lahanmap">LahanMap</a>
       <a href="#validasi">Validasi</a>
@@ -465,6 +502,47 @@ section{position:relative}
         <ul><li>Prediksi panen & harga harian</li><li>Cuaca & rekomendasi waktu tanam</li><li>Peringatan risiko pasokan</li></ul>
         <div class="fnote">Pendamping berbasis AI & data</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE (app dalam genggaman) -->
+<section class="showcase pad" id="app">
+  <div class="wrap scgrid">
+    <div class="sctext reveal">
+      <div class="eyebrow">Aplikasi · Demo Langsung</div>
+      <h2>NusaPangan dalam genggaman</h2>
+      <p>Bukan sekadar konsep — prototipenya sudah bisa dijalankan. Petani mendaftar, mendapat Rice ID, menjual ke SPPG, dan pemerintah memantau — dari satu aplikasi.</p>
+      <ul class="scfeat">
+        <li><span class="ic">📝</span><span><b>Daftar & dapat Rice ID</b><small>onboarding + persetujuan sesuai UU PDP</small></span></li>
+        <li><span class="ic">🛒</span><span><b>Jual langsung ke SPPG</b><small>AgriMart, tanpa tengkulak</small></span></li>
+        <li><span class="ic">🔍</span><span><b>QR traceability</b><small>lacak dari sawah ke piring</small></span></li>
+        <li><span class="ic">🗺️</span><span><b>LahanMap</b><small>peta LSD Banten di atas citra satelit</small></span></li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Buka Aplikasi →</a>
+        <a class="btn btn-line" style="color:var(--rice);border-color:var(--line)" href="https://nusapangan.streamlit.app/Pendaftaran" target="_blank" rel="noopener">Coba Pendaftaran</a>
+      </div>
+    </div>
+    <div class="phones reveal">
+      <div class="phone back"><div class="screen">
+        <div class="appbar"><div class="eb">Dashboard Petani</div><h5>Selamat datang, Budi</h5><p>NP-BTN-4821 · Kab. Serang</p></div>
+        <div class="appbody">
+          <div class="stat3"><div><b>2,4</b><small>TON PANEN</small></div><div><b>1,5</b><small>HA LAHAN</small></div><div><b>32</b><small>SKOR</small></div></div>
+          <div class="barm"><i style="height:40%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:95%"></i></div>
+          <div class="appbtn">Jual di AgriMart →</div>
+        </div>
+      </div></div>
+      <div class="phone front"><div class="screen">
+        <div class="appbar"><div class="eb">NusaPangan · Onboarding</div><h5>📝 Pendaftaran Petani</h5><p>Buat identitas digital & Rice ID</p></div>
+        <div class="appbody">
+          <div class="stepsm"><i class="on"></i><i></i><i></i><i></i></div>
+          <div class="fld">Nama lengkap</div><div class="inp"></div>
+          <div class="fld">NIK (16 digit)</div><div class="inp"></div>
+          <div class="pdpm">🔒 NIK di-hash & dilindungi sesuai UU No.27/2022 (PDP).</div>
+          <div class="appbtn">Lanjut →</div>
+        </div>
+      </div></div>
     </div>
   </div>
 </section>
