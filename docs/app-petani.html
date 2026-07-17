@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Petani — NusaPangan</title>
+<link rel="icon" href="https://nusapangan.my.id/logo-main.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green-900:#14532d;--green-800:#166534;--green-700:#15803d;--green-600:#16a34a;--green-100:#dcfce7;--green-50:#f0fdf4;--navy:#0f172a;--gray-500:#64748b;--red-600:#dc2626;--gold:#d4a012;--line:#e6efe8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f8fafc;color:var(--navy);display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px 12px}
+.phone{width:100%;max-width:384px;height:788px;max-height:94vh;background:#000;border-radius:38px;padding:11px;box-shadow:0 40px 90px rgba(15,23,42,.28);position:relative}
+.viewport{width:100%;height:100%;background:#fff;border-radius:29px;overflow:hidden;position:relative}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translateX(16px);pointer-events:none;transition:opacity .32s ease,transform .32s ease;overflow-y:auto}
+.screen.active{opacity:1;transform:none;pointer-events:auto}
+.hd{background:linear-gradient(135deg,var(--green-800),var(--green-700));color:#eafff1;padding:18px 18px 16px;flex:none;position:relative}
+.back{position:absolute;left:14px;top:16px;background:rgba(255,255,255,.16);border:0;color:#fff;width:30px;height:30px;border-radius:9px;font-size:16px;cursor:pointer}
+.hd .brand{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:16px}
+.leaf{width:20px;height:20px}
+.dots{display:flex;gap:5px;justify-content:center;padding:10px 0 0}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--green-100);opacity:.5}
+.dots i.on{opacity:1;background:#fff}
+.pad{padding:22px 20px;flex:1;display:flex;flex-direction:column}
+h2{font-size:21px;font-weight:800;color:var(--green-900);line-height:1.25}
+.sub{font-size:13.5px;color:var(--gray-500);margin-top:7px;line-height:1.5}
+label{display:block;font-size:12px;font-weight:700;color:#334155;margin:14px 0 5px}
+input,select{width:100%;padding:12px 13px;border:1px solid #d7e3da;border-radius:11px;font-family:inherit;font-size:14px;background:#fff}
+input:focus,select:focus{outline:none;border-color:var(--green-600)}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;background:var(--green-700);color:#fff;margin-top:auto}
+.btn:disabled{background:#c7d6cc;cursor:not-allowed}
+.btn.gold{background:var(--gold);color:#3a2a06}
+.link{text-align:center;font-size:13px;color:var(--green-700);font-weight:600;margin-top:14px;cursor:pointer}
+.tiny{font-size:11.5px;color:var(--gray-500);margin-top:8px;line-height:1.5}
+/* welcome */
+.welcome{background:linear-gradient(170deg,var(--green-700),var(--green-800));color:#fff;align-items:center;justify-content:center;text-align:center;padding:40px 26px}
+.welcome .big-leaf{width:74px;height:74px;margin-bottom:18px}
+.welcome h2{color:#fff;font-size:23px}
+.welcome .sub{color:#d7f5e1}
+.welcome .btn{margin-top:30px;background:var(--gold);color:#3a2a06}
+.welcome .link{color:#eafff1}
+/* prefix input */
+.phone-input{display:flex;align-items:center;border:1px solid #d7e3da;border-radius:11px;overflow:hidden}
+.phone-input .pfx{padding:12px 12px;background:var(--green-50);color:var(--green-800);font-weight:700;font-size:14px}
+.phone-input input{border:0;border-radius:0}
+/* otp */
+.otp{display:flex;gap:8px;justify-content:space-between;margin-top:6px}
+.otp input{text-align:center;font-size:20px;font-weight:800;padding:12px 0}
+/* consent list */
+.dl{margin-top:8px}
+.dl .it{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid #f0f4f1}
+.dl .ic{width:30px;height:30px;border-radius:8px;background:var(--green-50);display:grid;place-items:center;flex:none;font-size:15px}
+.dl b{font-size:13.5px;display:block}
+.dl small{font-size:12px;color:var(--gray-500)}
+.box{border-radius:12px;padding:13px;margin-top:14px;font-size:12.5px;line-height:1.6}
+.box-gray{background:#f1f5f4}
+.box-gray b,.box-green b{display:block;margin-bottom:6px;font-size:13px}
+.box-green{background:var(--green-50);border:1px solid var(--green-100)}
+.box ul{margin:0;padding-left:16px;color:#475569}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13px;cursor:pointer}
+.chk input{width:19px;height:19px;flex:none;margin-top:1px;accent-color:var(--green-600)}
+/* ktp upload */
+.upload{border:2px dashed #c7d6cc;border-radius:12px;padding:22px;text-align:center;color:var(--gray-500);font-size:13px;margin-top:6px}
+.upload .cam{font-size:30px}
+/* red box */
+.redbox{background:#fef2f2;border:2px solid var(--red-600);border-radius:13px;padding:14px;margin-bottom:12px}
+.redbox b{color:var(--red-600);font-size:14px;display:block;margin-bottom:6px}
+.redbox p{font-size:12.5px;color:#7f1d1d;line-height:1.6}
+.tc-scroll{border:1px solid var(--line);border-radius:12px;padding:13px;height:270px;overflow-y:auto;margin-top:6px}
+.tc-scroll .pt{font-size:12.5px;color:#475569;padding:7px 0;border-bottom:1px solid #f0f4f1;line-height:1.55}
+/* dashboard */
+.d-hd{background:linear-gradient(135deg,var(--green-800),var(--green-700));color:#fff;padding:18px 18px 20px;flex:none}
+.d-hd .badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;margin-top:6px}
+.d-body{padding:16px;flex:1;overflow-y:auto;padding-bottom:70px}
+.price-card{background:linear-gradient(160deg,var(--green-50),#fff);border:1px solid var(--green-100);border-radius:14px;padding:15px;text-align:center}
+.price-card .lbl{font-size:12px;color:var(--gray-500)}
+.price-card .val{font-size:30px;font-weight:800;color:var(--green-800);margin:2px 0}
+.price-card .up{color:var(--green-600);font-size:12.5px;font-weight:700}
+.price-card .src{font-size:10.5px;color:var(--gray-500);margin-top:4px}
+.st3{display:flex;gap:8px;margin:12px 0}
+.st3 div{flex:1;background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 7px;text-align:center}
+.st3 b{display:block;font-size:16px;color:var(--green-800)}
+.st3 small{font-size:10px;color:var(--gray-500)}
+.sec-t{font-size:14px;font-weight:800;margin:14px 0 8px}
+.lcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px}
+.lcard .row{display:flex;justify-content:space-between;align-items:center}
+.status-y{background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
+.sbtn{background:var(--green-50);color:var(--green-700);border:1px solid var(--green-100);font-size:12px;font-weight:700;padding:7px 12px;border-radius:9px;cursor:pointer;margin-top:10px}
+.qr{width:74px;height:74px;display:grid;grid-template-columns:repeat(9,1fr);gap:1px;background:#fff;padding:3px;border:1px solid var(--line);border-radius:8px;flex:none}
+.qr i{background:#0f172a;border-radius:1px}
+.qr i.w{background:#fff}
+.mini-tl{display:flex;align-items:center;gap:3px;margin-top:10px}
+.mini-tl .m{width:15px;height:15px;border-radius:50%;background:#e2e8f0;display:grid;place-items:center;font-size:8px;color:#94a3b8;flex:none}
+.mini-tl .m.on{background:var(--green-600);color:#fff}
+.mini-tl .ln{flex:1;height:2px;background:#e2e8f0}
+.prof{background:var(--green-50);border:1px solid var(--green-100);border-radius:12px;padding:13px}
+.toggle{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:12.5px}
+.sw{width:40px;height:22px;border-radius:12px;background:#cbd5e1;position:relative;cursor:pointer;flex:none;transition:background .2s}
+.sw:after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw.on{background:var(--green-600)}.sw.on:after{transform:translateX(18px)}
+.botnav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 0}
+.botnav div{font-size:10.5px;color:var(--gray-500);text-align:center}
+.botnav div.on{color:var(--green-700);font-weight:700}
+.botnav .bi{font-size:17px;display:block}
+</style>
+</head>
+<body>
+<div class="phone"><div class="viewport">
+
+  <!-- 1 WELCOME -->
+  <section class="screen welcome active" id="s1">
+    <svg class="big-leaf" viewBox="0 0 24 24" fill="none"><path d="M12 21c-5-1-8-5-8-10 0-3 2-6 6-8 0 4 3 5 6 7 2 1.5 3 4 2 7-1 3-4 4-6 4z" fill="#eafff1"/><path d="M12 21c0-5 1-9 4-13" stroke="#166534" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div style="font-weight:800;font-size:20px;margin-bottom:20px">NusaPangan</div>
+    <h2>Jual hasil panen langsung ke pembeli institusi</h2>
+    <p class="sub">Harga transparan. Pembayaran terjamin.</p>
+    <button class="btn" onclick="go(2)">Mulai Daftar</button>
+    <div class="link" onclick="go(7)">Sudah punya akun? Masuk</div>
+  </section>
+
+  <!-- 2 NOMOR HP -->
+  <section class="screen" id="s2">
+    <div class="hd"><button class="back" onclick="go(1)">←</button><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="pad">
+      <h2>Masukkan nomor HP</h2>
+      <p class="sub">Kami akan kirim kode verifikasi lewat SMS.</p>
+      <label>Nomor HP</label>
+      <div class="phone-input"><span class="pfx">+62</span><input inputmode="numeric" placeholder="812 3456 7890"></div>
+      <p class="tiny">Nomor ini akan jadi identitas akun Anda.</p>
+      <button class="btn" onclick="go(3)">Kirim Kode</button>
+    </div>
+  </section>
+
+  <!-- 3 OTP -->
+  <section class="screen" id="s3">
+    <div class="hd"><button class="back" onclick="go(2)">←</button><div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div></div>
+    <div class="pad">
+      <h2>Masukkan kode verifikasi</h2>
+      <p class="sub">Kode dikirim ke +62 812-xxxx-xxxx</p>
+      <div class="otp" id="otp"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"></div>
+      <div class="link" style="text-align:left;margin-top:14px;color:var(--gray-500);cursor:default">Kirim ulang kode (00:45)</div>
+      <button class="btn" onclick="go(4)">Verifikasi</button>
+    </div>
+  </section>
+
+  <!-- 4 PERSETUJUAN DATA -->
+  <section class="screen" id="s4">
+    <div class="hd"><button class="back" onclick="go(3)">←</button><div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i></div></div>
+    <div class="pad">
+      <h2>Data apa yang kami kumpulkan?</h2>
+      <p class="sub">Sebelum lanjut, pastikan Anda memahami ini.</p>
+      <div class="dl">
+        <div class="it"><div class="ic">🪪</div><div><b>Nama & NIK</b><small>Untuk memverifikasi Anda petani sungguhan</small></div></div>
+        <div class="it"><div class="ic">📍</div><div><b>Lokasi lahan</b><small>Untuk mencocokkan dengan pembeli terdekat</small></div></div>
+        <div class="it"><div class="ic">🌾</div><div><b>Riwayat panen</b><small>Untuk membangun profil verifikasi Anda</small></div></div>
+        <div class="it"><div class="ic">💳</div><div><b>Riwayat transaksi</b><small>Untuk menghitung harga wajar dan prediksi panen</small></div></div>
+      </div>
+      <div class="box box-gray"><b>Siapa yang bisa melihat data Anda?</b>
+        <ul><li>Pembeli (SPPG) hanya melihat: nama, desa, jenis beras, jumlah</li><li>Lembaga keuangan mitra hanya melihat profil verifikasi — HANYA jika Anda menyetujui secara terpisah</li><li>NIK Anda disimpan ter-enkripsi (hash), tidak pernah ditampilkan</li></ul>
+      </div>
+      <div class="box box-green"><b>Hak Anda</b>
+        <ul><li>Menarik listing kapan saja</li><li>Meminta data Anda dihapus</li><li>Menolak berbagi data ke lembaga keuangan tanpa kehilangan akses fitur lain</li></ul>
+      </div>
+      <label class="chk"><input type="checkbox" onchange="gate('g4',this.checked)"> Saya memahami dan menyetujui pengumpulan data di atas.</label>
+      <button class="btn" id="g4" disabled onclick="go(5)">Setuju & Lanjutkan</button>
+      <div class="link">Baca Kebijakan Privasi lengkap</div>
+    </div>
+  </section>
+
+  <!-- 5 VERIFIKASI IDENTITAS -->
+  <section class="screen" id="s5">
+    <div class="hd"><button class="back" onclick="go(4)">←</button><div class="dots"><i></i><i></i><i></i><i class="on"></i><i></i></div></div>
+    <div class="pad">
+      <h2>Verifikasi identitas</h2>
+      <p class="sub">Untuk memastikan Anda petani sungguhan.</p>
+      <label>Foto KTP</label>
+      <div class="upload"><div class="cam">📷</div>Ambil foto KTP</div>
+      <label>NIK (16 digit)</label><input inputmode="numeric" maxlength="16" placeholder="16 digit">
+      <label>Nama sesuai KTP</label><input placeholder="cth. Budi Santoso">
+      <label>Kecamatan (Banten)</label>
+      <select><option>Kramatwatu, Serang</option><option>Ciruas, Serang</option><option>Kragilan, Serang</option><option>Pontang, Serang</option><option>Rangkasbitung, Lebak</option><option>Pandeglang Kota</option></select>
+      <label>Luas lahan (hektar)</label><input inputmode="decimal" placeholder="cth. 1.5">
+      <label>Jenis padi</label>
+      <select><option>Inpari 32</option><option>Inpari 42</option><option>Ciherang</option><option>IR64</option><option>Mekongga</option><option>Situ Bagendit</option><option>Beras Merah</option><option>Beras Organik</option></select>
+      <p class="tiny">Data akan diverifikasi oleh petugas lapangan dalam 1–2 hari kerja.</p>
+      <button class="btn" onclick="go(6)">Kirim Verifikasi</button>
+    </div>
+  </section>
+
+  <!-- 6 S&K -->
+  <section class="screen" id="s6">
+    <div class="hd"><button class="back" onclick="go(5)">←</button><div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i></div></div>
+    <div class="pad">
+      <h2>Syarat & Ketentuan</h2>
+      <div class="tc-scroll">
+        <div class="redbox"><b>⚠️ NusaPangan TIDAK menyalurkan pinjaman</b><p>Kami tidak memberi kredit, tidak menagih utang, dan tidak menyimpan uang Anda. Kami hanya menyediakan data verifikasi kepada bank mitra — keputusan pemberian kredit sepenuhnya ada di tangan bank, dan risikonya ditanggung bank.</p></div>
+        <div class="pt">Komisi platform: 1–2% dari nilai transaksi, dipotong saat pembayaran cair.</div>
+        <div class="pt">Escrow: dana pembeli ditahan oleh penyedia jasa pembayaran berizin (bukan oleh NusaPangan) sampai Anda mengonfirmasi barang terkirim.</div>
+        <div class="pt">Anda berhak menarik listing kapan saja sebelum ada pembeli.</div>
+        <div class="pt">Anda menetapkan harga sendiri — NusaPangan hanya menampilkan harga pasar sebagai referensi.</div>
+        <div class="pt">Tidak ada biaya pendaftaran, tidak ada biaya bulanan.</div>
+        <div class="pt">Perselisihan diselesaikan lewat mediasi sebelum jalur hukum.</div>
+      </div>
+      <label class="chk"><input type="checkbox" onchange="gate('g6',this.checked)"> Saya telah membaca dan menyetujui Syarat & Ketentuan.</label>
+      <button class="btn" id="g6" disabled onclick="go(7)">Selesai & Masuk Dashboard</button>
+    </div>
+  </section>
+
+  <!-- 7 DASHBOARD -->
+  <section class="screen" id="s7">
+    <div class="d-hd"><div style="font-size:17px;font-weight:800">Selamat datang, Pak Budi</div><span class="badge">✓ Terverifikasi</span></div>
+    <div class="d-body">
+      <div class="price-card"><div class="lbl">Harga gabah hari ini di Serang</div><div class="val">Rp 6.800<span style="font-size:14px">/kg</span></div><div class="up">↑ +Rp 200 dari kemarin</div><div class="src">Sumber: PIHPS Kementerian Perdagangan</div></div>
+      <div class="st3"><div><b>1,5 ha</b><small>Luas lahan</small></div><div><b>7 ton</b><small>Estimasi panen</small></div><div><b>1</b><small>Listing aktif</small></div></div>
+
+      <div class="sec-t">Listing Saya</div>
+      <div class="lcard"><div class="row"><div><b style="font-size:14px">Gabah Inpari 32</b><div style="font-size:12px;color:var(--gray-500)">500 kg · Rp 6.800/kg</div></div><span class="status-y">Menunggu pembeli</span></div><button class="sbtn">Tarik listing</button></div>
+
+      <div class="sec-t">Batch Saya</div>
+      <div class="lcard">
+        <div style="display:flex;gap:12px">
+          <div class="qr" id="qr"></div>
+          <div><b style="font-size:13px">NP-BTN-2026-0847</b><div style="font-size:12px;color:var(--gray-500);margin-top:2px">Gabah Inpari 32 · 500 kg<br>Panen 12 Juli 2026</div></div>
+        </div>
+        <div class="mini-tl"><div class="m on">✓</div><div class="ln"></div><div class="m">2</div><div class="ln"></div><div class="m">3</div><div class="ln"></div><div class="m">4</div><div class="ln"></div><div class="m">5</div></div>
+        <p style="font-size:11.5px;color:var(--gray-500);margin-top:9px">Beras Anda kini punya identitas. Siapa pun yang menerimanya bisa melihat bahwa Anda yang menanamnya.</p>
+        <a href="scan.html" target="_blank" rel="noopener" class="sbtn" style="display:inline-block;text-decoration:none">Lihat detail perjalanan →</a>
+      </div>
+
+      <div class="sec-t">Profil Verifikasi</div>
+      <div class="prof">
+        <b style="color:var(--green-800);font-size:14px">✓ Terverifikasi Penuh</b>
+        <p style="font-size:12px;color:#475569;margin-top:5px">Profil ini dapat dibagikan ke bank mitra jika Anda menyetujui. NusaPangan tidak menyalurkan pinjaman.</p>
+        <div class="toggle"><span>Izinkan bank melihat profil saya</span><div class="sw" id="bankSw" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+    <div class="botnav"><div class="on"><span class="bi">🏠</span>Beranda</div><div><span class="bi">💰</span>Harga</div><div><span class="bi">🌾</span>Listing</div><div><span class="bi">👤</span>Akun</div></div>
+  </section>
+
+</div></div>
+<script>
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  document.querySelector('#s'+n).scrollTop=0;
+  if(n===3) setTimeout(fillOtp,500);
+}
+function gate(id,on){document.getElementById(id).disabled=!on;}
+function fillOtp(){
+  const v=['4','8','2','9','1','5'];
+  document.querySelectorAll('#otp input').forEach((el,i)=>{setTimeout(()=>el.value=v[i],i*90);});
+}
+// QR pola (tetap)
+(function(){
+  const seed=[1,1,1,0,1,0,1,1,1, 1,0,1,1,0,0,0,0,1, 1,0,1,0,1,1,1,0,1, 0,0,0,1,0,1,0,1,0, 1,1,0,0,1,0,1,1,1, 0,1,0,1,0,0,1,0,0, 1,0,1,1,1,0,1,0,1, 1,0,0,0,1,1,0,1,1, 1,1,1,0,1,0,0,0,1];
+  const q=document.getElementById('qr');
+  seed.forEach(c=>{const i=document.createElement('i');if(!c)i.className='w';q.appendChild(i);});
+})();
+</script>
+</body>
+</html>
