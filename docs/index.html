@@ -206,12 +206,18 @@ section{position:relative}
 /* VARIETAS (white) */
 .varietas{background:var(--white)}
 .varietas .eyebrow{color:var(--grain-d)}
-.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.vcard{background:linear-gradient(160deg,var(--mist),#fff);border:1px solid var(--line);border-radius:15px;padding:22px 18px;transition:transform .22s,box-shadow .22s}
-.vcard:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 16px 34px rgba(14,58,44,.1)}
-.vcard .g{font-size:26px;margin-bottom:10px}
-.vcard h4{font-size:16px;margin-bottom:4px}
-.vcard small{font-size:12px;color:var(--muted)}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.vcard{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .22s,box-shadow .22s}
+.vcard:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(14,58,44,.12)}
+.vcard:hover .vphoto svg,.vcard:hover .vimg{transform:scale(1.06)}
+.vphoto{position:relative;height:150px;background:linear-gradient(150deg,var(--c1),var(--c2));display:grid;place-items:center;overflow:hidden}
+.vphoto:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.28),transparent 58%),linear-gradient(0deg,rgba(0,0,0,.14),transparent 45%)}
+.vphoto svg{width:64px;height:64px;opacity:.95;transition:transform .3s;filter:drop-shadow(0 3px 7px rgba(0,0,0,.22))}
+.vimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.vbadge{position:absolute;top:10px;left:10px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.07em;background:rgba(255,255,255,.9);color:var(--rice);padding:3px 8px;border-radius:6px;text-transform:uppercase}
+.vbody{padding:15px 18px 18px}
+.vbody h4{font-size:16px;margin-bottom:3px}
+.vbody small{font-size:12px;color:var(--muted)}
 .vnote{text-align:center;font-size:12.5px;color:var(--muted);margin-top:22px}
 @media(max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr)}}
 
@@ -538,14 +544,14 @@ section{position:relative}
       <p>Kami memilih menguasai satu rantai sampai tuntas, bukan melebar ke banyak komoditas. Varietas premium seperti beras organik justru paling membutuhkan traceability.</p>
     </div>
     <div class="vgrid">
-      <div class="vcard reveal"><div class="g">🌾</div><h4>Inpari 32</h4><small>Populer Banten · tahan hama</small></div>
-      <div class="vcard reveal"><div class="g">🌾</div><h4>Inpari 42</h4><small>Produktivitas tinggi</small></div>
-      <div class="vcard reveal"><div class="g">🌾</div><h4>Ciherang</h4><small>Favorit pasar</small></div>
-      <div class="vcard reveal"><div class="g">🌾</div><h4>IR64</h4><small>Klasik andalan</small></div>
-      <div class="vcard reveal"><div class="g">🌾</div><h4>Mekongga</h4><small>Pulen · adaptif</small></div>
-      <div class="vcard reveal"><div class="g">🌾</div><h4>Situ Bagendit</h4><small>Toleran lahan kering</small></div>
-      <div class="vcard reveal"><div class="g">🍚</div><h4>Beras Merah</h4><small>Segmen premium</small></div>
-      <div class="vcard reveal"><div class="g">🌿</div><h4>Beras Organik</h4><small>Premium · wajib traceability</small></div>
+      <div class="vcard reveal" style="--c1:#B8860B;--c2:#E7B24C"><div class="vphoto"><span class="vbadge">Populer Banten</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Inpari 32</h4><small>Populer Banten · tahan hama</small></div></div>
+      <div class="vcard reveal" style="--c1:#6E8B3D;--c2:#AFC565"><div class="vphoto"><span class="vbadge">Produktivitas</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Inpari 42</h4><small>Produktivitas tinggi</small></div></div>
+      <div class="vcard reveal" style="--c1:#C08A2A;--c2:#E6C15A"><div class="vphoto"><span class="vbadge">Favorit pasar</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Ciherang</h4><small>Favorit pasar</small></div></div>
+      <div class="vcard reveal" style="--c1:#7E8B4A;--c2:#B3C077"><div class="vphoto"><span class="vbadge">Klasik</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>IR64</h4><small>Klasik andalan</small></div></div>
+      <div class="vcard reveal" style="--c1:#C2842E;--c2:#E3B457"><div class="vphoto"><span class="vbadge">Pulen</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Mekongga</h4><small>Pulen · adaptif</small></div></div>
+      <div class="vcard reveal" style="--c1:#A5843A;--c2:#D3B457"><div class="vphoto"><span class="vbadge">Lahan kering</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Situ Bagendit</h4><small>Toleran lahan kering</small></div></div>
+      <div class="vcard reveal" style="--c1:#7A2E22;--c2:#B5503F"><div class="vphoto"><span class="vbadge">Premium</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Beras Merah</h4><small>Segmen premium</small></div></div>
+      <div class="vcard reveal" style="--c1:#22794A;--c2:#4FB07A"><div class="vphoto"><span class="vbadge">Organik</span><svg viewBox="0 0 64 64"><g fill="rgba(255,255,255,.94)"><ellipse cx="23" cy="22" rx="5.5" ry="12" transform="rotate(-24 23 22)"/><ellipse cx="41" cy="25" rx="5.5" ry="12" transform="rotate(22 41 25)"/><ellipse cx="32" cy="41" rx="5.8" ry="12.5" transform="rotate(-4 32 41)"/></g></svg></div><div class="vbody"><h4>Beras Organik</h4><small>Premium · wajib traceability</small></div></div>
     </div>
     <p class="vnote">Varietas berdasarkan hasil validasi lapangan di Banten dan segmen pengembangan.</p>
   </div>
