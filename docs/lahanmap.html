@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LahanMap Banten — NusaPangan</title>
-<meta name="description" content="Peta Lahan Sawah Dilindungi Banten dengan petani terverifikasi NusaPangan.">
+<meta name="description" content="Peta Lahan Sawah Dilindungi (LSD) 5 wilayah Banten di atas citra satelit, dengan petani terverifikasi NusaPangan.">
 <link rel="icon" href="https://nusapangan.my.id/logo-main.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,14 +13,13 @@
 :root{
   --ink:#0A1F17;--rice:#0E3A2C;--sprout:#39A96B;--sprout-d:#2B8354;
   --grain:#E7B24C;--grain-d:#C9902E;--paper:#F7F4EC;--mist:#EAF1EC;
-  --sky:#1C6E8C;--line:rgba(14,58,44,.14);--muted:#5A6B62;
+  --sky:#1C6E8C;--sky-l:#E4F0F2;--line:rgba(14,58,44,.14);--muted:#5A6B62;
   --sans:'Inter',system-ui,sans-serif;--disp:'Sora',var(--sans);--mono:'JetBrains Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{font-family:var(--sans);color:var(--ink);background:var(--paper);overflow:hidden}
-.app{display:grid;grid-template-columns:340px 1fr;height:100vh}
-/* PANEL */
+.app{display:grid;grid-template-columns:342px 1fr;height:100vh}
 .panel{background:linear-gradient(180deg,var(--rice),var(--ink));color:#EAF3EE;overflow-y:auto;padding:20px 20px 30px}
 .phead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .phead img{height:30px}
@@ -28,10 +27,14 @@ body{font-family:var(--sans);color:var(--ink);background:var(--paper);overflow:h
 .back{font-family:var(--mono);font-size:11px;color:#9FC2B2;text-decoration:none;display:inline-block;margin-bottom:16px}
 .back:hover{color:var(--grain)}
 .ptitle{font-family:var(--disp);font-size:22px;font-weight:700;line-height:1.15;margin-bottom:8px;letter-spacing:-.02em}
-.psub{font-size:13px;color:#BFD8CC;margin-bottom:18px;line-height:1.55}
+.psub{font-size:13px;color:#BFD8CC;margin-bottom:16px;line-height:1.55}
 .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:14px;margin-bottom:14px}
 .card h4{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9FC2B2;margin-bottom:12px;font-weight:500}
-/* layer toggles */
+.bigstat{display:flex;gap:8px;margin-bottom:14px}
+.bs{flex:1;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:11px;text-align:center}
+.bs b{font-family:var(--disp);font-size:17px;display:block;color:#fff;letter-spacing:-.01em}
+.bs.g b{color:var(--grain)}
+.bs small{font-size:10px;color:#9FC2B2}
 .toggle{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;user-select:none}
 .toggle input{display:none}
 .sw{width:36px;height:20px;border-radius:11px;background:rgba(255,255,255,.18);position:relative;flex:none;transition:background .2s}
@@ -41,43 +44,34 @@ body{font-family:var(--sans);color:var(--ink);background:var(--paper);overflow:h
 .toggle .tl{font-size:13.5px}
 .toggle .tl small{display:block;font-size:11px;color:#8FB2A1}
 .swatch{width:13px;height:13px;border-radius:3px;flex:none;border:1px solid rgba(255,255,255,.3)}
-/* legend heatmap */
 .legrow{display:flex;align-items:center;gap:9px;font-size:12px;padding:4px 0;color:#DCEBE3}
-.legbar{height:12px;border-radius:3px;flex:1;background:linear-gradient(90deg,#D9EFD9,#7FC79A,#39A96B,#1F6B41,#0E3A2C)}
-.legends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:#8FB2A1;margin-top:4px}
-/* stat readout */
 #readout .rt{font-family:var(--disp);font-size:16px;font-weight:600;margin-bottom:2px}
 .statline{display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
 .statline small{color:#9FC2B2}
 .statline b{font-family:var(--mono);font-weight:500;color:#fff}
 .hint{font-size:11.5px;color:#8FB2A1;font-style:italic}
-/* verified counter */
-.vcount{display:flex;gap:8px;margin-bottom:14px}
-.vpill{flex:1;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:11px;text-align:center}
-.vpill b{font-family:var(--disp);font-size:20px;display:block}
-.vpill.real b{color:var(--grain)} .vpill.sim b{color:#9FD3E6}
-.vpill small{font-size:10.5px;color:#9FC2B2}
 .disc{font-size:11px;color:#7FA592;line-height:1.6;border-top:1px solid rgba(255,255,255,.1);padding-top:14px;margin-top:6px}
 .disc b{color:#BFD8CC}
-/* MAP */
-#map{height:100vh;width:100%;background:#dfe7e2}
-.leaflet-popup-content-wrapper{border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+#map{height:100vh;width:100%;background:#0b1a14}
+.leaflet-popup-content-wrapper{border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 .leaflet-popup-content{margin:14px 16px;font-family:var(--sans);font-size:13px;line-height:1.5}
 .pop-t{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:3px}
 .pop-e{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
-.pop-e.pub{color:var(--sky)} .pop-e.real{color:var(--grain-d)} .pop-e.sim{color:#3B7FA0}
+.pop-e.lsd{color:var(--sprout-d)} .pop-e.real{color:var(--grain-d)} .pop-e.sim{color:#3B7FA0}
 .pop-row{display:flex;justify-content:space-between;gap:14px;padding:3px 0;border-bottom:1px dotted var(--line)}
 .pop-row small{color:var(--muted)} .pop-row b{font-family:var(--mono);font-weight:500}
 .pop-tag{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:6px}
-.pt-real{background:rgba(231,178,76,.16);color:var(--grain-d)} .pt-sim{background:var(--sky-l,#E4F0F2);color:var(--sky)}
-/* mobile toggle */
+.pt-lsd{background:rgba(57,169,107,.16);color:var(--sprout-d)}
+.pt-real{background:rgba(231,178,76,.16);color:var(--grain-d)}
+.pt-sim{background:var(--sky-l);color:var(--sky)}
+.loader{position:absolute;top:14px;right:60px;z-index:900;background:rgba(10,31,23,.9);color:#CFE6DA;font-family:var(--mono);font-size:11px;padding:8px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.14)}
+.leaflet-control-layers{border-radius:11px!important;border:1px solid var(--line)!important;box-shadow:0 8px 24px rgba(0,0,0,.2)!important;font-family:var(--sans)!important}
 .mtoggle{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:1200;background:var(--rice);color:#fff;border:0;padding:12px 22px;border-radius:999px;font-family:var(--mono);font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.3);cursor:pointer}
 @media(max-width:820px){
   .app{grid-template-columns:1fr}
-  .panel{position:fixed;inset:0 0 auto 0;height:78vh;z-index:1100;transform:translateY(-102%);transition:transform .3s;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+  .panel{position:fixed;inset:0 0 auto 0;height:80vh;z-index:1100;transform:translateY(-102%);transition:transform .3s;box-shadow:0 20px 50px rgba(0,0,0,.4)}
   .panel.open{transform:none}
-  #map{height:100vh}
-  .mtoggle{display:block}
+  #map{height:100vh}.mtoggle{display:block}
 }
 </style>
 </head>
@@ -86,187 +80,139 @@ body{font-family:var(--sans);color:var(--ink);background:var(--paper);overflow:h
   <aside class="panel" id="panel">
     <div class="phead"><img src="https://nusapangan.my.id/logo-main.png" alt="NusaPangan"><b>LahanMap</b></div>
     <a class="back" href="index.html">← kembali ke beranda</a>
-    <div class="ptitle">Lahan Sawah Banten</div>
-    <div class="psub">Peta zona sawah sebagai fondasi publik, dengan petani terverifikasi NusaPangan ditautkan di atasnya. Klik zona atau titik untuk detail.</div>
+    <div class="ptitle">Lahan Sawah Dilindungi Banten</div>
+    <div class="psub">Data LSD resmi ATR/BPN (2021) untuk 5 wilayah, di atas citra satelit. Petani terverifikasi NusaPangan ditautkan ke atasnya.</div>
 
-    <div class="vcount">
-      <div class="vpill real"><b>3</b><small>petani tervalidasi</small></div>
-      <div class="vpill sim"><b id="simN">156</b><small>titik jaringan</small></div>
+    <div class="bigstat">
+      <div class="bs g"><b id="stLuas">149.163</b><small>ha sawah dilindungi</small></div>
+      <div class="bs"><b id="stBidang">47.937</b><small>bidang · 5 wilayah</small></div>
+    </div>
+    <div class="bigstat">
+      <div class="bs g"><b>3</b><small>petani tervalidasi</small></div>
+      <div class="bs"><b id="simN">156</b><small>titik jaringan</small></div>
     </div>
 
     <div class="card">
       <h4>Layer peta</h4>
-      <label class="toggle"><input type="checkbox" id="tZona" checked><span class="sw"></span><span class="tl">Zona sawah (LSD)<small>layer publik · heatmap produksi</small></span></label>
+      <label class="toggle"><input type="checkbox" id="tLSD" checked><span class="sw"></span><span class="tl">Sawah Dilindungi (LSD)<small>resmi · SK ATR/BPN 2021</small></span></label>
       <label class="toggle"><input type="checkbox" id="tReal" checked><span class="sw"></span><span class="tl">Petani terverifikasi<small>layer NusaPangan · 3 real</small></span></label>
       <label class="toggle"><input type="checkbox" id="tSim" checked><span class="sw"></span><span class="tl">Titik jaringan (156)<small>koordinat nyata · status sintetis</small></span></label>
+      <p class="hint" style="margin-top:6px">Ganti basemap (Peta / Citra Satelit / Hybrid) di pojok kanan atas peta.</p>
     </div>
 
     <div class="card">
-      <h4>Intensitas sawah (heatmap)</h4>
-      <div class="legbar"></div>
-      <div class="legends"><span>rendah</span><span>tinggi</span></div>
-      <div style="margin-top:12px">
-        <div class="legrow"><span class="swatch" style="background:var(--grain)"></span> Petani terverifikasi (3 · real)</div>
-        <div class="legrow"><span class="swatch" style="background:#39A96B"></span> Siap panen</div>
-        <div class="legrow"><span class="swatch" style="background:#3E9E8E"></span> Masa tumbuh</div>
-        <div class="legrow"><span class="swatch" style="background:#59B3D6"></span> Masa tanam</div>
-        <div class="legrow"><span class="swatch" style="background:#8AA79A"></span> Pasca panen</div>
-      </div>
+      <h4>Legenda</h4>
+      <div class="legrow"><span class="swatch" style="background:rgba(57,169,107,.55);border-color:#2B8354"></span> Kawasan Sawah Dilindungi (resmi)</div>
+      <div class="legrow"><span class="swatch" style="background:var(--grain)"></span> Petani terverifikasi (3 · real)</div>
+      <div class="legrow"><span class="swatch" style="background:#39A96B"></span> Siap panen</div>
+      <div class="legrow"><span class="swatch" style="background:#3E9E8E"></span> Masa tumbuh</div>
+      <div class="legrow"><span class="swatch" style="background:#59B3D6"></span> Masa tanam</div>
+      <div class="legrow"><span class="swatch" style="background:#8AA79A"></span> Pasca panen</div>
     </div>
 
     <div class="card" id="readout">
       <h4>Detail wilayah</h4>
-      <div class="rt" id="ro-name">Klik sebuah zona kabupaten</div>
-      <div id="ro-body"><p class="hint">Sorot peta untuk melihat luas sawah, produksi, dan harga per wilayah.</p></div>
+      <div class="rt" id="ro-name">Klik kawasan LSD</div>
+      <div id="ro-body"><p class="hint">Sorot atau klik kawasan hijau untuk melihat luas sawah dilindungi dan jumlah bidang.</p></div>
     </div>
 
     <div class="disc">
-      <b>Catatan kejujuran data.</b> Batas kabupaten & angka per-wilayah di sini masih <b>ilustratif</b> untuk prototipe — menunggu polygon <b>LSD resmi ATR/BPN (2021)</b> untuk presisi. <b>3 titik petani adalah data nyata</b> hasil wawancara lapangan di Banten; 156 titik jaringan memakai koordinat nyata namun beratribut sintetis, ditandai jelas. Setiap musim panen, titik real bertambah dan riwayatnya menebal.
+      <b>Sumber &amp; kejujuran data.</b> Polygon sawah = <b>Lahan Sawah Dilindungi resmi ATR/BPN (SK 2021)</b>, disederhanakan untuk web (149.163 ha, 47.937 bidang, 5 wilayah — angka utuh). <b>3 titik petani = data nyata</b> hasil wawancara lapangan. 156 titik jaringan memakai koordinat nyata namun beratribut sintetis, ditandai jelas — diganti petani nyata tiap musim panen.
     </div>
   </aside>
-
-  <div id="map"></div>
+  <div id="map"><div class="loader" id="loader">memuat data LSD…</div></div>
 </div>
 <button class="mtoggle" onclick="document.getElementById('panel').classList.toggle('open')">☰ Panel data</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-/* =========================================================
-   LahanMap — NusaPangan
-   ---------------------------------------------------------
-   SWAP-IN DATA LSD RESMI:
-   Ganti isi variabel LSD_GEOJSON di bawah dengan GeoJSON
-   Lahan Sawah Dilindungi ATR/BPN (setelah disederhanakan).
-   Struktur properti tiap feature yang dipakai peta:
-     properties.nama       -> nama kabupaten/zona
-     properties.sawah_ha   -> luas baku sawah (ha)
-     properties.produksi   -> produksi ton (Jan–Jun)
-     properties.harga      -> harga rata-rata Rp/kg
-     properties.petani     -> jumlah petani terverifikasi
-     properties.intensitas -> 0..1 (untuk warna heatmap)
-   Sisa kode (heatmap, popup, toggle) otomatis mengikuti.
-   ========================================================= */
+// ---------- BASEMAPS (tanpa token) ----------
+const street=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · © CARTO',maxZoom:19});
+const esri=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Citra: Esri, Maxar, Earthstar Geographics',maxZoom:19});
+const labels=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',{maxZoom:19});
+const hybrid=L.layerGroup([esri,labels]);
 
-// --- ILUSTRATIF: zona sawah per kabupaten Banten (rough, berlabel) ---
-const LSD_GEOJSON = {
-  type:"FeatureCollection",
-  features:[
-    {type:"Feature",properties:{nama:"Kab. Pandeglang",sawah_ha:52000,produksi:298000,harga:12750,petani:1,intensitas:0.95},
-     geometry:{type:"Polygon",coordinates:[[[105.55,-6.30],[106.00,-6.25],[106.10,-6.55],[106.00,-6.85],[105.60,-6.80],[105.50,-6.50],[105.55,-6.30]]]}},
-    {type:"Feature",properties:{nama:"Kab. Lebak",sawah_ha:46000,produksi:264000,harga:12900,petani:1,intensitas:0.88},
-     geometry:{type:"Polygon",coordinates:[[[106.00,-6.35],[106.45,-6.35],[106.55,-6.60],[106.45,-6.95],[106.05,-6.90],[106.00,-6.55],[106.00,-6.35]]]}},
-    {type:"Feature",properties:{nama:"Kab. Serang",sawah_ha:31000,produksi:182000,harga:13050,petani:1,intensitas:0.72},
-     geometry:{type:"Polygon",coordinates:[[[105.95,-6.05],[106.25,-6.00],[106.30,-6.20],[106.10,-6.30],[105.90,-6.20],[105.95,-6.05]]]}},
-    {type:"Feature",properties:{nama:"Kab. Tangerang",sawah_ha:35000,produksi:201000,harga:13200,petani:0,intensitas:0.62},
-     geometry:{type:"Polygon",coordinates:[[[106.35,-6.00],[106.65,-6.05],[106.65,-6.25],[106.40,-6.30],[106.35,-6.15],[106.35,-6.00]]]}},
-    {type:"Feature",properties:{nama:"Kota Serang",sawah_ha:5200,produksi:29000,harga:13100,petani:0,intensitas:0.30},
-     geometry:{type:"Polygon",coordinates:[[[106.10,-6.08],[106.20,-6.08],[106.20,-6.18],[106.10,-6.18],[106.10,-6.08]]]}},
-    {type:"Feature",properties:{nama:"Kota Cilegon",sawah_ha:600,produksi:3400,harga:13300,petani:0,intensitas:0.10},
-     geometry:{type:"Polygon",coordinates:[[[105.90,-5.98],[106.02,-5.98],[106.02,-6.08],[105.90,-6.08],[105.90,-5.98]]]}},
-    {type:"Feature",properties:{nama:"Kota Tangerang",sawah_ha:250,produksi:1400,harga:13900,petani:0,intensitas:0.06},
-     geometry:{type:"Polygon",coordinates:[[[106.58,-6.12],[106.72,-6.12],[106.72,-6.24],[106.58,-6.24],[106.58,-6.12]]]}},
-    {type:"Feature",properties:{nama:"Kota Tangerang Selatan",sawah_ha:60,produksi:340,harga:14000,petani:0,intensitas:0.04},
-     geometry:{type:"Polygon",coordinates:[[[106.65,-6.25],[106.78,-6.25],[106.78,-6.38],[106.65,-6.38],[106.65,-6.25]]]}}
-  ]
-};
+const map=L.map('map',{zoomControl:true,scrollWheelZoom:true,layers:[esri]}).setView([-6.55,106.15],9);
+L.control.layers({'Citra Satelit':esri,'Hybrid (citra + label)':hybrid,'Peta':street},null,{position:'topright'}).addTo(map);
 
-// --- 3 petani NYATA (hasil wawancara lapangan) ---
-const VERIFIED = [
+const fmt=n=>Math.round(n).toLocaleString('id-ID');
+
+// ---------- 156 petani (koordinat nyata, atribut sintetis berlabel) ----------
+const FARMERS=[{"la":-6.33153,"ln":106.19215,"d":"Padarincang","k":"Serang","v":"Situ Bagendit","ha":0.59,"hg":5657,"st":"Pasca Panen"},{"la":-6.33155,"ln":106.18943,"d":"Padarincang","k":"Serang","v":"Inpari 32","ha":1.27,"hg":5213,"st":"Masa Tanam"},{"la":-6.32884,"ln":106.19329,"d":"Padarincang","k":"Serang","v":"Ciherang","ha":3.91,"hg":6330,"st":"Siap Panen"},{"la":-6.31882,"ln":106.19077,"d":"Padarincang","k":"Serang","v":"Mekongga","ha":2.09,"hg":5533,"st":"Masa Tanam"},{"la":-6.31571,"ln":106.20036,"d":"Padarincang","k":"Serang","v":"IR64","ha":1.3,"hg":5846,"st":"Siap Panen"},{"la":-6.33034,"ln":106.1907,"d":"Padarincang","k":"Serang","v":"Mekongga","ha":3.11,"hg":6395,"st":"Pasca Panen"},{"la":-6.1925,"ln":106.25117,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":1.38,"hg":5223,"st":"Masa Tumbuh"},{"la":-6.19641,"ln":106.24692,"d":"Pontang","k":"Serang","v":"Situ Bagendit","ha":1.03,"hg":6304,"st":"Masa Tumbuh"},{"la":-6.1866,"ln":106.24612,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":0.95,"hg":6325,"st":"Pasca Panen"},{"la":-6.19662,"ln":106.26021,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":0.92,"hg":5892,"st":"Pasca Panen"},{"la":-6.19258,"ln":106.25057,"d":"Pontang","k":"Serang","v":"Mekongga","ha":1.25,"hg":6369,"st":"Pasca Panen"},{"la":-6.19195,"ln":106.25959,"d":"Pontang","k":"Serang","v":"Ciherang","ha":3.05,"hg":5423,"st":"Masa Tanam"},{"la":-6.19362,"ln":106.26181,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":3.89,"hg":5684,"st":"Pasca Panen"},{"la":-6.19114,"ln":106.25915,"d":"Pontang","k":"Serang","v":"IR64","ha":1.04,"hg":5319,"st":"Masa Tanam"},{"la":-6.18953,"ln":106.25256,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":2.58,"hg":5681,"st":"Siap Panen"},{"la":-6.19973,"ln":106.24636,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":1.89,"hg":5814,"st":"Masa Tumbuh"},{"la":-6.26146,"ln":106.30457,"d":"Ciruas","k":"Serang","v":"IR64","ha":1.5,"hg":6312,"st":"Masa Tumbuh"},{"la":-6.26741,"ln":106.31909,"d":"Ciruas","k":"Serang","v":"Ciherang","ha":1.45,"hg":5902,"st":"Masa Tumbuh"},{"la":-6.26905,"ln":106.3111,"d":"Ciruas","k":"Serang","v":"Ciherang","ha":3.09,"hg":6075,"st":"Masa Tumbuh"},{"la":-6.2796,"ln":106.31723,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":2.89,"hg":5924,"st":"Masa Tumbuh"},{"la":-6.27963,"ln":106.30636,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":3.26,"hg":5279,"st":"Siap Panen"},{"la":-6.26817,"ln":106.30941,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":2.75,"hg":6298,"st":"Masa Tumbuh"},{"la":-6.27382,"ln":106.31946,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":1.39,"hg":5203,"st":"Pasca Panen"},{"la":-6.27436,"ln":106.3111,"d":"Ciruas","k":"Serang","v":"Situ Bagendit","ha":2.94,"hg":5592,"st":"Masa Tumbuh"},{"la":-6.39289,"ln":106.15173,"d":"Pabuaran","k":"Serang","v":"IR64","ha":2.16,"hg":5547,"st":"Masa Tanam"},{"la":-6.38535,"ln":106.15345,"d":"Pabuaran","k":"Serang","v":"Ciherang","ha":2.09,"hg":6378,"st":"Pasca Panen"},{"la":-6.38127,"ln":106.14785,"d":"Pabuaran","k":"Serang","v":"Situ Bagendit","ha":0.68,"hg":5448,"st":"Pasca Panen"},{"la":-6.39367,"ln":106.14199,"d":"Pabuaran","k":"Serang","v":"Situ Bagendit","ha":2.08,"hg":5767,"st":"Pasca Panen"},{"la":-6.39131,"ln":106.151,"d":"Pabuaran","k":"Serang","v":"Ciherang","ha":2.93,"hg":5331,"st":"Siap Panen"},{"la":-6.38939,"ln":106.14338,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":3.14,"hg":6058,"st":"Masa Tanam"},{"la":-6.39255,"ln":106.14469,"d":"Pabuaran","k":"Serang","v":"Inpari 32","ha":3.67,"hg":5255,"st":"Masa Tanam"},{"la":-6.38667,"ln":106.14037,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":2.15,"hg":5306,"st":"Siap Panen"},{"la":-6.38758,"ln":106.15376,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":3.18,"hg":6443,"st":"Masa Tumbuh"},{"la":-6.38898,"ln":106.14242,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":0.86,"hg":6429,"st":"Pasca Panen"},{"la":-6.20915,"ln":106.27381,"d":"Carenang","k":"Serang","v":"Ciherang","ha":2.02,"hg":5753,"st":"Pasca Panen"},{"la":-6.20879,"ln":106.28651,"d":"Carenang","k":"Serang","v":"Inpari 32","ha":2.49,"hg":5888,"st":"Masa Tumbuh"},{"la":-6.20751,"ln":106.27377,"d":"Carenang","k":"Serang","v":"Situ Bagendit","ha":3.02,"hg":5692,"st":"Siap Panen"},{"la":-6.2018,"ln":106.27273,"d":"Carenang","k":"Serang","v":"Mekongga","ha":1.73,"hg":5827,"st":"Masa Tumbuh"},{"la":-6.20165,"ln":106.27143,"d":"Carenang","k":"Serang","v":"Mekongga","ha":1.54,"hg":5819,"st":"Siap Panen"},{"la":-6.20406,"ln":106.28263,"d":"Carenang","k":"Serang","v":"IR64","ha":2.14,"hg":5577,"st":"Masa Tumbuh"},{"la":-6.1984,"ln":106.2887,"d":"Carenang","k":"Serang","v":"Inpari 32","ha":0.91,"hg":6441,"st":"Masa Tumbuh"},{"la":-6.16757,"ln":106.40693,"d":"Kronjo","k":"Tangerang","v":"Inpari 32","ha":2.81,"hg":5555,"st":"Masa Tumbuh"},{"la":-6.16462,"ln":106.41167,"d":"Kronjo","k":"Tangerang","v":"Inpari 32","ha":1.99,"hg":5505,"st":"Pasca Panen"},{"la":-6.15438,"ln":106.42229,"d":"Kronjo","k":"Tangerang","v":"Inpari 32","ha":2.03,"hg":6084,"st":"Pasca Panen"},{"la":-6.16698,"ln":106.40439,"d":"Kronjo","k":"Tangerang","v":"IR64","ha":3.71,"hg":6398,"st":"Pasca Panen"},{"la":-6.16025,"ln":106.41315,"d":"Kronjo","k":"Tangerang","v":"Mekongga","ha":3.35,"hg":6131,"st":"Pasca Panen"},{"la":-6.15394,"ln":106.41448,"d":"Kronjo","k":"Tangerang","v":"IR64","ha":2.69,"hg":5616,"st":"Pasca Panen"},{"la":-6.16793,"ln":106.41899,"d":"Kronjo","k":"Tangerang","v":"Mekongga","ha":0.83,"hg":5432,"st":"Masa Tumbuh"},{"la":-6.15888,"ln":106.41905,"d":"Kronjo","k":"Tangerang","v":"Situ Bagendit","ha":3.73,"hg":5479,"st":"Pasca Panen"},{"la":-6.15033,"ln":106.48049,"d":"Mauk","k":"Tangerang","v":"Mekongga","ha":1.66,"hg":5972,"st":"Masa Tanam"},{"la":-6.13378,"ln":106.485,"d":"Mauk","k":"Tangerang","v":"Ciherang","ha":0.94,"hg":5879,"st":"Pasca Panen"},{"la":-6.13858,"ln":106.48402,"d":"Mauk","k":"Tangerang","v":"IR64","ha":2.77,"hg":6292,"st":"Pasca Panen"},{"la":-6.14632,"ln":106.47384,"d":"Mauk","k":"Tangerang","v":"IR64","ha":1.08,"hg":5259,"st":"Pasca Panen"},{"la":-6.13318,"ln":106.47915,"d":"Mauk","k":"Tangerang","v":"IR64","ha":2.67,"hg":6394,"st":"Siap Panen"},{"la":-6.14402,"ln":106.47152,"d":"Mauk","k":"Tangerang","v":"Inpari 32","ha":2.74,"hg":5712,"st":"Masa Tanam"},{"la":-6.13847,"ln":106.47802,"d":"Mauk","k":"Tangerang","v":"IR64","ha":2.48,"hg":5300,"st":"Pasca Panen"},{"la":-6.14058,"ln":106.48387,"d":"Mauk","k":"Tangerang","v":"IR64","ha":0.62,"hg":5469,"st":"Siap Panen"},{"la":-6.20361,"ln":106.42137,"d":"Kemiri","k":"Tangerang","v":"Inpari 32","ha":2.14,"hg":5662,"st":"Masa Tanam"},{"la":-6.20286,"ln":106.42707,"d":"Kemiri","k":"Tangerang","v":"IR64","ha":2.86,"hg":6468,"st":"Pasca Panen"},{"la":-6.1958,"ln":106.43557,"d":"Kemiri","k":"Tangerang","v":"Situ Bagendit","ha":0.91,"hg":6300,"st":"Siap Panen"},{"la":-6.20338,"ln":106.43826,"d":"Kemiri","k":"Tangerang","v":"Mekongga","ha":1.26,"hg":5683,"st":"Masa Tanam"},{"la":-6.19341,"ln":106.43467,"d":"Kemiri","k":"Tangerang","v":"Situ Bagendit","ha":0.68,"hg":5457,"st":"Siap Panen"},{"la":-6.20636,"ln":106.42732,"d":"Kemiri","k":"Tangerang","v":"Ciherang","ha":3.29,"hg":5252,"st":"Masa Tanam"},{"la":-6.56645,"ln":106.31083,"d":"Sajira","k":"Lebak","v":"Ciherang","ha":2.26,"hg":5288,"st":"Masa Tanam"},{"la":-6.57279,"ln":106.31137,"d":"Sajira","k":"Lebak","v":"Situ Bagendit","ha":1.63,"hg":5458,"st":"Masa Tumbuh"},{"la":-6.5783,"ln":106.32137,"d":"Sajira","k":"Lebak","v":"Mekongga","ha":2.01,"hg":6047,"st":"Pasca Panen"},{"la":-6.57633,"ln":106.31561,"d":"Sajira","k":"Lebak","v":"Mekongga","ha":0.84,"hg":5466,"st":"Siap Panen"},{"la":-6.5811,"ln":106.30787,"d":"Sajira","k":"Lebak","v":"IR64","ha":1.73,"hg":5635,"st":"Siap Panen"},{"la":-6.58056,"ln":106.31496,"d":"Sajira","k":"Lebak","v":"Ciherang","ha":0.6,"hg":5832,"st":"Pasca Panen"},{"la":-6.57104,"ln":106.31578,"d":"Sajira","k":"Lebak","v":"Inpari 32","ha":2.09,"hg":5838,"st":"Pasca Panen"},{"la":-6.57286,"ln":106.30847,"d":"Sajira","k":"Lebak","v":"IR64","ha":1.95,"hg":6249,"st":"Masa Tumbuh"},{"la":-6.58082,"ln":106.31295,"d":"Sajira","k":"Lebak","v":"IR64","ha":1.55,"hg":5481,"st":"Pasca Panen"},{"la":-6.35188,"ln":106.23904,"d":"Rangkasbitung","k":"Lebak","v":"Situ Bagendit","ha":2.11,"hg":5841,"st":"Pasca Panen"},{"la":-6.35562,"ln":106.23713,"d":"Rangkasbitung","k":"Lebak","v":"Ciherang","ha":3.46,"hg":6406,"st":"Masa Tumbuh"},{"la":-6.36192,"ln":106.24687,"d":"Rangkasbitung","k":"Lebak","v":"Situ Bagendit","ha":1.33,"hg":5604,"st":"Masa Tumbuh"},{"la":-6.36216,"ln":106.23674,"d":"Rangkasbitung","k":"Lebak","v":"Inpari 32","ha":2.04,"hg":6493,"st":"Pasca Panen"},{"la":-6.35205,"ln":106.24461,"d":"Rangkasbitung","k":"Lebak","v":"Inpari 32","ha":2.12,"hg":5284,"st":"Masa Tumbuh"},{"la":-6.35762,"ln":106.23665,"d":"Rangkasbitung","k":"Lebak","v":"Inpari 32","ha":2.98,"hg":6273,"st":"Pasca Panen"},{"la":-6.30566,"ln":106.09708,"d":"Pandeglang","k":"Pandeglang","v":"Ciherang","ha":1.38,"hg":6434,"st":"Masa Tumbuh"},{"la":-6.31529,"ln":106.09878,"d":"Pandeglang","k":"Pandeglang","v":"Mekongga","ha":2.85,"hg":6278,"st":"Masa Tanam"},{"la":-6.31581,"ln":106.09812,"d":"Pandeglang","k":"Pandeglang","v":"Situ Bagendit","ha":1.54,"hg":6239,"st":"Pasca Panen"},{"la":-6.30082,"ln":106.09838,"d":"Pandeglang","k":"Pandeglang","v":"Situ Bagendit","ha":1.78,"hg":6109,"st":"Pasca Panen"},{"la":-6.30198,"ln":106.11152,"d":"Pandeglang","k":"Pandeglang","v":"Inpari 32","ha":3.88,"hg":6438,"st":"Pasca Panen"},{"la":-6.30886,"ln":106.09922,"d":"Pandeglang","k":"Pandeglang","v":"Ciherang","ha":3.67,"hg":6095,"st":"Masa Tanam"},{"la":-6.31879,"ln":106.09608,"d":"Pandeglang","k":"Pandeglang","v":"Inpari 32","ha":3.44,"hg":5499,"st":"Pasca Panen"},{"la":-6.30818,"ln":106.10714,"d":"Pandeglang","k":"Pandeglang","v":"Situ Bagendit","ha":0.89,"hg":5816,"st":"Pasca Panen"},{"la":-6.35105,"ln":105.83317,"d":"Labuan","k":"Pandeglang","v":"Situ Bagendit","ha":2.65,"hg":6053,"st":"Pasca Panen"},{"la":-6.36031,"ln":105.82432,"d":"Labuan","k":"Pandeglang","v":"IR64","ha":3.93,"hg":5233,"st":"Masa Tumbuh"},{"la":-6.35324,"ln":105.82971,"d":"Labuan","k":"Pandeglang","v":"Mekongga","ha":0.72,"hg":6137,"st":"Siap Panen"},{"la":-6.35442,"ln":105.81714,"d":"Labuan","k":"Pandeglang","v":"Mekongga","ha":3.52,"hg":5879,"st":"Pasca Panen"},{"la":-6.35228,"ln":105.82775,"d":"Labuan","k":"Pandeglang","v":"IR64","ha":0.78,"hg":5569,"st":"Siap Panen"},{"la":-6.35834,"ln":105.82555,"d":"Labuan","k":"Pandeglang","v":"Mekongga","ha":2.65,"hg":5317,"st":"Siap Panen"},{"la":-6.13065,"ln":106.14964,"d":"Cipocok Jaya","k":"Serang","v":"Inpari 32","ha":1.84,"hg":6439,"st":"Masa Tumbuh"},{"la":-6.11507,"ln":106.15212,"d":"Cipocok Jaya","k":"Serang","v":"Ciherang","ha":2.25,"hg":6350,"st":"Masa Tumbuh"},{"la":-6.11637,"ln":106.15654,"d":"Cipocok Jaya","k":"Serang","v":"IR64","ha":3.65,"hg":5379,"st":"Masa Tumbuh"},{"la":-6.12116,"ln":106.14402,"d":"Cipocok Jaya","k":"Serang","v":"Inpari 32","ha":3.27,"hg":6211,"st":"Pasca Panen"},{"la":-6.13083,"ln":106.15888,"d":"Cipocok Jaya","k":"Serang","v":"Situ Bagendit","ha":3.19,"hg":5351,"st":"Masa Tanam"},{"la":-6.12839,"ln":106.155,"d":"Cipocok Jaya","k":"Serang","v":"Situ Bagendit","ha":3.41,"hg":5822,"st":"Masa Tanam"},{"la":-6.13249,"ln":106.15513,"d":"Cipocok Jaya","k":"Serang","v":"Situ Bagendit","ha":2.26,"hg":6389,"st":"Pasca Panen"},{"la":-6.12433,"ln":106.15607,"d":"Cipocok Jaya","k":"Serang","v":"IR64","ha":2.66,"hg":6484,"st":"Masa Tumbuh"},{"la":-6.10627,"ln":106.12425,"d":"Kasemen","k":"Serang","v":"IR64","ha":2.62,"hg":5853,"st":"Pasca Panen"},{"la":-6.10562,"ln":106.12507,"d":"Kasemen","k":"Serang","v":"Ciherang","ha":3.52,"hg":5527,"st":"Pasca Panen"},{"la":-6.10698,"ln":106.13655,"d":"Kasemen","k":"Serang","v":"Inpari 32","ha":3.88,"hg":5922,"st":"Masa Tanam"},{"la":-6.10338,"ln":106.12147,"d":"Kasemen","k":"Serang","v":"Ciherang","ha":2.5,"hg":6333,"st":"Siap Panen"},{"la":-6.10521,"ln":106.12188,"d":"Kasemen","k":"Serang","v":"Situ Bagendit","ha":3.14,"hg":6242,"st":"Pasca Panen"},{"la":-6.1061,"ln":106.11923,"d":"Kasemen","k":"Serang","v":"Inpari 32","ha":3.97,"hg":5812,"st":"Siap Panen"},{"la":-6.11219,"ln":106.13148,"d":"Kasemen","k":"Serang","v":"Situ Bagendit","ha":3.29,"hg":6488,"st":"Masa Tanam"},{"la":-6.09814,"ln":106.13362,"d":"Kasemen","k":"Serang","v":"Ciherang","ha":1.17,"hg":6057,"st":"Siap Panen"},{"la":-6.00811,"ln":106.05198,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":2.34,"hg":5554,"st":"Siap Panen"},{"la":-6.00254,"ln":106.06022,"d":"Cilegon","k":"Cilegon","v":"Mekongga","ha":3.2,"hg":6201,"st":"Masa Tanam"},{"la":-5.99474,"ln":106.05622,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":1.51,"hg":5909,"st":"Masa Tanam"},{"la":-5.99411,"ln":106.06186,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":2.84,"hg":5676,"st":"Masa Tumbuh"},{"la":-6.00504,"ln":106.05905,"d":"Cilegon","k":"Cilegon","v":"Ciherang","ha":3.15,"hg":5784,"st":"Siap Panen"},{"la":-5.99561,"ln":106.04498,"d":"Cilegon","k":"Cilegon","v":"Situ Bagendit","ha":3.57,"hg":6363,"st":"Siap Panen"},{"la":-6.00118,"ln":106.05507,"d":"Cilegon","k":"Cilegon","v":"Mekongga","ha":1.07,"hg":5726,"st":"Pasca Panen"},{"la":-6.00806,"ln":106.04889,"d":"Cilegon","k":"Cilegon","v":"Situ Bagendit","ha":2.84,"hg":5487,"st":"Masa Tanam"},{"la":-6.00111,"ln":106.04668,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":2.84,"hg":5527,"st":"Siap Panen"},{"la":-6.02396,"ln":106.08394,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":2.96,"hg":6300,"st":"Masa Tumbuh"},{"la":-6.01503,"ln":106.07467,"d":"Cibeber","k":"Cilegon","v":"Situ Bagendit","ha":1.08,"hg":6104,"st":"Pasca Panen"},{"la":-6.02431,"ln":106.06688,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":2.85,"hg":5244,"st":"Siap Panen"},{"la":-6.01813,"ln":106.07256,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":1.93,"hg":6060,"st":"Masa Tanam"},{"la":-6.02199,"ln":106.0687,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":3.15,"hg":6148,"st":"Masa Tanam"},{"la":-6.02651,"ln":106.06995,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":1.34,"hg":6416,"st":"Siap Panen"},{"la":-6.02007,"ln":106.07743,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":2.52,"hg":5856,"st":"Siap Panen"},{"la":-6.02044,"ln":106.07042,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":3.8,"hg":6274,"st":"Masa Tanam"},{"la":-6.01276,"ln":106.08254,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":2.47,"hg":6341,"st":"Masa Tanam"},{"la":-6.22105,"ln":106.64229,"d":"Cipondoh","k":"Tangerang","v":"Mekongga","ha":1.16,"hg":6344,"st":"Masa Tumbuh"},{"la":-6.21408,"ln":106.63836,"d":"Cipondoh","k":"Tangerang","v":"Mekongga","ha":2.43,"hg":5979,"st":"Siap Panen"},{"la":-6.2188,"ln":106.6337,"d":"Cipondoh","k":"Tangerang","v":"IR64","ha":1.95,"hg":5653,"st":"Pasca Panen"},{"la":-6.21972,"ln":106.64009,"d":"Cipondoh","k":"Tangerang","v":"Ciherang","ha":3.88,"hg":6204,"st":"Masa Tanam"},{"la":-6.21104,"ln":106.63564,"d":"Cipondoh","k":"Tangerang","v":"Situ Bagendit","ha":1.94,"hg":5673,"st":"Masa Tanam"},{"la":-6.22126,"ln":106.62423,"d":"Cipondoh","k":"Tangerang","v":"IR64","ha":2.36,"hg":5234,"st":"Siap Panen"},{"la":-6.17137,"ln":106.6186,"d":"Periuk","k":"Tangerang","v":"Ciherang","ha":0.78,"hg":6140,"st":"Pasca Panen"},{"la":-6.17282,"ln":106.6102,"d":"Periuk","k":"Tangerang","v":"Situ Bagendit","ha":0.7,"hg":5550,"st":"Siap Panen"},{"la":-6.18521,"ln":106.61688,"d":"Periuk","k":"Tangerang","v":"Situ Bagendit","ha":3.65,"hg":5267,"st":"Masa Tumbuh"},{"la":-6.1791,"ln":106.61788,"d":"Periuk","k":"Tangerang","v":"Situ Bagendit","ha":3.27,"hg":5360,"st":"Siap Panen"},{"la":-6.17576,"ln":106.61151,"d":"Periuk","k":"Tangerang","v":"IR64","ha":3.24,"hg":5667,"st":"Pasca Panen"},{"la":-6.1858,"ln":106.60825,"d":"Periuk","k":"Tangerang","v":"IR64","ha":2.99,"hg":5997,"st":"Masa Tanam"},{"la":-6.1767,"ln":106.61679,"d":"Periuk","k":"Tangerang","v":"IR64","ha":0.81,"hg":6422,"st":"Masa Tumbuh"},{"la":-6.18617,"ln":106.61053,"d":"Periuk","k":"Tangerang","v":"Mekongga","ha":1.44,"hg":5498,"st":"Siap Panen"},{"la":-6.18479,"ln":106.62455,"d":"Periuk","k":"Tangerang","v":"IR64","ha":0.52,"hg":6470,"st":"Siap Panen"},{"la":-6.34156,"ln":106.73321,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":3.07,"hg":6379,"st":"Pasca Panen"},{"la":-6.34494,"ln":106.72984,"d":"Pamulang","k":"Tangerang Selatan","v":"Mekongga","ha":3.29,"hg":5341,"st":"Pasca Panen"},{"la":-6.34011,"ln":106.72563,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":2.4,"hg":5936,"st":"Pasca Panen"},{"la":-6.33795,"ln":106.73407,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":0.87,"hg":5654,"st":"Masa Tanam"},{"la":-6.34374,"ln":106.73182,"d":"Pamulang","k":"Tangerang Selatan","v":"Mekongga","ha":1.53,"hg":5375,"st":"Masa Tanam"},{"la":-6.34678,"ln":106.73083,"d":"Pamulang","k":"Tangerang Selatan","v":"Mekongga","ha":3.34,"hg":5902,"st":"Masa Tumbuh"},{"la":-6.34783,"ln":106.73638,"d":"Pamulang","k":"Tangerang Selatan","v":"Ciherang","ha":2.74,"hg":5259,"st":"Siap Panen"},{"la":-6.34644,"ln":106.73921,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":1.19,"hg":6202,"st":"Masa Tanam"},{"la":-6.3197,"ln":106.68406,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":1.6,"hg":5439,"st":"Siap Panen"},{"la":-6.31192,"ln":106.68571,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":0.99,"hg":6123,"st":"Pasca Panen"},{"la":-6.31989,"ln":106.69105,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":2.21,"hg":5263,"st":"Siap Panen"},{"la":-6.32594,"ln":106.69284,"d":"Serpong","k":"Tangerang Selatan","v":"Ciherang","ha":2.4,"hg":6103,"st":"Masa Tumbuh"},{"la":-6.31509,"ln":106.687,"d":"Serpong","k":"Tangerang Selatan","v":"Situ Bagendit","ha":3.34,"hg":5918,"st":"Siap Panen"},{"la":-6.31717,"ln":106.67825,"d":"Serpong","k":"Tangerang Selatan","v":"IR64","ha":1.51,"hg":6253,"st":"Pasca Panen"},{"la":-6.31247,"ln":106.68298,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":1.0,"hg":6485,"st":"Pasca Panen"}];
+const STCOL={"Siap Panen":"#39A96B","Pasca Panen":"#8AA79A","Masa Tanam":"#59B3D6","Masa Tumbuh":"#3E9E8E"};
+
+// ---------- 3 petani NYATA ----------
+const VERIFIED=[
   {lat:-6.18,lng:106.08,nama:"Petani 1",varietas:"Inpari 32",luas:"1,5 ha",jual:"Tengkulak",harga:"Rp 6.000–6.500/kg",wil:"Kab. Serang"},
   {lat:-6.55,lng:105.95,nama:"Petani 2",varietas:"Ciherang",luas:"2 ha",jual:"Koperasi & pengepul",harga:"Rp 6.200–6.800/kg",wil:"Kab. Pandeglang"},
   {lat:-6.60,lng:106.20,nama:"Petani 3",varietas:"Inpari 42",luas:"0,8 ha",jual:"Tengkulak",harga:"Rp 6.000/kg",wil:"Kab. Lebak"}
 ];
 
-// --- Titik JARINGAN (156 petani, koordinat nyata dari farmers.csv) ---
-// Sesuai keputusan kejujuran tim: 3 titik EMAS = tervalidasi lapangan (data nyata);
-// 156 titik ini = data jaringan/sintetis berlabel, diganti petani nyata tiap musim.
-const FARMERS=[{"la":-6.33153,"ln":106.19215,"d":"Padarincang","k":"Serang","v":"Situ Bagendit","ha":0.59,"hg":5657,"st":"Pasca Panen"},{"la":-6.33155,"ln":106.18943,"d":"Padarincang","k":"Serang","v":"Inpari 32","ha":1.27,"hg":5213,"st":"Masa Tanam"},{"la":-6.32884,"ln":106.19329,"d":"Padarincang","k":"Serang","v":"Ciherang","ha":3.91,"hg":6330,"st":"Siap Panen"},{"la":-6.31882,"ln":106.19077,"d":"Padarincang","k":"Serang","v":"Mekongga","ha":2.09,"hg":5533,"st":"Masa Tanam"},{"la":-6.31571,"ln":106.20036,"d":"Padarincang","k":"Serang","v":"IR64","ha":1.3,"hg":5846,"st":"Siap Panen"},{"la":-6.33034,"ln":106.1907,"d":"Padarincang","k":"Serang","v":"Mekongga","ha":3.11,"hg":6395,"st":"Pasca Panen"},{"la":-6.1925,"ln":106.25117,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":1.38,"hg":5223,"st":"Masa Tumbuh"},{"la":-6.19641,"ln":106.24692,"d":"Pontang","k":"Serang","v":"Situ Bagendit","ha":1.03,"hg":6304,"st":"Masa Tumbuh"},{"la":-6.1866,"ln":106.24612,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":0.95,"hg":6325,"st":"Pasca Panen"},{"la":-6.19662,"ln":106.26021,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":0.92,"hg":5892,"st":"Pasca Panen"},{"la":-6.19258,"ln":106.25057,"d":"Pontang","k":"Serang","v":"Mekongga","ha":1.25,"hg":6369,"st":"Pasca Panen"},{"la":-6.19195,"ln":106.25959,"d":"Pontang","k":"Serang","v":"Ciherang","ha":3.05,"hg":5423,"st":"Masa Tanam"},{"la":-6.19362,"ln":106.26181,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":3.89,"hg":5684,"st":"Pasca Panen"},{"la":-6.19114,"ln":106.25915,"d":"Pontang","k":"Serang","v":"IR64","ha":1.04,"hg":5319,"st":"Masa Tanam"},{"la":-6.18953,"ln":106.25256,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":2.58,"hg":5681,"st":"Siap Panen"},{"la":-6.19973,"ln":106.24636,"d":"Pontang","k":"Serang","v":"Inpari 32","ha":1.89,"hg":5814,"st":"Masa Tumbuh"},{"la":-6.26146,"ln":106.30457,"d":"Ciruas","k":"Serang","v":"IR64","ha":1.5,"hg":6312,"st":"Masa Tumbuh"},{"la":-6.26741,"ln":106.31909,"d":"Ciruas","k":"Serang","v":"Ciherang","ha":1.45,"hg":5902,"st":"Masa Tumbuh"},{"la":-6.26905,"ln":106.3111,"d":"Ciruas","k":"Serang","v":"Ciherang","ha":3.09,"hg":6075,"st":"Masa Tumbuh"},{"la":-6.2796,"ln":106.31723,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":2.89,"hg":5924,"st":"Masa Tumbuh"},{"la":-6.27963,"ln":106.30636,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":3.26,"hg":5279,"st":"Siap Panen"},{"la":-6.26817,"ln":106.30941,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":2.75,"hg":6298,"st":"Masa Tumbuh"},{"la":-6.27382,"ln":106.31946,"d":"Ciruas","k":"Serang","v":"Inpari 32","ha":1.39,"hg":5203,"st":"Pasca Panen"},{"la":-6.27436,"ln":106.3111,"d":"Ciruas","k":"Serang","v":"Situ Bagendit","ha":2.94,"hg":5592,"st":"Masa Tumbuh"},{"la":-6.39289,"ln":106.15173,"d":"Pabuaran","k":"Serang","v":"IR64","ha":2.16,"hg":5547,"st":"Masa Tanam"},{"la":-6.38535,"ln":106.15345,"d":"Pabuaran","k":"Serang","v":"Ciherang","ha":2.09,"hg":6378,"st":"Pasca Panen"},{"la":-6.38127,"ln":106.14785,"d":"Pabuaran","k":"Serang","v":"Situ Bagendit","ha":0.68,"hg":5448,"st":"Pasca Panen"},{"la":-6.39367,"ln":106.14199,"d":"Pabuaran","k":"Serang","v":"Situ Bagendit","ha":2.08,"hg":5767,"st":"Pasca Panen"},{"la":-6.39131,"ln":106.151,"d":"Pabuaran","k":"Serang","v":"Ciherang","ha":2.93,"hg":5331,"st":"Siap Panen"},{"la":-6.38939,"ln":106.14338,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":3.14,"hg":6058,"st":"Masa Tanam"},{"la":-6.39255,"ln":106.14469,"d":"Pabuaran","k":"Serang","v":"Inpari 32","ha":3.67,"hg":5255,"st":"Masa Tanam"},{"la":-6.38667,"ln":106.14037,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":2.15,"hg":5306,"st":"Siap Panen"},{"la":-6.38758,"ln":106.15376,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":3.18,"hg":6443,"st":"Masa Tumbuh"},{"la":-6.38898,"ln":106.14242,"d":"Pabuaran","k":"Serang","v":"Mekongga","ha":0.86,"hg":6429,"st":"Pasca Panen"},{"la":-6.20915,"ln":106.27381,"d":"Carenang","k":"Serang","v":"Ciherang","ha":2.02,"hg":5753,"st":"Pasca Panen"},{"la":-6.20879,"ln":106.28651,"d":"Carenang","k":"Serang","v":"Inpari 32","ha":2.49,"hg":5888,"st":"Masa Tumbuh"},{"la":-6.20751,"ln":106.27377,"d":"Carenang","k":"Serang","v":"Situ Bagendit","ha":3.02,"hg":5692,"st":"Siap Panen"},{"la":-6.2018,"ln":106.27273,"d":"Carenang","k":"Serang","v":"Mekongga","ha":1.73,"hg":5827,"st":"Masa Tumbuh"},{"la":-6.20165,"ln":106.27143,"d":"Carenang","k":"Serang","v":"Mekongga","ha":1.54,"hg":5819,"st":"Siap Panen"},{"la":-6.20406,"ln":106.28263,"d":"Carenang","k":"Serang","v":"IR64","ha":2.14,"hg":5577,"st":"Masa Tumbuh"},{"la":-6.1984,"ln":106.2887,"d":"Carenang","k":"Serang","v":"Inpari 32","ha":0.91,"hg":6441,"st":"Masa Tumbuh"},{"la":-6.16757,"ln":106.40693,"d":"Kronjo","k":"Tangerang","v":"Inpari 32","ha":2.81,"hg":5555,"st":"Masa Tumbuh"},{"la":-6.16462,"ln":106.41167,"d":"Kronjo","k":"Tangerang","v":"Inpari 32","ha":1.99,"hg":5505,"st":"Pasca Panen"},{"la":-6.15438,"ln":106.42229,"d":"Kronjo","k":"Tangerang","v":"Inpari 32","ha":2.03,"hg":6084,"st":"Pasca Panen"},{"la":-6.16698,"ln":106.40439,"d":"Kronjo","k":"Tangerang","v":"IR64","ha":3.71,"hg":6398,"st":"Pasca Panen"},{"la":-6.16025,"ln":106.41315,"d":"Kronjo","k":"Tangerang","v":"Mekongga","ha":3.35,"hg":6131,"st":"Pasca Panen"},{"la":-6.15394,"ln":106.41448,"d":"Kronjo","k":"Tangerang","v":"IR64","ha":2.69,"hg":5616,"st":"Pasca Panen"},{"la":-6.16793,"ln":106.41899,"d":"Kronjo","k":"Tangerang","v":"Mekongga","ha":0.83,"hg":5432,"st":"Masa Tumbuh"},{"la":-6.15888,"ln":106.41905,"d":"Kronjo","k":"Tangerang","v":"Situ Bagendit","ha":3.73,"hg":5479,"st":"Pasca Panen"},{"la":-6.15033,"ln":106.48049,"d":"Mauk","k":"Tangerang","v":"Mekongga","ha":1.66,"hg":5972,"st":"Masa Tanam"},{"la":-6.13378,"ln":106.485,"d":"Mauk","k":"Tangerang","v":"Ciherang","ha":0.94,"hg":5879,"st":"Pasca Panen"},{"la":-6.13858,"ln":106.48402,"d":"Mauk","k":"Tangerang","v":"IR64","ha":2.77,"hg":6292,"st":"Pasca Panen"},{"la":-6.14632,"ln":106.47384,"d":"Mauk","k":"Tangerang","v":"IR64","ha":1.08,"hg":5259,"st":"Pasca Panen"},{"la":-6.13318,"ln":106.47915,"d":"Mauk","k":"Tangerang","v":"IR64","ha":2.67,"hg":6394,"st":"Siap Panen"},{"la":-6.14402,"ln":106.47152,"d":"Mauk","k":"Tangerang","v":"Inpari 32","ha":2.74,"hg":5712,"st":"Masa Tanam"},{"la":-6.13847,"ln":106.47802,"d":"Mauk","k":"Tangerang","v":"IR64","ha":2.48,"hg":5300,"st":"Pasca Panen"},{"la":-6.14058,"ln":106.48387,"d":"Mauk","k":"Tangerang","v":"IR64","ha":0.62,"hg":5469,"st":"Siap Panen"},{"la":-6.20361,"ln":106.42137,"d":"Kemiri","k":"Tangerang","v":"Inpari 32","ha":2.14,"hg":5662,"st":"Masa Tanam"},{"la":-6.20286,"ln":106.42707,"d":"Kemiri","k":"Tangerang","v":"IR64","ha":2.86,"hg":6468,"st":"Pasca Panen"},{"la":-6.1958,"ln":106.43557,"d":"Kemiri","k":"Tangerang","v":"Situ Bagendit","ha":0.91,"hg":6300,"st":"Siap Panen"},{"la":-6.20338,"ln":106.43826,"d":"Kemiri","k":"Tangerang","v":"Mekongga","ha":1.26,"hg":5683,"st":"Masa Tanam"},{"la":-6.19341,"ln":106.43467,"d":"Kemiri","k":"Tangerang","v":"Situ Bagendit","ha":0.68,"hg":5457,"st":"Siap Panen"},{"la":-6.20636,"ln":106.42732,"d":"Kemiri","k":"Tangerang","v":"Ciherang","ha":3.29,"hg":5252,"st":"Masa Tanam"},{"la":-6.56645,"ln":106.31083,"d":"Sajira","k":"Lebak","v":"Ciherang","ha":2.26,"hg":5288,"st":"Masa Tanam"},{"la":-6.57279,"ln":106.31137,"d":"Sajira","k":"Lebak","v":"Situ Bagendit","ha":1.63,"hg":5458,"st":"Masa Tumbuh"},{"la":-6.5783,"ln":106.32137,"d":"Sajira","k":"Lebak","v":"Mekongga","ha":2.01,"hg":6047,"st":"Pasca Panen"},{"la":-6.57633,"ln":106.31561,"d":"Sajira","k":"Lebak","v":"Mekongga","ha":0.84,"hg":5466,"st":"Siap Panen"},{"la":-6.5811,"ln":106.30787,"d":"Sajira","k":"Lebak","v":"IR64","ha":1.73,"hg":5635,"st":"Siap Panen"},{"la":-6.58056,"ln":106.31496,"d":"Sajira","k":"Lebak","v":"Ciherang","ha":0.6,"hg":5832,"st":"Pasca Panen"},{"la":-6.57104,"ln":106.31578,"d":"Sajira","k":"Lebak","v":"Inpari 32","ha":2.09,"hg":5838,"st":"Pasca Panen"},{"la":-6.57286,"ln":106.30847,"d":"Sajira","k":"Lebak","v":"IR64","ha":1.95,"hg":6249,"st":"Masa Tumbuh"},{"la":-6.58082,"ln":106.31295,"d":"Sajira","k":"Lebak","v":"IR64","ha":1.55,"hg":5481,"st":"Pasca Panen"},{"la":-6.35188,"ln":106.23904,"d":"Rangkasbitung","k":"Lebak","v":"Situ Bagendit","ha":2.11,"hg":5841,"st":"Pasca Panen"},{"la":-6.35562,"ln":106.23713,"d":"Rangkasbitung","k":"Lebak","v":"Ciherang","ha":3.46,"hg":6406,"st":"Masa Tumbuh"},{"la":-6.36192,"ln":106.24687,"d":"Rangkasbitung","k":"Lebak","v":"Situ Bagendit","ha":1.33,"hg":5604,"st":"Masa Tumbuh"},{"la":-6.36216,"ln":106.23674,"d":"Rangkasbitung","k":"Lebak","v":"Inpari 32","ha":2.04,"hg":6493,"st":"Pasca Panen"},{"la":-6.35205,"ln":106.24461,"d":"Rangkasbitung","k":"Lebak","v":"Inpari 32","ha":2.12,"hg":5284,"st":"Masa Tumbuh"},{"la":-6.35762,"ln":106.23665,"d":"Rangkasbitung","k":"Lebak","v":"Inpari 32","ha":2.98,"hg":6273,"st":"Pasca Panen"},{"la":-6.30566,"ln":106.09708,"d":"Pandeglang","k":"Pandeglang","v":"Ciherang","ha":1.38,"hg":6434,"st":"Masa Tumbuh"},{"la":-6.31529,"ln":106.09878,"d":"Pandeglang","k":"Pandeglang","v":"Mekongga","ha":2.85,"hg":6278,"st":"Masa Tanam"},{"la":-6.31581,"ln":106.09812,"d":"Pandeglang","k":"Pandeglang","v":"Situ Bagendit","ha":1.54,"hg":6239,"st":"Pasca Panen"},{"la":-6.30082,"ln":106.09838,"d":"Pandeglang","k":"Pandeglang","v":"Situ Bagendit","ha":1.78,"hg":6109,"st":"Pasca Panen"},{"la":-6.30198,"ln":106.11152,"d":"Pandeglang","k":"Pandeglang","v":"Inpari 32","ha":3.88,"hg":6438,"st":"Pasca Panen"},{"la":-6.30886,"ln":106.09922,"d":"Pandeglang","k":"Pandeglang","v":"Ciherang","ha":3.67,"hg":6095,"st":"Masa Tanam"},{"la":-6.31879,"ln":106.09608,"d":"Pandeglang","k":"Pandeglang","v":"Inpari 32","ha":3.44,"hg":5499,"st":"Pasca Panen"},{"la":-6.30818,"ln":106.10714,"d":"Pandeglang","k":"Pandeglang","v":"Situ Bagendit","ha":0.89,"hg":5816,"st":"Pasca Panen"},{"la":-6.35105,"ln":105.83317,"d":"Labuan","k":"Pandeglang","v":"Situ Bagendit","ha":2.65,"hg":6053,"st":"Pasca Panen"},{"la":-6.36031,"ln":105.82432,"d":"Labuan","k":"Pandeglang","v":"IR64","ha":3.93,"hg":5233,"st":"Masa Tumbuh"},{"la":-6.35324,"ln":105.82971,"d":"Labuan","k":"Pandeglang","v":"Mekongga","ha":0.72,"hg":6137,"st":"Siap Panen"},{"la":-6.35442,"ln":105.81714,"d":"Labuan","k":"Pandeglang","v":"Mekongga","ha":3.52,"hg":5879,"st":"Pasca Panen"},{"la":-6.35228,"ln":105.82775,"d":"Labuan","k":"Pandeglang","v":"IR64","ha":0.78,"hg":5569,"st":"Siap Panen"},{"la":-6.35834,"ln":105.82555,"d":"Labuan","k":"Pandeglang","v":"Mekongga","ha":2.65,"hg":5317,"st":"Siap Panen"},{"la":-6.13065,"ln":106.14964,"d":"Cipocok Jaya","k":"Serang","v":"Inpari 32","ha":1.84,"hg":6439,"st":"Masa Tumbuh"},{"la":-6.11507,"ln":106.15212,"d":"Cipocok Jaya","k":"Serang","v":"Ciherang","ha":2.25,"hg":6350,"st":"Masa Tumbuh"},{"la":-6.11637,"ln":106.15654,"d":"Cipocok Jaya","k":"Serang","v":"IR64","ha":3.65,"hg":5379,"st":"Masa Tumbuh"},{"la":-6.12116,"ln":106.14402,"d":"Cipocok Jaya","k":"Serang","v":"Inpari 32","ha":3.27,"hg":6211,"st":"Pasca Panen"},{"la":-6.13083,"ln":106.15888,"d":"Cipocok Jaya","k":"Serang","v":"Situ Bagendit","ha":3.19,"hg":5351,"st":"Masa Tanam"},{"la":-6.12839,"ln":106.155,"d":"Cipocok Jaya","k":"Serang","v":"Situ Bagendit","ha":3.41,"hg":5822,"st":"Masa Tanam"},{"la":-6.13249,"ln":106.15513,"d":"Cipocok Jaya","k":"Serang","v":"Situ Bagendit","ha":2.26,"hg":6389,"st":"Pasca Panen"},{"la":-6.12433,"ln":106.15607,"d":"Cipocok Jaya","k":"Serang","v":"IR64","ha":2.66,"hg":6484,"st":"Masa Tumbuh"},{"la":-6.10627,"ln":106.12425,"d":"Kasemen","k":"Serang","v":"IR64","ha":2.62,"hg":5853,"st":"Pasca Panen"},{"la":-6.10562,"ln":106.12507,"d":"Kasemen","k":"Serang","v":"Ciherang","ha":3.52,"hg":5527,"st":"Pasca Panen"},{"la":-6.10698,"ln":106.13655,"d":"Kasemen","k":"Serang","v":"Inpari 32","ha":3.88,"hg":5922,"st":"Masa Tanam"},{"la":-6.10338,"ln":106.12147,"d":"Kasemen","k":"Serang","v":"Ciherang","ha":2.5,"hg":6333,"st":"Siap Panen"},{"la":-6.10521,"ln":106.12188,"d":"Kasemen","k":"Serang","v":"Situ Bagendit","ha":3.14,"hg":6242,"st":"Pasca Panen"},{"la":-6.1061,"ln":106.11923,"d":"Kasemen","k":"Serang","v":"Inpari 32","ha":3.97,"hg":5812,"st":"Siap Panen"},{"la":-6.11219,"ln":106.13148,"d":"Kasemen","k":"Serang","v":"Situ Bagendit","ha":3.29,"hg":6488,"st":"Masa Tanam"},{"la":-6.09814,"ln":106.13362,"d":"Kasemen","k":"Serang","v":"Ciherang","ha":1.17,"hg":6057,"st":"Siap Panen"},{"la":-6.00811,"ln":106.05198,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":2.34,"hg":5554,"st":"Siap Panen"},{"la":-6.00254,"ln":106.06022,"d":"Cilegon","k":"Cilegon","v":"Mekongga","ha":3.2,"hg":6201,"st":"Masa Tanam"},{"la":-5.99474,"ln":106.05622,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":1.51,"hg":5909,"st":"Masa Tanam"},{"la":-5.99411,"ln":106.06186,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":2.84,"hg":5676,"st":"Masa Tumbuh"},{"la":-6.00504,"ln":106.05905,"d":"Cilegon","k":"Cilegon","v":"Ciherang","ha":3.15,"hg":5784,"st":"Siap Panen"},{"la":-5.99561,"ln":106.04498,"d":"Cilegon","k":"Cilegon","v":"Situ Bagendit","ha":3.57,"hg":6363,"st":"Siap Panen"},{"la":-6.00118,"ln":106.05507,"d":"Cilegon","k":"Cilegon","v":"Mekongga","ha":1.07,"hg":5726,"st":"Pasca Panen"},{"la":-6.00806,"ln":106.04889,"d":"Cilegon","k":"Cilegon","v":"Situ Bagendit","ha":2.84,"hg":5487,"st":"Masa Tanam"},{"la":-6.00111,"ln":106.04668,"d":"Cilegon","k":"Cilegon","v":"IR64","ha":2.84,"hg":5527,"st":"Siap Panen"},{"la":-6.02396,"ln":106.08394,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":2.96,"hg":6300,"st":"Masa Tumbuh"},{"la":-6.01503,"ln":106.07467,"d":"Cibeber","k":"Cilegon","v":"Situ Bagendit","ha":1.08,"hg":6104,"st":"Pasca Panen"},{"la":-6.02431,"ln":106.06688,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":2.85,"hg":5244,"st":"Siap Panen"},{"la":-6.01813,"ln":106.07256,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":1.93,"hg":6060,"st":"Masa Tanam"},{"la":-6.02199,"ln":106.0687,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":3.15,"hg":6148,"st":"Masa Tanam"},{"la":-6.02651,"ln":106.06995,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":1.34,"hg":6416,"st":"Siap Panen"},{"la":-6.02007,"ln":106.07743,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":2.52,"hg":5856,"st":"Siap Panen"},{"la":-6.02044,"ln":106.07042,"d":"Cibeber","k":"Cilegon","v":"IR64","ha":3.8,"hg":6274,"st":"Masa Tanam"},{"la":-6.01276,"ln":106.08254,"d":"Cibeber","k":"Cilegon","v":"Ciherang","ha":2.47,"hg":6341,"st":"Masa Tanam"},{"la":-6.22105,"ln":106.64229,"d":"Cipondoh","k":"Tangerang","v":"Mekongga","ha":1.16,"hg":6344,"st":"Masa Tumbuh"},{"la":-6.21408,"ln":106.63836,"d":"Cipondoh","k":"Tangerang","v":"Mekongga","ha":2.43,"hg":5979,"st":"Siap Panen"},{"la":-6.2188,"ln":106.6337,"d":"Cipondoh","k":"Tangerang","v":"IR64","ha":1.95,"hg":5653,"st":"Pasca Panen"},{"la":-6.21972,"ln":106.64009,"d":"Cipondoh","k":"Tangerang","v":"Ciherang","ha":3.88,"hg":6204,"st":"Masa Tanam"},{"la":-6.21104,"ln":106.63564,"d":"Cipondoh","k":"Tangerang","v":"Situ Bagendit","ha":1.94,"hg":5673,"st":"Masa Tanam"},{"la":-6.22126,"ln":106.62423,"d":"Cipondoh","k":"Tangerang","v":"IR64","ha":2.36,"hg":5234,"st":"Siap Panen"},{"la":-6.17137,"ln":106.6186,"d":"Periuk","k":"Tangerang","v":"Ciherang","ha":0.78,"hg":6140,"st":"Pasca Panen"},{"la":-6.17282,"ln":106.6102,"d":"Periuk","k":"Tangerang","v":"Situ Bagendit","ha":0.7,"hg":5550,"st":"Siap Panen"},{"la":-6.18521,"ln":106.61688,"d":"Periuk","k":"Tangerang","v":"Situ Bagendit","ha":3.65,"hg":5267,"st":"Masa Tumbuh"},{"la":-6.1791,"ln":106.61788,"d":"Periuk","k":"Tangerang","v":"Situ Bagendit","ha":3.27,"hg":5360,"st":"Siap Panen"},{"la":-6.17576,"ln":106.61151,"d":"Periuk","k":"Tangerang","v":"IR64","ha":3.24,"hg":5667,"st":"Pasca Panen"},{"la":-6.1858,"ln":106.60825,"d":"Periuk","k":"Tangerang","v":"IR64","ha":2.99,"hg":5997,"st":"Masa Tanam"},{"la":-6.1767,"ln":106.61679,"d":"Periuk","k":"Tangerang","v":"IR64","ha":0.81,"hg":6422,"st":"Masa Tumbuh"},{"la":-6.18617,"ln":106.61053,"d":"Periuk","k":"Tangerang","v":"Mekongga","ha":1.44,"hg":5498,"st":"Siap Panen"},{"la":-6.18479,"ln":106.62455,"d":"Periuk","k":"Tangerang","v":"IR64","ha":0.52,"hg":6470,"st":"Siap Panen"},{"la":-6.34156,"ln":106.73321,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":3.07,"hg":6379,"st":"Pasca Panen"},{"la":-6.34494,"ln":106.72984,"d":"Pamulang","k":"Tangerang Selatan","v":"Mekongga","ha":3.29,"hg":5341,"st":"Pasca Panen"},{"la":-6.34011,"ln":106.72563,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":2.4,"hg":5936,"st":"Pasca Panen"},{"la":-6.33795,"ln":106.73407,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":0.87,"hg":5654,"st":"Masa Tanam"},{"la":-6.34374,"ln":106.73182,"d":"Pamulang","k":"Tangerang Selatan","v":"Mekongga","ha":1.53,"hg":5375,"st":"Masa Tanam"},{"la":-6.34678,"ln":106.73083,"d":"Pamulang","k":"Tangerang Selatan","v":"Mekongga","ha":3.34,"hg":5902,"st":"Masa Tumbuh"},{"la":-6.34783,"ln":106.73638,"d":"Pamulang","k":"Tangerang Selatan","v":"Ciherang","ha":2.74,"hg":5259,"st":"Siap Panen"},{"la":-6.34644,"ln":106.73921,"d":"Pamulang","k":"Tangerang Selatan","v":"Situ Bagendit","ha":1.19,"hg":6202,"st":"Masa Tanam"},{"la":-6.3197,"ln":106.68406,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":1.6,"hg":5439,"st":"Siap Panen"},{"la":-6.31192,"ln":106.68571,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":0.99,"hg":6123,"st":"Pasca Panen"},{"la":-6.31989,"ln":106.69105,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":2.21,"hg":5263,"st":"Siap Panen"},{"la":-6.32594,"ln":106.69284,"d":"Serpong","k":"Tangerang Selatan","v":"Ciherang","ha":2.4,"hg":6103,"st":"Masa Tumbuh"},{"la":-6.31509,"ln":106.687,"d":"Serpong","k":"Tangerang Selatan","v":"Situ Bagendit","ha":3.34,"hg":5918,"st":"Siap Panen"},{"la":-6.31717,"ln":106.67825,"d":"Serpong","k":"Tangerang Selatan","v":"IR64","ha":1.51,"hg":6253,"st":"Pasca Panen"},{"la":-6.31247,"ln":106.68298,"d":"Serpong","k":"Tangerang Selatan","v":"Mekongga","ha":1.0,"hg":6485,"st":"Pasca Panen"}];
-const STCOL={"Siap Panen":"#39A96B","Pasca Panen":"#8AA79A","Masa Tanam":"#59B3D6","Masa Tumbuh":"#3E9E8E"};
-
-// ---------- MAP ----------
-const map=L.map('map',{zoomControl:true,scrollWheelZoom:true}).setView([-6.42,106.15],9);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
-  attribution:'© OpenStreetMap · © CARTO',maxZoom:18
-}).addTo(map);
-
-function heatColor(v){ // 0..1 -> green ramp
-  const stops=[[217,239,217],[127,199,154],[57,169,107],[31,107,65],[14,58,44]];
-  const t=Math.max(0,Math.min(1,v))*(stops.length-1), i=Math.floor(t), f=t-i;
-  const a=stops[i], b=stops[Math.min(i+1,stops.length-1)];
-  const c=a.map((x,k)=>Math.round(x+(b[k]-x)*f));
-  return `rgb(${c[0]},${c[1]},${c[2]})`;
-}
-const fmt=n=>n.toLocaleString('id-ID');
-
-// zona layer
-const zonaLayer=L.geoJSON(LSD_GEOJSON,{
-  style:f=>({color:'#0E3A2C',weight:1.2,fillColor:heatColor(f.properties.intensitas),fillOpacity:.72}),
-  onEachFeature:(f,layer)=>{
-    const p=f.properties;
-    layer.bindPopup(`
-      <div class="pop-t">${p.nama}</div>
-      <div class="pop-e pub">Layer publik · ilustratif</div>
-      <div class="pop-row"><small>Luas baku sawah</small><b>${fmt(p.sawah_ha)} ha</b></div>
-      <div class="pop-row"><small>Produksi Jan–Jun</small><b>${fmt(p.produksi)} ton</b></div>
-      <div class="pop-row"><small>Harga rata-rata</small><b>Rp ${fmt(p.harga)}/kg</b></div>
-      <div class="pop-row"><small>Petani terverifikasi</small><b>${p.petani}</b></div>
-      <div class="pop-row"><small>Titik jaringan</small><b>${KABCOUNT[p.nama.replace(/Kab. |Kota /,'')]||0}</b></div>
-      <span class="pop-tag pt-sim">estimasi · menunggu data LSD resmi</span>`);
-    layer.on('mouseover',()=>{layer.setStyle({weight:2.4,color:'#E7B24C'});showReadout(p)});
-    layer.on('mouseout',()=>zonaLayer.resetStyle(layer));
-    layer.on('click',()=>showReadout(p));
-  }
-}).addTo(map);
-
-// verified markers
-function farmIcon(color,r){return L.divIcon({className:'',iconSize:[r*2,r*2],iconAnchor:[r,r],
-  html:`<div style="width:${r*2}px;height:${r*2}px;border-radius:50%;background:${color};border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35)"></div>`});}
+function dot(color,r){return L.divIcon({className:'',iconSize:[r*2,r*2],iconAnchor:[r,r],
+  html:`<div style="width:${r*2}px;height:${r*2}px;border-radius:50%;background:${color};border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.45)"></div>`});}
 
 const realLayer=L.layerGroup(VERIFIED.map(v=>
-  L.marker([v.lat,v.lng],{icon:farmIcon('#E7B24C',9)}).bindPopup(`
+  L.marker([v.lat,v.lng],{icon:dot('#E7B24C',9),zIndexOffset:1000}).bindPopup(`
     <div class="pop-t">${v.nama} · ${v.varietas}</div>
     <div class="pop-e real">Terverifikasi lapangan · data nyata</div>
     <div class="pop-row"><small>Luas lahan</small><b>${v.luas}</b></div>
     <div class="pop-row"><small>Wilayah</small><b>${v.wil}</b></div>
     <div class="pop-row"><small>Saluran jual</small><b>${v.jual}</b></div>
     <div class="pop-row"><small>Harga diterima</small><b>${v.harga}</b></div>
-    <span class="pop-tag pt-real">✓ hasil wawancara lapangan</span>`)
-)).addTo(map);
+    <span class="pop-tag pt-real">✓ hasil wawancara lapangan</span>`)));
 
-// network markers (156, real coords, labeled synthetic)
 const simLayer=L.layerGroup(FARMERS.map(f=>
-  L.circleMarker([f.la,f.ln],{radius:5,color:'#fff',weight:1,fillColor:(STCOL[f.st]||'#59B3D6'),fillOpacity:.9}).bindPopup(`
+  L.circleMarker([f.la,f.ln],{radius:5,color:'#fff',weight:1,fillColor:(STCOL[f.st]||'#59B3D6'),fillOpacity:.92}).bindPopup(`
     <div class="pop-t">${f.d} · ${f.k}</div>
     <div class="pop-e sim">Titik jaringan · data sintetis berlabel</div>
     <div class="pop-row"><small>Varietas</small><b>${f.v}</b></div>
     <div class="pop-row"><small>Luas lahan</small><b>${f.ha} ha</b></div>
     <div class="pop-row"><small>Harga gabah</small><b>Rp ${f.hg.toLocaleString('id-ID')}/kg</b></div>
     <div class="pop-row"><small>Status</small><b>${f.st}</b></div>
-    <span class="pop-tag pt-sim">sintetis — diganti petani nyata tiap musim</span>`)
-)).addTo(map);
+    <span class="pop-tag pt-sim">sintetis — diganti petani nyata tiap musim</span>`)));
 document.getElementById('simN').textContent=FARMERS.length;
-// per-kabupaten farmer count (real distribution) for zone popups
 const KABCOUNT={}; FARMERS.forEach(f=>{KABCOUNT[f.k]=(KABCOUNT[f.k]||0)+1});
 
-// readout
+// ---------- LSD resmi (fetch geojson) ----------
+let lsdLayer=null;
 function showReadout(p){
-  document.getElementById('ro-name').textContent=p.nama;
+  document.getElementById('ro-name').textContent=(p.KABUPATEN.startsWith('Kota')?'':'Kab. ')+p.KABUPATEN;
   document.getElementById('ro-body').innerHTML=`
-    <div class="statline"><small>Luas baku sawah</small><b>${fmt(p.sawah_ha)} ha</b></div>
-    <div class="statline"><small>Produksi Jan–Jun</small><b>${fmt(p.produksi)} ton</b></div>
-    <div class="statline"><small>Harga rata-rata</small><b>Rp ${fmt(p.harga)}/kg</b></div>
-    <div class="statline"><small>Petani terverifikasi</small><b>${p.petani}</b></div>
-    <p class="hint" style="margin-top:8px">Angka ilustratif · menunggu data LSD resmi.</p>`;
+    <div class="statline"><small>Luas sawah dilindungi</small><b>${fmt(p.LUAS)} ha</b></div>
+    <div class="statline"><small>Jumlah bidang</small><b>${fmt(p.BIDANG)}</b></div>
+    <div class="statline"><small>Titik jaringan di sini</small><b>${KABCOUNT[p.KABUPATEN.replace('Kota ','')]||KABCOUNT[p.KABUPATEN]||0}</b></div>
+    <p class="hint" style="margin-top:8px">Sumber: SK LSD ATR/BPN 2021.</p>`;
 }
+fetch('lsd_banten.geojson').then(r=>r.json()).then(gj=>{
+  lsdLayer=L.geoJSON(gj,{
+    style:{color:'#2B8354',weight:1.4,fillColor:'#39A96B',fillOpacity:.42},
+    onEachFeature:(f,layer)=>{
+      const p=f.properties;
+      layer.bindPopup(`
+        <div class="pop-t">${p.KABUPATEN.startsWith('Kota')?'':'Kab. '}${p.KABUPATEN}</div>
+        <div class="pop-e lsd">Lahan Sawah Dilindungi · SK ATR/BPN 2021</div>
+        <div class="pop-row"><small>Luas dilindungi</small><b>${fmt(p.LUAS)} ha</b></div>
+        <div class="pop-row"><small>Jumlah bidang</small><b>${fmt(p.BIDANG)}</b></div>
+        <div class="pop-row"><small>Titik jaringan</small><b>${KABCOUNT[p.KABUPATEN.replace('Kota ','')]||KABCOUNT[p.KABUPATEN]||0}</b></div>
+        <span class="pop-tag pt-lsd">data resmi · disederhanakan untuk web</span>`);
+      layer.on('mouseover',()=>{layer.setStyle({weight:2.6,color:'#E7B24C',fillOpacity:.55});showReadout(p)});
+      layer.on('mouseout',()=>lsdLayer.resetStyle(layer));
+      layer.on('click',()=>showReadout(p));
+    }
+  }).addTo(map);
+  simLayer.addTo(map); realLayer.addTo(map);
+  try{map.fitBounds(lsdLayer.getBounds(),{padding:[24,24]});}catch(e){}
+  const l=document.getElementById('loader'); if(l)l.remove();
+}).catch(e=>{
+  const l=document.getElementById('loader'); if(l)l.textContent='gagal memuat LSD — cek lsd_banten.geojson';
+  simLayer.addTo(map); realLayer.addTo(map);
+});
 
 // toggles
-const bind=(id,layer)=>document.getElementById(id).addEventListener('change',e=>{
-  e.target.checked?map.addLayer(layer):map.removeLayer(layer);
+const bind=(id,get)=>document.getElementById(id).addEventListener('change',e=>{
+  const L2=get(); if(!L2)return; e.target.checked?map.addLayer(L2):map.removeLayer(L2);
 });
-bind('tZona',zonaLayer); bind('tReal',realLayer); bind('tSim',simLayer);
-
-// fit
-map.fitBounds(zonaLayer.getBounds(),{padding:[30,30]});
+bind('tLSD',()=>lsdLayer); bind('tReal',()=>realLayer); bind('tSim',()=>simLayer);
 </script>
 </body>
 </html>
