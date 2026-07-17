@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal SPPG — NusaPangan</title>
+<link rel="icon" href="https://nusapangan.my.id/logo-main.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green-900:#14532d;--green-800:#166534;--green-700:#15803d;--green-600:#16a34a;--green-100:#dcfce7;--green-50:#f0fdf4;--navy:#0f172a;--gray-500:#64748b;--gold:#d4a012;--blue-600:#2563eb;--line:#e6eaef;--amber:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f8fafc;color:var(--navy)}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh;position:relative}
+/* sidebar */
+.side{background:linear-gradient(180deg,var(--green-800),var(--green-900));color:#dcfce7;padding:22px 16px;display:flex;flex-direction:column}
+.side .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;color:#fff}
+.leaf{width:22px;height:22px}
+.side .portal{font-size:11px;color:#a7e0bd;margin:2px 0 22px 31px}
+.menu{list-style:none;display:flex;flex-direction:column;gap:3px}
+.menu li{padding:11px 13px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;color:#c9ead5;display:flex;align-items:center;gap:10px;transition:background .15s}
+.menu li:hover{background:rgba(255,255,255,.08)}
+.menu li.on{background:rgba(255,255,255,.16);color:#fff}
+.profile{margin-top:auto;background:rgba(0,0,0,.22);border-radius:12px;padding:13px}
+.profile b{font-size:13px;color:#fff;display:block}
+.profile small{font-size:11px;color:#a7e0bd}
+/* main */
+.main{padding:26px 30px;overflow-y:auto}
+.mhead h1{font-size:22px;font-weight:800;color:var(--green-900)}
+.mhead p{font-size:14px;color:var(--gray-500);margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat .l{font-size:12px;color:var(--gray-500)}
+.stat .v{font-size:26px;font-weight:800;color:var(--green-800);margin-top:4px}
+.stat .s{font-size:11px;color:var(--gray-500)}
+.warn{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid var(--amber);border-radius:12px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+.warn .t{font-size:13.5px;color:#78350f;line-height:1.5}
+.btn{border:0;border-radius:10px;font-family:inherit;font-weight:700;font-size:13px;padding:11px 16px;cursor:pointer;background:var(--green-700);color:#fff;white-space:nowrap}
+.btn:hover{background:var(--green-800)}
+.btn.sm{padding:8px 13px;font-size:12px}
+.btn.ghost{background:var(--green-50);color:var(--green-700);border:1px solid var(--green-100)}
+.btn.blue{background:var(--blue-600)}
+.sec-t{font-size:16px;font-weight:800;margin:6px 0 3px}
+.sec-s{font-size:12.5px;color:var(--gray-500);margin-bottom:14px}
+.supply{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.scard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.scard .top{display:flex;justify-content:space-between;align-items:start}
+.scard h4{font-size:15px}
+.scard .loc{font-size:12px;color:var(--gray-500);margin-top:1px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0}
+.bg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px}
+.bg-green{background:var(--green-100);color:var(--green-800)}
+.bg-blue{background:#dbeafe;color:#1e40af}
+.bg-gold{background:#fef3c7;color:#92400e}
+.scard .price{font-size:20px;font-weight:800;color:var(--green-800);margin:6px 0 2px}
+.scard .qty{font-size:12px;color:var(--gray-500)}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:26px}
+th,td{text-align:left;padding:13px 15px;font-size:13px;border-bottom:1px solid var(--line)}
+th{background:#f1f5f4;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--gray-500)}
+tr:last-child td{border-bottom:0}
+.st-blue{color:var(--blue-600);font-weight:700}
+.st-amber{color:#b45309;font-weight:700}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.wcard{background:var(--green-50);border:1px solid var(--green-100);border-radius:12px;padding:15px;font-size:13px;color:#334155}
+.wcard .ic{font-size:22px;margin-bottom:6px}
+.wcard b{display:block;margin-bottom:3px;color:var(--green-900)}
+.hidden{display:none}
+/* popup (normal flow overlay, bukan fixed) */
+.overlay{position:absolute;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:16px;padding:24px;max-width:420px;width:100%;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.modal h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.modal p{font-size:13.5px;color:var(--gray-500);margin-bottom:14px}
+.modal label{font-size:12px;font-weight:700;display:block;margin-bottom:5px}
+.modal input{width:100%;padding:11px 13px;border:1px solid #d7e3da;border-radius:10px;font-family:inherit;font-size:14px}
+.modal .actions{display:flex;gap:10px;margin-top:18px}
+.modal .actions .btn{flex:1}
+.ok-banner{background:var(--green-50);border:1px solid var(--green-100);color:var(--green-800);border-radius:10px;padding:12px;font-size:13px;font-weight:600;margin-bottom:18px;display:none}
+.ok-banner.show{display:block}
+@media(max-width:820px){.app{grid-template-columns:1fr}.side{flex-direction:row;flex-wrap:wrap;align-items:center}.side .portal{display:none}.menu{flex-direction:row;flex-wrap:wrap}.profile{margin:0 0 0 auto}.stats,.supply,.why{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- sidebar -->
+  <aside class="side">
+    <div class="brand"><svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M12 21c-5-1-8-5-8-10 0-3 2-6 6-8 0 4 3 5 6 7 2 1.5 3 4 2 7-1 3-4 4-6 4z" fill="#dcfce7"/><path d="M12 21c0-5 1-9 4-13" stroke="#166534" stroke-width="1.4" stroke-linecap="round"/></svg>NusaPangan</div>
+    <div class="portal">Portal SPPG</div>
+    <ul class="menu">
+      <li class="on" data-v="beranda">🏠 Beranda</li>
+      <li data-v="cari">🔎 Cari Pasokan</li>
+      <li data-v="beranda">📋 Pesanan Saya</li>
+      <li data-v="beranda">📦 Lacak Batch</li>
+      <li data-v="beranda">✅ Konfirmasi Terima</li>
+      <li data-v="beranda">👤 Akun</li>
+    </ul>
+    <div class="profile"><b>SPPG SDN 03 Menteng</b><small>3.000 porsi/hari</small></div>
+  </aside>
+
+  <!-- main -->
+  <main class="main">
+    <div class="ok-banner" id="okBanner"></div>
+
+    <!-- BERANDA -->
+    <div id="v-beranda">
+      <div class="mhead"><h1>Selamat datang, SPPG SDN 03 Menteng</h1><p>Jakarta Pusat · Melayani 3.000 porsi/hari</p></div>
+      <div class="stats">
+        <div class="stat"><div class="l">Kebutuhan beras/hari</div><div class="v">450 kg</div><div class="s">untuk 3.000 porsi</div></div>
+        <div class="stat"><div class="l">Stok tersisa</div><div class="v" style="color:#b45309">2 hari</div><div class="s">perlu segera restock</div></div>
+        <div class="stat"><div class="l">Pesanan aktif</div><div class="v">3</div><div class="s">sedang berjalan</div></div>
+        <div class="stat"><div class="l">Pemasok terverifikasi</div><div class="v">12</div><div class="s">terhubung</div></div>
+      </div>
+      <div class="warn">
+        <div class="t">⚠️ Stok beras Anda cukup untuk <b>2 hari lagi</b>. Ada 5 pemasok terverifikasi di Banten dengan Inpari 32 siap kirim.</div>
+        <button class="btn" onclick="showView('cari')">Cari Pasokan Sekarang</button>
+      </div>
+
+      <div class="sec-t">Pasokan Tersedia Terdekat</div>
+      <div class="sec-s">Diurutkan berdasarkan jarak dan harga</div>
+      <div class="supply" id="supplyList"></div>
+
+      <div class="sec-t">Pesanan Aktif</div>
+      <div class="sec-s"> </div>
+      <table>
+        <thead><tr><th>Kode Batch</th><th>Pemasok</th><th>Jumlah</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody>
+          <tr><td>NP-BTN-2026-0847</td><td>Pak Budi</td><td>500 kg</td><td class="st-blue">🚛 Dalam pengiriman</td><td><a class="btn sm ghost" href="scan.html" target="_blank" rel="noopener" style="text-decoration:none">Lacak</a></td></tr>
+          <tr><td>NP-BTN-2026-0851</td><td>KT Maju</td><td>1.200 kg</td><td class="st-amber">⏳ Menunggu konfirmasi terima</td><td><button class="btn sm" onclick="openConfirm('NP-BTN-2026-0851')">Konfirmasi</button></td></tr>
+        </tbody>
+      </table>
+
+      <div class="sec-t">Kenapa lewat NusaPangan?</div>
+      <div class="sec-s"> </div>
+      <div class="why">
+        <div class="wcard"><div class="ic">🔍</div><b>Asal jelas</b>Setiap beras bisa dilacak asal-usulnya lewat QR traceability.</div>
+        <div class="wcard"><div class="ic">💸</div><b>Harga transparan</b>Tanpa markup perantara — Anda tahu harga sebenarnya.</div>
+        <div class="wcard"><div class="ic">🔐</div><b>Pembayaran aman</b>Escrow melindungi kedua pihak sampai barang diterima.</div>
+      </div>
+    </div>
+
+    <!-- CARI PASOKAN -->
+    <div id="v-cari" class="hidden">
+      <div class="mhead"><h1>Cari Pasokan</h1><p>Pemasok terverifikasi dengan stok siap kirim</p></div>
+      <div style="display:flex;gap:12px;margin:18px 0;flex-wrap:wrap">
+        <select style="padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-family:inherit"><option>Semua komoditas</option><option>Inpari 32</option><option>Ciherang</option><option>Beras Merah</option></select>
+        <select style="padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-family:inherit"><option>Semua wilayah</option><option>Serang</option><option>Lebak</option><option>Pandeglang</option></select>
+        <select style="padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-family:inherit"><option>Harga terendah</option><option>Terdekat</option></select>
+      </div>
+      <div class="supply" id="supplyList2"></div>
+    </div>
+  </main>
+
+  <!-- popup konfirmasi (normal flow overlay) -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <h3>Konfirmasi penerimaan batch</h3>
+      <p id="mBatch">NP-BTN-2026-0851</p>
+      <label>Berat diterima (kg)</label>
+      <input id="mWeight" inputmode="numeric" placeholder="1200">
+      <div class="actions">
+        <button class="btn ghost" onclick="closeConfirm()">Batal</button>
+        <button class="btn" onclick="doConfirm()">Konfirmasi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const suppliers=[
+  {n:"Pak Budi",loc:"Serang, Banten",kom:"Inpari 32",qty:"500 kg",harga:"6.800",badges:['green','qr']},
+  {n:"Kelompok Tani Maju",loc:"Serang, Banten",kom:"Ciherang",qty:"1.200 kg",harga:"6.500",badges:['green']},
+  {n:"Bu Siti",loc:"Lebak, Banten",kom:"Beras Merah",qty:"300 kg",harga:"12.000",badges:['green','premium']},
+];
+function card(s){
+  const bg=s.badges.map(b=> b==='green'?'<span class="bg bg-green">✓ Terverifikasi</span>': b==='qr'?'<span class="bg bg-blue">QR aktif</span>':'<span class="bg bg-gold">Premium</span>').join('');
+  return `<div class="scard"><div class="top"><div><h4>${s.n}</h4><div class="loc">📍 ${s.loc} · ${s.kom}</div></div></div>
+    <div class="badges">${bg}</div>
+    <div class="price">Rp ${s.harga}<span style="font-size:12px;color:#64748b">/kg</span></div>
+    <div class="qty">Stok: ${s.qty} tersedia</div>
+    <button class="btn sm" style="width:100%;margin-top:12px" onclick="order('${s.n}')">Pesan</button></div>`;
+}
+document.getElementById('supplyList').innerHTML=suppliers.map(card).join('');
+document.getElementById('supplyList2').innerHTML=suppliers.concat(suppliers).map(card).join('');
+
+function showView(v){
+  document.querySelectorAll('.menu li').forEach(li=>li.classList.toggle('on', li.dataset.v===v && li.textContent.toLowerCase().includes(v==='cari'?'cari':'beranda')));
+  document.getElementById('v-beranda').classList.toggle('hidden', v!=='beranda');
+  document.getElementById('v-cari').classList.toggle('hidden', v!=='cari');
+  document.querySelector('.main').scrollTop=0;
+}
+document.querySelectorAll('.menu li').forEach(li=>li.addEventListener('click',()=>{
+  document.querySelectorAll('.menu li').forEach(x=>x.classList.remove('on'));li.classList.add('on');showView(li.dataset.v);
+}));
+function order(n){banner(`✅ Permintaan pesanan ke ${n} dikirim. Pemasok akan dikonfirmasi via WhatsApp.`);}
+function banner(t){const b=document.getElementById('okBanner');b.textContent=t;b.classList.add('show');window.scrollTo(0,0);setTimeout(()=>b.classList.remove('show'),4500);}
+function openConfirm(code){document.getElementById('mBatch').textContent=code;document.getElementById('overlay').classList.add('show');}
+function closeConfirm(){document.getElementById('overlay').classList.remove('show');}
+function doConfirm(){const w=document.getElementById('mWeight').value||'—';closeConfirm();banner(`✅ Batch ${document.getElementById('mBatch').textContent} dikonfirmasi diterima (${w} kg). Dana escrow dicairkan ke petani.`);}
+</script>
+</body>
+</html>

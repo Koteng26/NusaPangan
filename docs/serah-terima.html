@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfirmasi Serah Terima — NusaPangan</title>
+<link rel="icon" href="https://nusapangan.my.id/logo-main.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green-700:#15803d;--green-600:#16a34a;--green-100:#dcfce7;--green-50:#f0fdf4;--green-900:#14532d;--navy:#0f172a;--gray-500:#64748b;--red-600:#dc2626;--amber:#f59e0b;--line:#e6efe8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f8fafc;color:var(--navy);display:flex;justify-content:center;padding:24px 12px;min-height:100vh}
+.phone{width:100%;max-width:412px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 30px 70px rgba(15,23,42,.18);border:1px solid #eef2f4;align-self:flex-start}
+.hd{background:linear-gradient(135deg,#166534,var(--green-700));color:#eafff1;padding:20px;text-align:center}
+.brand{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:17px}
+.leaf{width:22px;height:22px}
+.hd .sub{font-size:12.5px;opacity:.9;margin-top:3px}
+.content{padding:18px}
+.card{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.klabel{font-size:11.5px;color:var(--gray-500);font-weight:600}
+.batch .code{font-size:20px;font-weight:800;color:var(--green-800);font-family:ui-monospace,monospace;margin:4px 0 12px}
+.drow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid #f0f4f1}
+.drow:last-child{border:0}
+.drow small{color:var(--gray-500)}
+.prev{background:var(--green-50);border-radius:9px;padding:8px 11px;font-size:12px;color:var(--green-800);margin-top:10px;font-weight:600}
+label{display:block;font-size:12.5px;font-weight:700;margin:13px 0 5px}
+select,input{width:100%;padding:12px 13px;border:1px solid #d7e3da;border-radius:11px;font-family:inherit;font-size:14px;background:#fff}
+select:focus,input:focus{outline:none;border-color:var(--green-600)}
+.rendemen{background:#f1f5f4;border-radius:11px;padding:13px;text-align:center;margin-top:13px}
+.rendemen .lbl{font-size:12px;color:var(--gray-500)}
+.rendemen .val{font-size:26px;font-weight:800;color:var(--navy);margin-top:2px}
+.alert{border-radius:11px;padding:11px 13px;font-size:12.5px;font-weight:600;margin-top:11px;line-height:1.5}
+.alert.ok{background:var(--green-50);border:1px solid var(--green-100);color:var(--green-800)}
+.alert.bad{background:#fef2f2;border:1px solid #fecaca;color:var(--red-600)}
+.info-gray{background:#f1f5f4;border-radius:11px;padding:12px;font-size:11.5px;color:var(--gray-500);line-height:1.6;margin-top:14px}
+.btn{width:100%;padding:15px;border:0;border-radius:12px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;background:var(--green-700);color:#fff;margin-top:16px}
+.btn:hover{background:#166534}
+/* success */
+#success{display:none;text-align:center;padding:16px 6px}
+#success .ico{width:70px;height:70px;border-radius:50%;background:var(--green-50);border:2px solid var(--green-600);display:grid;place-items:center;font-size:34px;margin:8px auto 14px}
+#success h2{font-size:20px;font-weight:800;color:var(--green-900)}
+#success p{font-size:13px;color:var(--gray-500);margin-top:6px;line-height:1.5}
+.mtl{display:flex;align-items:center;gap:3px;margin:22px 0}
+.mtl .m{flex:none;width:20px;height:20px;border-radius:50%;background:#e2e8f0;display:grid;place-items:center;font-size:9px;color:#94a3b8}
+.mtl .m.on{background:var(--green-600);color:#fff}
+.mtl .m.done{background:var(--green-600);color:#fff}
+.mtl .ln{flex:1;height:2px;background:#e2e8f0}
+.mtl .ln.on{background:var(--green-600)}
+.mlabels{display:flex;justify-content:space-between;font-size:8.5px;color:var(--gray-500);margin-top:-14px}
+.thanks{font-size:12.5px;color:var(--gray-500);margin-top:18px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="hd">
+    <div class="brand"><svg class="leaf" viewBox="0 0 24 24" fill="none"><path d="M12 21c-5-1-8-5-8-10 0-3 2-6 6-8 0 4 3 5 6 7 2 1.5 3 4 2 7-1 3-4 4-6 4z" fill="#eafff1"/><path d="M12 21c0-5 1-9 4-13" stroke="#166534" stroke-width="1.4" stroke-linecap="round"/></svg>NusaPangan</div>
+    <div class="sub">Konfirmasi Serah Terima</div>
+  </div>
+
+  <div class="content" id="form">
+    <div class="card batch">
+      <div class="klabel">Anda menerima batch:</div>
+      <div class="code">NP-BTN-2026-0847</div>
+      <div class="drow"><small>Komoditas</small><b>Gabah Inpari 32</b></div>
+      <div class="drow"><small>Jumlah dikirim</small><b>500 kg</b></div>
+      <div class="drow"><small>Dari</small><b>Pak Budi, Serang, Banten</b></div>
+      <div class="prev">✓ Tahap sebelumnya: Panen di sawah (12 Juli 2026, 06:00)</div>
+    </div>
+
+    <div class="card">
+      <label>Peran Anda</label>
+      <select id="peran"><option>Penggilingan</option><option>Gudang</option><option>Kurir/Distribusi</option><option>SPPG</option></select>
+
+      <label>Berat gabah diterima (kg)</label>
+      <input id="gabah" inputmode="numeric" placeholder="500" value="500" oninput="calc()">
+      <label>Berat beras hasil giling (kg)</label>
+      <input id="beras" inputmode="numeric" placeholder="320" value="320" oninput="calc()">
+
+      <div class="rendemen"><div class="lbl">Rendemen</div><div class="val" id="rval">64%</div></div>
+      <div class="alert ok" id="ralert">✓ Rendemen dalam rentang wajar.</div>
+
+      <label>Catatan (opsional)</label>
+      <input placeholder="mis. kondisi gabah, dll">
+
+      <div class="info-gray">Konfirmasi ini akan dicatat permanen dan tidak bisa diubah. Data Anda membantu menjaga transparansi rantai pasok.</div>
+      <button class="btn" onclick="confirmHandover()">Konfirmasi Serah Terima</button>
+    </div>
+  </div>
+
+  <div class="content" id="success">
+    <div class="ico">✓</div>
+    <h2>Serah terima dikonfirmasi</h2>
+    <p id="okmsg">Batch NP-BTN-2026-0847 kini tercatat pada tahap Penggilingan.</p>
+    <div class="mtl">
+      <div class="m done">✓</div><div class="ln on"></div>
+      <div class="m on">✓</div><div class="ln"></div>
+      <div class="m">3</div><div class="ln"></div>
+      <div class="m">4</div><div class="ln"></div>
+      <div class="m">5</div>
+    </div>
+    <div class="mlabels"><span>Sawah</span><span>Giling</span><span>Gudang</span><span>Distribusi</span><span>Sekolah</span></div>
+    <p class="thanks">Terima kasih. Anda boleh menutup halaman ini.</p>
+  </div>
+</div>
+
+<script>
+function calc(){
+  const g=parseFloat(document.getElementById('gabah').value)||0;
+  const b=parseFloat(document.getElementById('beras').value)||0;
+  const r=g>0?Math.round(b/g*100):0;
+  document.getElementById('rval').textContent=r+'%';
+  const a=document.getElementById('ralert');
+  if(r>=60&&r<=65){a.className='alert ok';a.textContent='✓ Rendemen dalam rentang wajar.';}
+  else{a.className='alert bad';a.textContent='⚠️ Rendemen di luar rentang wajar (60–65%). Mohon periksa kembali.';}
+}
+function confirmHandover(){
+  const peran=document.getElementById('peran').value;
+  document.getElementById('okmsg').textContent='Batch NP-BTN-2026-0847 kini tercatat pada tahap '+peran+'.';
+  document.getElementById('form').style.display='none';
+  document.getElementById('success').style.display='block';
+  window.scrollTo(0,0);
+}
+calc();
+</script>
+</body>
+</html>
