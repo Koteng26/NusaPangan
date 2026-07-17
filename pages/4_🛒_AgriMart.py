@@ -88,6 +88,14 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+ss = st.session_state
+ss.setdefault("my_listings", [])
+if ss.get("petani"):
+    _p = ss["petani"]
+    st.markdown(f'<div style="background:#E8F5E9;border-left:4px solid #43A047;border-radius:12px;padding:0.9rem 1.1rem;margin-bottom:1rem;font-size:0.9rem;">👋 Halo <b>{_p["nama"]}</b> · <span style="font-family:monospace;">{_p["rice_id"]}</span> — {_p["luas"]} ha {_p["varietas"]} di {_p["kabupaten"]}. Terbitkan lapak hasil panen Anda di tab <b>Browse Produk</b>.</div>', unsafe_allow_html=True)
+else:
+    st.info("Belum mendaftar? Buka menu **📝 Pendaftaran** untuk membuat Rice ID dan menjual hasil panen Anda di sini.")
+
 # Metrics
 st.markdown(f"""
 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
@@ -121,6 +129,28 @@ tab_browse, tab_order, tab_escrow = st.tabs(["🛍️ Browse Produk", "📋 Simu
 
 with tab_browse:
     st.markdown("### 🌾 Produk Tersedia dari Petani Terverifikasi")
+
+    if ss.get("petani"):
+        _p = ss["petani"]
+        with st.expander("🌾 Terbitkan lapak Anda (jual hasil panen)", expanded=not ss["my_listings"]):
+            with st.form("jual_form", clear_on_submit=True):
+                cca, ccb = st.columns(2)
+                _harga = cca.number_input("Harga jual (Rp/kg)", min_value=5000, max_value=20000, value=11000, step=100)
+                _stok = ccb.number_input("Stok (kg)", min_value=50, max_value=50000, value=500, step=50)
+                if st.form_submit_button("Terbitkan lapak ✓", type="primary", use_container_width=True):
+                    ss["my_listings"].insert(0, {
+                        "nama_produk": f"Beras {_p['varietas']} — panen {_p['nama']}",
+                        "petani": _p["nama"], "rice_id": _p["rice_id"], "kab": _p["kabupaten"],
+                        "harga": int(_harga), "stok": int(_stok),
+                    })
+                    st.success("Lapak Anda terbit dan tampil paling atas!")
+        if ss["my_listings"]:
+            st.markdown("#### 🌟 Lapak Anda")
+            _mc = st.columns(3)
+            for _i, _l in enumerate(ss["my_listings"][:3]):
+                with _mc[_i % 3]:
+                    st.markdown(f'<div class="product-card" style="border:2px solid #43A047;"><div style="display:flex;justify-content:space-between;"><span style="font-size:0.75rem;color:#888;">🌾 {_l["kab"]}</span><span class="verified-seller">✅ Lapak Anda</span></div><h4 style="margin:0.3rem 0;font-size:1rem;">{_l["nama_produk"]}</h4><p style="font-size:0.8rem;color:#666;margin:0.2rem 0;">👨‍🌾 {_l["petani"]} · {_l["rice_id"]}</p><div style="margin:0.5rem 0;"><span class="price-tag">Rp {_l["harga"]:,}/kg</span></div><p style="font-size:0.75rem;color:#888;">Stok: {_l["stok"]:,} kg</p></div>', unsafe_allow_html=True)
+            st.markdown("---")
     
     # Filter
     col_f1, col_f2, col_f3 = st.columns(3)
