@@ -38,8 +38,10 @@ scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
 img{max-width:100%;display:block}
 
 /* ---------- SPLASH ---------- */
-.splash{min-height:100%;height:100%;background:linear-gradient(160deg,var(--rice) 0%,var(--rice2) 55%,#1E6B4C 100%);display:flex;
-flex-direction:column;padding:0 26px 34px;position:relative;overflow:hidden}
+#s-splash{position:absolute;inset:0;overflow:hidden}
+#s-splash.on{display:block}
+.splash{position:absolute;inset:0;background:linear-gradient(160deg,var(--rice) 0%,var(--rice2) 55%,#1E6B4C 100%);
+display:flex;flex-direction:column;justify-content:space-between;padding:0 26px 34px;overflow:hidden}
 .splash .orb{position:absolute;border-radius:50%;background:var(--sprout);opacity:.16}
 .splash .wm{font-size:clamp(21px,6.2vw,28px);font-weight:800;color:#fff;letter-spacing:-.02em;flex:none}
 .splash .fld{color:#DDECE3}
@@ -49,10 +51,10 @@ flex-direction:column;padding:0 26px 34px;position:relative;overflow:hidden}
 .splash .linkline b{color:var(--grain)}
 .splash .o1{top:-70px;right:-70px;width:230px;height:230px}
 .splash .o2{bottom:-90px;left:-90px;width:260px;height:260px}
-.splash .mid{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;
-justify-content:flex-start;padding-top:13%;gap:10px;position:relative;z-index:1;animation:rise .9s ease}
+.splash .mid{display:flex;flex-direction:column;align-items:center;gap:10px;
+padding-top:13%;position:relative;z-index:1;animation:rise .9s ease}
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.splash img{width:min(118px,29vw);flex:none;filter:drop-shadow(0 6px 16px rgba(0,0,0,.24))}
+.splash img{width:min(118px,29vw);max-height:24vh;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,.24))}
 .splash .tag{font-size:clamp(10.5px,3vw,12.5px);font-weight:600;color:#BFD8CC;text-align:center;line-height:1.5;flex:none;max-width:88%}
 .fld{font-size:12.5px;font-weight:600;color:var(--rice);margin-bottom:6px}
 .inp{display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);
