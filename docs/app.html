@@ -13,7 +13,10 @@
 :root{color-scheme:light only;--ink:#0A1F17;--rice:#0E3A2C;--rice2:#175C41;--sprout:#39A96B;--sprout-d:#2B8354;
 --grain:#E7B24C;--grain-d:#C9902E;--sky:#1C6E8C;--paper:#F7F4EC;--mist:#EAF1EC;
 --muted:#5A6B62;--line:#DCE3DE;--red:#dc2626;--purple:#7C3AED;--blue:#2563EB;}
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;scrollbar-width:none;-ms-overflow-style:none}
+*::-webkit-scrollbar{width:0!important;height:0!important;display:none!important;background:transparent}
+html,body{scrollbar-width:none;-ms-overflow-style:none;overflow-x:hidden}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important;width:0!important}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--rice);color:var(--ink);forced-color-adjust:none;
 display:flex;align-items:center;justify-content:center;min-height:100vh;padding:26px 14px}
 .device{width:390px;height:844px;max-height:94vh;background:var(--paper);border-radius:44px;
