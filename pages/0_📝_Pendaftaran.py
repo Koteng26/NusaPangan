@@ -127,7 +127,7 @@ elif ss.reg_step == 3:
     if paket.startswith("Petani"):
         st.markdown('<div class="np-alert np-alert-green"><b>Petani — Gratis.</b> Profil & Rice ID terverifikasi · harga harian & info pasar · akses AgriMart (jual ke SPPG).</div>', unsafe_allow_html=True)
     elif paket.startswith("Program Musim"):
-        st.markdown('<div class="np-alert np-alert-green"><b>Program Musim — Gratis, didanai mitra.</b> Pendampingan agronom 20 jam/musim · voucher input 1× (ditukar di toko tani mitra) · prediksi cuaca & waktu tanam.<br><small>◆ Benefit disponsori mitra input — NusaPangan tidak menyimpan/menjual barang.</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="np-alert np-alert-green"><b>Program Musim — Gratis, didanai mitra.</b> Pendampingan agronom 10 jam/bulan · voucher input 1× (ditukar di toko tani mitra) · prediksi cuaca & waktu tanam.<br><small>◆ Benefit disponsori mitra input — NusaPangan tidak menyimpan/menjual barang.</small></div>', unsafe_allow_html=True)
     else:
         st.markdown('<div class="np-alert np-alert-orange"><b>NusaTani+ — Rp 49rb/musim (opsional).</b> Semua fitur gratis + prioritas pembeli · analitik panen lanjutan · sertifikat traceability untuk beras premium/organik.</div>', unsafe_allow_html=True)
     b1, b2 = st.columns([1, 2])

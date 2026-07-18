@@ -46,7 +46,7 @@ tier(c1, "Petani", "Gratis", "#4CAF50",
      ["Profil & Rice ID terverifikasi", "Harga harian & info pasar", "Akses AgriMart (jual ke SPPG)", "QR traceability dasar"],
      "Freemium")
 tier(c2, "Program Musim", "Gratis · didanai mitra", "#15803d",
-     ["Semua fitur Petani", "Pendampingan agronom 20 jam / musim", "Voucher input 1× di toko tani mitra", "Prediksi cuaca & waktu tanam"],
+     ["Semua fitur Petani", "Pendampingan agronom 10 jam / bulan", "Voucher input 1× di toko tani mitra", "Prediksi cuaca & waktu tanam"],
      "Benefit mitra")
 tier(c3, "NusaTani+", "Rp 49rb / musim", "#E65100",
      ["Semua fitur di atas", "Prioritas pembeli & harga terbaik", "Analitik panen lanjutan", "Sertifikat traceability (premium/organik)"],
