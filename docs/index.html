@@ -143,6 +143,16 @@ section{position:relative}
 .flypunch em{color:var(--grain);font-style:normal}
 @media(max-width:760px){.flyarrow{transform:rotate(90deg)}}
 
+/* LOOP (flywheel ringkas) */
+.loopwrap{margin-top:38px;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px}
+.loophead{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sprout-d);font-weight:600;margin-bottom:14px;text-align:center}
+.loop{display:flex;align-items:stretch;gap:10px;justify-content:center;flex-wrap:wrap}
+.ln{flex:1;min-width:130px;background:var(--mist);border-radius:12px;padding:12px 14px;text-align:center}
+.ln b{display:block;font-size:13.5px;color:var(--rice)}
+.ln small{font-size:11.5px;color:var(--muted)}
+.la{display:flex;align-items:center;color:var(--sprout);font-weight:700;font-size:17px}
+.loopback{margin-top:14px;text-align:center;font-size:12.5px;color:var(--sprout-d);background:rgba(57,169,107,.09);border:1px dashed rgba(57,169,107,.32);border-radius:11px;padding:10px}
+@media(max-width:760px){.la{display:none}.ln{min-width:100%}}
 /* FONDASI (mist) */
 .fondasi{background:var(--mist)}
 .fondasi .eyebrow{color:var(--sky)}
@@ -406,7 +416,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
         <span>Alur data · farm → food security</span>
         <span class="pipe-live"><i></i>LIVE</span>
       </div>
-      <svg class="pipe-svg" viewBox="0 0 340 300" role="img" aria-label="Alur data NusaPangan: Petani, Lahan, Rice ID, Gudang, Dashboard Pemerintah">
+      <svg class="pipe-svg" viewBox="0 0 340 348" role="img" aria-label="Alur data NusaPangan: Petani, Polygon Lahan, Rice ID, Penggilingan, SPPG — seluruhnya mengalirkan data ke Dashboard Pemerintah">
         <defs>
           <linearGradient id="path" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#39A96B"/><stop offset="1" stop-color="#E7B24C"/>
@@ -436,7 +446,18 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
         <g class="pnode n1"><circle class="ring" cx="90" cy="110" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="90" cy="110" r="8" fill="#39A96B"/><text class="plabel" x="112" y="107">Polygon Lahan</text><text class="psub" x="112" y="119">koordinat & luas (LSD)</text></g>
         <g class="pnode n2"><circle class="ring" cx="280" cy="130" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="280" cy="130" r="8" fill="#39A96B"/><text class="plabel" x="262" y="127" text-anchor="end" style="fill:#CFE6DA">Rice ID</text><text class="psub" x="262" y="139" text-anchor="end">QR traceability</text></g>
         <g class="pnode n3"><circle class="ring" cx="250" cy="200" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="250" cy="200" r="8" fill="#39A96B"/><text class="plabel" x="250" y="226" text-anchor="middle">Gudang / SPPG</text><text class="psub" x="250" y="238" text-anchor="middle">escrow &amp; distribusi</text></g>
-        <g class="pnode n4"><circle class="ring" cx="60" cy="262" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="60" cy="262" r="8" fill="#E7B24C"/><text class="plabel" x="82" y="259" style="fill:#E7B24C;font-weight:700">Dashboard Pemerintah</text><text class="psub" x="82" y="271">intelijen pangan</text></g>
+        <g class="pnode n3b"><circle class="ring" cx="170" cy="200" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="170" cy="200" r="8" fill="#39A96B"/><text class="plabel" x="170" y="226" text-anchor="middle">Penggilingan</text><text class="psub" x="170" y="238" text-anchor="middle">rendemen tercatat</text></g>
+        <g class="pnode n4"><circle class="ring" cx="60" cy="262" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="60" cy="262" r="8" fill="#39A96B"/><text class="plabel" x="82" y="259">SPPG</text><text class="psub" x="82" y="271">dapur program MBG</text></g>
+
+        <!-- dashboard sebagai lapisan penerima, bukan ujung rantai -->
+        <g class="dashlayer">
+          <path d="M60,276 Q66,296 150,302" fill="none" stroke="rgba(231,178,76,.34)" stroke-width="1.6" stroke-dasharray="3 4"/>
+          <path d="M170,214 L170,300" fill="none" stroke="rgba(231,178,76,.34)" stroke-width="1.6" stroke-dasharray="3 4"/>
+          <path d="M280,144 Q300,250 192,302" fill="none" stroke="rgba(231,178,76,.34)" stroke-width="1.6" stroke-dasharray="3 4"/>
+          <rect x="42" y="304" width="256" height="40" rx="12" fill="rgba(231,178,76,.12)" stroke="rgba(231,178,76,.4)" stroke-width="1.2"/>
+          <text x="170" y="321" text-anchor="middle" class="plabel" style="fill:#E7B24C;font-weight:700">Dashboard Pemerintah</text>
+          <text x="170" y="334" text-anchor="middle" class="psub">menerima data dari seluruh simpul</text>
+        </g>
       </svg>
       <div class="hstats">
         <div class="hstat"><b id="hs1">3</b><small>petani tervalidasi</small></div>
@@ -487,49 +508,43 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
   <div class="wrap">
     <div class="shead reveal">
       <div class="eyebrow">Struktur Bisnis</div>
-      <h2>Tiga pilar, satu fondasi data</h2>
-      <p>Semakin banyak petani bergabung, semakin kaya data — akurasi AI meningkat, prediksi membaik, dan seluruh ekosistem memperoleh manfaat.</p>
+      <h2>Petani gratis. Institusi yang membayar.</h2>
+      <p>Petani adalah sumber data, bukan sumber pendapatan. Yang membayar adalah pihak yang membutuhkan kepastian — pembeli institusi dan lembaga yang menanggung risiko.</p>
     </div>
     <div class="pgrid">
       <div class="pcard p1 reveal">
-        <div class="pnum">PILAR 01 · TRANSAKSI</div>
-        <h3>AgriMart</h3>
-        <p>Petani jual langsung ke SPPG tanpa tengkulak. Escrow menjamin pembayaran — dana ditahan pihak berizin sampai barang dikonfirmasi diterima.</p>
-        <span class="ptag">Mesin pengumpul data</span>
+        <div class="pnum">01 · PETANI</div>
+        <h3>Gratis selamanya</h3>
+        <p>Rice ID, pencatatan lahan, harga harian, dan akses ke pembeli institusi — tanpa biaya. Setiap panen yang dicatat memperkaya mesin data kami.</p>
+        <span class="ptag">Rp 0 · mesin pengumpul data</span>
       </div>
       <div class="pcard p2 reveal">
-        <div class="pnum">PILAR 02 · PERANGKAT LUNAK</div>
-        <h3>Command Center · QR Trace · SmartDistrib</h3>
-        <p>Dashboard harga, traceability QR dari sawah ke sekolah, dan monitoring logistik untuk SPPG, Bulog, dan pemerintah.</p>
+        <div class="pnum">02 · PEMBELI INSTITUSI</div>
+        <h3>Komisi &amp; langganan</h3>
+        <p>SPPG, Bulog, dan pembeli besar membayar komisi transaksi serta langganan dashboard pasokan, traceability QR, dan optimasi rute.</p>
         <span class="ptag">Pendapatan berulang</span>
       </div>
       <div class="pcard core reveal">
-        <div class="pnum">PILAR 03 · INTELIJEN DATA</div>
-        <h3>LahanIntel</h3>
-        <p>Peta lahan sawah Banten, prediksi panen, dan verifikasi petani untuk lembaga keuangan. Harvest, Supply, Price & Farmer Intelligence dari satu mesin data.</p>
+        <div class="pnum">03 · LEMBAGA</div>
+        <h3>Data &amp; verifikasi</h3>
+        <p>Bank, asuransi, dan pemerintah daerah membayar untuk profil petani terverifikasi, prediksi panen, dan peta pasokan wilayah.</p>
         <span class="ptag">Inti bisnis · margin tertinggi</span>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- FLYWHEEL -->
-<section class="fly pad">
-  <div class="wrap">
-    <div class="shead reveal" style="max-width:640px">
-      <div class="eyebrow" style="color:var(--grain)">Data Flywheel</div>
-      <h2 style="color:#fff">Marketplace bukan produk kami. Ia mesin penghasil data.</h2>
+    <div class="loopwrap reveal">
+      <div class="loophead">Mengapa ini berputar sendiri</div>
+      <div class="loop">
+        <div class="ln"><b>Petani mencatat</b><small>panen &amp; transaksi</small></div>
+        <div class="la">→</div>
+        <div class="ln"><b>Data menumpuk</b><small>harga, volume, lahan</small></div>
+        <div class="la">→</div>
+        <div class="ln"><b>Prediksi menajam</b><small>akurasi meningkat</small></div>
+        <div class="la">→</div>
+        <div class="ln"><b>Lembaga membayar</b><small>margin tertinggi</small></div>
+      </div>
+      <div class="loopback"><span>↺ Pendapatan itu membiayai layanan gratis petani — makin banyak petani, makin kuat datanya</span></div>
     </div>
-    <div class="flychain reveal">
-      <div class="flynode"><b>Petani jual di AgriMart</b><small>transaksi nyata</small></div>
-      <div class="flyarrow">→</div>
-      <div class="flynode"><b>Data transaksi terkumpul</b><small>harga, volume, waktu</small></div>
-      <div class="flyarrow">→</div>
-      <div class="flynode"><b>LahanIntel makin akurat</b><small>prediksi menajam</small></div>
-      <div class="flyarrow">→</div>
-      <div class="flynode"><b>Dijual ke bank, Bulog, eksportir</b><small>margin tertinggi</small></div>
-    </div>
-    <p class="flypunch reveal">Marketplace sengaja bermargin tipis. <em>Data itulah yang kami jual.</em></p>
   </div>
 </section>
 
@@ -555,10 +570,10 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
         <div class="fnote">Fondasi peta: data LSD Banten</div>
       </div>
       <div class="fcard reveal">
-        <div class="ficon">🤖</div>
-        <h3>Smart Farming Insights</h3>
-        <ul><li>Prediksi panen & harga harian</li><li>Cuaca & rekomendasi waktu tanam</li><li>Peringatan risiko pasokan</li></ul>
-        <div class="fnote">Pendamping berbasis AI & data</div>
+        <div class="ficon">🗺️</div>
+        <h3>Protected Farmland Layer</h3>
+        <ul><li>149.163 ha Lahan Sawah Dilindungi Banten</li><li>47.937 bidang · 5 wilayah terpetakan</li><li>Verifikasi lahan lewat uji titik-dalam-poligon</li></ul>
+        <div class="fnote">Data resmi ATR/BPN yang sudah kami olah</div>
       </div>
     </div>
   </div>
@@ -723,8 +738,6 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       <p>Mengapa NusaPangan ada, dan ke mana kami membawanya.</p>
     </div>
     <div class="aboutgrid">
-      
-      </div>
       <div class="avision reveal">
         <p>NusaPangan didirikan dengan satu visi sederhana: membangun <b>Rice Intelligence Infrastructure</b> Indonesia.</p>
         <p>Ketahanan pangan dimulai dari memberdayakan orang-orang yang memproduksi pangan kita. Dengan menghubungkan petani langsung ke pembeli institusi — didukung data tepercaya, wawasan berbasis AI, dan infrastruktur digital yang transparan — kami mempersempit kesenjangan informasi, memangkas rantai pasok yang tidak efisien, dan memperluas akses pasar bagi petani.</p>
