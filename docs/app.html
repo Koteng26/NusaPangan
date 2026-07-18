@@ -38,10 +38,10 @@ scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
 img{max-width:100%;display:block}
 
 /* ---------- SPLASH ---------- */
-.splash{min-height:824px;background:linear-gradient(160deg,var(--rice) 0%,var(--rice2) 55%,#1E6B4C 100%);display:flex;
-flex-direction:column;padding:0 28px 40px;position:relative;overflow:hidden}
+.splash{min-height:100%;height:100%;background:linear-gradient(160deg,var(--rice) 0%,var(--rice2) 55%,#1E6B4C 100%);display:flex;
+flex-direction:column;padding:0 26px 34px;position:relative;overflow:hidden}
 .splash .orb{position:absolute;border-radius:50%;background:var(--sprout);opacity:.16}
-.splash .wm{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.splash .wm{font-size:clamp(22px,6.6vw,29px);font-weight:800;color:#fff;letter-spacing:-.02em}
 .splash .fld{color:#DDECE3}
 .splash .inp{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.26)}
 .splash .inp span,.splash .inp input{color:#fff}
@@ -50,10 +50,10 @@ flex-direction:column;padding:0 28px 40px;position:relative;overflow:hidden}
 .splash .o1{top:-70px;right:-70px;width:230px;height:230px}
 .splash .o2{bottom:-90px;left:-90px;width:260px;height:260px}
 .splash .mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-gap:14px;position:relative;z-index:1;animation:rise .9s ease}
+gap:11px;padding-bottom:52px;position:relative;z-index:1;animation:rise .9s ease}
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.splash img{width:158px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.28))}
-.splash .tag{font-size:13px;font-weight:600;color:#BFD8CC;text-align:center;letter-spacing:.01em}
+.splash img{width:min(126px,30vw);filter:drop-shadow(0 6px 16px rgba(0,0,0,.26))}
+.splash .tag{font-size:clamp(11px,3.2vw,13px);font-weight:600;color:#BFD8CC;text-align:center;line-height:1.5}
 .fld{font-size:12.5px;font-weight:600;color:var(--rice);margin-bottom:6px}
 .inp{display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);
 border-radius:14px;padding:0 14px;height:52px}
