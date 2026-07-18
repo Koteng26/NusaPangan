@@ -167,18 +167,21 @@ section{position:relative}
 .scfeat .ic{width:32px;height:32px;border-radius:9px;background:var(--mist);display:grid;place-items:center;flex:none;font-size:15px}
 .scfeat b{display:block}
 .scfeat small{color:var(--muted);font-size:12.5px}
-.pshow{position:relative;display:flex;justify-content:center;align-items:center;min-height:600px;padding-bottom:14px}
+.pshow{position:relative;display:flex;justify-content:center;align-items:center;min-height:640px;padding-bottom:56px}
 .pframe{width:266px;height:552px;background:linear-gradient(160deg,#12251c,#0A1F17);border-radius:38px;padding:11px;box-shadow:0 40px 80px rgba(10,31,23,.42);position:relative}
 .pframe:before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:90px;height:21px;background:#0A1F17;border-radius:0 0 13px 13px;z-index:5}
 .pscreen{width:100%;height:100%;border-radius:29px;overflow:hidden;background:#F0FDF4;position:relative}
-.ptrack{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
-.pslide{min-width:100%;height:100%;overflow-y:auto}
-.pdots{position:absolute;bottom:-20px;left:0;right:0;display:flex;gap:6px;justify-content:center}
-.pdots i{width:7px;height:7px;border-radius:50%;background:rgba(14,58,44,.18);cursor:pointer;transition:all .3s}
-.pdots i.on{background:var(--sprout);width:20px;border-radius:4px}
-.parrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;z-index:6;box-shadow:0 4px 12px rgba(14,58,44,.14);font-size:16px;color:var(--rice);user-select:none}
-.parrow.l{left:-4px} .parrow.r{right:-4px}
-.parrow:hover{background:var(--mist)}
+#appFrame{width:100%;height:100%;border:0;display:block;background:#F7F4EC}
+.livedot{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--rice);color:#EAF3EE;
+font-family:var(--mono);font-size:9px;letter-spacing:.12em;font-weight:600;padding:5px 12px;border-radius:999px;
+display:flex;align-items:center;gap:6px;z-index:8;white-space:nowrap;box-shadow:0 4px 14px rgba(10,31,23,.28)}
+.livedot i{width:6px;height:6px;border-radius:50%;background:#4ADE80;animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.chiprow{position:absolute;bottom:-46px;left:-30px;right:-30px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.chiprow button{border:1px solid var(--line);background:#fff;color:var(--rice);font:inherit;font-size:11px;
+font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:all .2s}
+.chiprow button:hover{border-color:var(--sprout);color:var(--sprout-d)}
+.chiprow button.on{background:var(--rice);color:#fff;border-color:var(--rice)}
 .stores{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .store{display:inline-flex;align-items:center;gap:9px;background:#0A1F17;color:#fff;border-radius:11px;padding:9px 15px;text-decoration:none;transition:transform .2s}
 .store:hover{transform:translateY(-2px)}
@@ -217,7 +220,7 @@ section{position:relative}
 .stat3 small{font-size:6.5px;color:#888;letter-spacing:.03em}
 .barm{display:flex;align-items:flex-end;gap:5px;height:64px;padding:8px;background:#fff;border:1px solid #dbe7dd;border-radius:9px;margin-top:8px}
 .barm i{flex:1;background:linear-gradient(#39A96B,#2B8354);border-radius:3px 3px 0 0}
-@media(max-width:860px){.scgrid{grid-template-columns:1fr}.pshow{min-height:600px}}
+@media(max-width:860px){.scgrid{grid-template-columns:1fr}.pshow{min-height:660px}.chiprow{left:0;right:0}}
 /* GOVERNANCE (dark) */
 .gov{background:var(--ink);color:#EAF3EE}
 .gov .eyebrow{color:var(--deficit)}
@@ -541,12 +544,12 @@ section{position:relative}
     <div class="sctext reveal">
       <div class="eyebrow">Aplikasi · Demo Langsung</div>
       <h2>NusaPangan dalam genggaman</h2>
-      <p>Bukan sekadar konsep — prototipenya sudah bisa dijalankan. Petani mendaftar, mendapat Rice ID, menjual ke SPPG, dan pemerintah memantau — dari satu aplikasi.</p>
+      <p>Bukan sekadar konsep — ini aplikasinya, berjalan langsung di halaman ini. 14 layar: daftar, catat lahan, jual ke SPPG, lacak QR, sampai skor kelayakan untuk bank. Silakan klik dan coba.</p>
       <ul class="scfeat">
-        <li><span class="ic">📝</span><span><b>Daftar & dapat Rice ID</b><small>onboarding + persetujuan sesuai UU PDP</small></span></li>
+        <li><span class="ic">📝</span><span><b>Daftar & dapat Rice ID</b><small>identitas digital + persetujuan sesuai UU PDP</small></span></li>
         <li><span class="ic">🛒</span><span><b>Jual langsung ke SPPG</b><small>AgriMart, tanpa tengkulak</small></span></li>
         <li><span class="ic">🔍</span><span><b>QR traceability</b><small>lacak dari sawah ke piring</small></span></li>
-        <li><span class="ic">🗺️</span><span><b>LahanMap</b><small>peta LSD Banten di atas citra satelit</small></span></li>
+        <li><span class="ic">📊</span><span><b>Skor kelayakan petani</b><small>profil verifikasi untuk bank — bukan pinjaman</small></span></li>
       </ul>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Buka Aplikasi →</a>
@@ -562,17 +565,13 @@ section{position:relative}
       </div>
     </div>
     <div class="pshow reveal">
-      <div class="parrow l" onclick="scSlide(-1)">‹</div>
-      <div class="parrow r" onclick="scSlide(1)">›</div>
-      <div class="pframe"><div class="pscreen"><div class="ptrack" id="ptrack">
-        <div class="pslide"><div class="appbar"><div class="eb">NusaPangan · Onboarding</div><h5>📝 Pendaftaran Petani</h5><p>Buat identitas digital & Rice ID</p></div><div class="appbody"><div class="stepsm"><i class="on"></i><i></i><i></i><i></i></div><div class="fld">Nama lengkap</div><div class="inp"></div><div class="fld">NIK (16 digit)</div><div class="inp"></div><div class="pdpm">🔒 NIK di-hash & dilindungi sesuai UU No.27/2022 (PDP).</div><div class="appbtn">Lanjut →</div></div></div>
-        <div class="pslide"><div class="appbar"><div class="eb">Dashboard Petani</div><h5>Selamat datang, Budi</h5><p>NP-BTN-4821 · Kab. Serang</p></div><div class="appbody"><div class="stat3"><div><b>2,4</b><small>TON PANEN</small></div><div><b>1,5</b><small>HA LAHAN</small></div><div><b>32</b><small>SKOR</small></div></div><div class="barm"><i style="height:40%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:95%"></i></div><div class="appbtn">Jual di AgriMart →</div></div></div>
-        <div class="pslide"><div class="appbar"><div class="eb">Harga Hari Ini</div><h5>💰 Harga Gabah</h5><p>Serang, Banten · hari ini</p></div><div class="appbody"><div class="pricebig"><div class="p">Rp 6.800<span style="font-size:12px">/kg</span></div><div class="u">↑ +Rp 200 dari kemarin</div><div class="s">Sumber: PIHPS Kemendag</div></div><div class="barm"><i style="height:55%"></i><i style="height:60%"></i><i style="height:50%"></i><i style="height:72%"></i><i style="height:66%"></i><i style="height:85%"></i></div></div></div>
-        <div class="pslide"><div class="appbar"><div class="eb">AgriMart</div><h5>🛒 Lapak Saya</h5><p>Jual langsung ke SPPG</p></div><div class="appbody"><div class="lrow"><div><b>Gabah Inpari 32</b><br><small>500 kg · Rp 6.800/kg</small></div><span class="yy">Menunggu</span></div><div class="lrow"><div><b>Ciherang</b><br><small>300 kg · Rp 6.500/kg</small></div><span class="yy">Menunggu</span></div><div class="appbtn">+ Terbitkan lapak</div></div></div>
-        <div class="pslide"><div class="appbar"><div class="eb">Batch Saya</div><h5>🔍 Traceability</h5><p>NP-BTN-2026-0847</p></div><div class="appbody"><div style="display:flex;gap:10px;align-items:center"><div class="qrm" id="scqr"></div><div style="font-size:9px;color:#555;line-height:1.5">Gabah Inpari 32<br>500 kg · panen 12 Jul<br><b style="color:#166534">✓ Terverifikasi</b></div></div><div class="minitl"><div class="m on">✓</div><div class="ln"></div><div class="m">2</div><div class="ln"></div><div class="m">3</div><div class="ln"></div><div class="m">4</div><div class="ln"></div><div class="m">5</div></div><div class="appbtn">Lihat perjalanan →</div></div></div>
-        <div class="pslide"><div class="appbar"><div class="eb">LahanMap</div><h5>🗺️ Sawah Dilindungi</h5><p>LSD Banten · citra satelit</p></div><div class="appbody"><div class="mapm"><div class="zone" style="left:14%;top:30%;width:34%;height:40%"></div><div class="zone" style="left:52%;top:22%;width:30%;height:34%"></div><div class="zone" style="left:30%;top:60%;width:40%;height:26%"></div><div class="pin" style="left:26%;top:44%"></div><div class="pin" style="left:62%;top:36%"></div></div><div class="stat3" style="margin-top:8px"><div><b>149rb</b><small>HA LSD</small></div><div><b>5</b><small>WILAYAH</small></div><div><b>3</b><small>PETANI</small></div></div></div></div>
-      </div></div></div>
-      <div class="pdots" id="pdots"></div>
+      <div class="pframe">
+        <div class="pscreen">
+          <iframe id="appFrame" src="app.html" title="Demo aplikasi NusaPangan" loading="lazy"></iframe>
+        </div>
+        <div class="livedot"><i></i> DEMO LANGSUNG</div>
+      </div>
+      <div class="chiprow" id="chiprow"></div>
     </div>
   </div>
 </section>
@@ -799,17 +798,29 @@ const pc=document.getElementById('pricechart'); if(pc)pio.observe(pc);
 const nodes=document.querySelectorAll('.pnode');
 let ni=0;
 setInterval(()=>{nodes.forEach(n=>n.classList.remove('act'));if(nodes[ni])nodes[ni].classList.add('act');ni=(ni+1)%nodes.length;},800);
-// showcase carousel
+// showcase: kontrol app asli yang tertanam
 (function(){
-  const track=document.getElementById('ptrack'); if(!track)return;
-  const n=track.children.length; let idx=0; const dots=document.getElementById('pdots');
-  for(let i=0;i<n;i++){const d=document.createElement('i');if(i===0)d.className='on';d.addEventListener('click',()=>{idx=i;upd();rst();});dots.appendChild(d);}
-  function upd(){track.style.transform='translateX('+(-idx*100)+'%)';[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===idx));}
-  window.scSlide=function(dir){idx=(idx+dir+n)%n;upd();rst();};
-  let t=setInterval(()=>{idx=(idx+1)%n;upd();},3800);
-  function rst(){clearInterval(t);t=setInterval(()=>{idx=(idx+1)%n;upd();},3800);}
-  const qr=document.getElementById('scqr');
-  if(qr){const s=[1,1,1,0,1,0,1,1,1,1,0,1,1,0,0,0,0,1,1,0,1,0,1,1,1,0,1,0,0,0,1,0,1,0,1,0,1,1,0,0,1,0,1,1,1,0,1,0,1,0,0,1,0,0,1,0,1,1,1,0,1,0,1,1,0,0,0,1,1,0,1,1,1,1,1,0,1,0,0,0,1];s.forEach(c=>{const i=document.createElement('i');if(!c)i.className='w';qr.appendChild(i);});}
+  const fr=document.getElementById('appFrame'); if(!fr)return;
+  const SCREENS=[['home','Beranda'],['lahan','Lahan'],['timeline','Timeline'],['sell','Jual'],
+    ['qr','QR Trace'],['map','LahanMap'],['skor','Skor'],['buyer','Pembeli']];
+  const row=document.getElementById('chiprow');
+  SCREENS.forEach(([id,label],i)=>{
+    const b=document.createElement('button'); b.textContent=label; b.dataset.id=id;
+    if(i===0)b.classList.add('on');
+    b.addEventListener('click',()=>{show(id);stop();});
+    row.appendChild(b);
+  });
+  function show(id){
+    try{ fr.contentWindow.go(id); }catch(e){ return; }
+    [...row.children].forEach(c=>c.classList.toggle('on',c.dataset.id===id));
+  }
+  let k=0,timer=null;
+  function tick(){ k=(k+1)%SCREENS.length; show(SCREENS[k][0]); }
+  function start(){ if(!timer) timer=setInterval(tick,4200); }
+  function stop(){ clearInterval(timer); timer=null; }
+  fr.addEventListener('load',()=>{ try{ fr.contentWindow.go('home'); }catch(e){} start(); });
+  fr.addEventListener('mouseenter',stop);
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
 })();
 </script>
 </body>
