@@ -18,6 +18,12 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--rice)
 display:flex;align-items:center;justify-content:center;min-height:100vh;padding:26px 14px}
 .device{width:390px;height:844px;max-height:94vh;background:var(--paper);border-radius:44px;
 border:10px solid var(--ink);box-shadow:0 40px 90px rgba(10,31,23,.34);overflow:hidden;position:relative}
+/* di layar HP: penuhi layar, tanpa bingkai & tanpa scroll halaman */
+@media(max-width:560px){
+  html,body{height:100%;overflow:hidden}
+  body{padding:0;display:block;background:var(--paper)}
+  .device{width:100vw;height:100vh;height:100dvh;max-height:none;border:0;border-radius:0;box-shadow:none}
+}
 .viewport{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden}
 .scr{display:none;min-height:100%;animation:fade .32s ease}
 .scr.on{display:block}
