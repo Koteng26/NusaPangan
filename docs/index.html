@@ -21,7 +21,7 @@
   --sans:'Inter',system-ui,sans-serif; --disp:'Sora',var(--sans); --mono:'JetBrains Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;scroll-padding-top:72px}
 body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -107,8 +107,8 @@ section{position:relative}
 .shead{max-width:680px;margin-bottom:44px}
 .shead h2{font-size:clamp(26px,3.6vw,40px);margin:12px 0 12px}
 .shead p{color:var(--muted);font-size:16px}
-.pad{padding:88px 0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;scroll-margin-top:64px}
-.hero,.logos,.counters{scroll-snap-align:start;scroll-margin-top:64px}
+.pad{padding:80px 0 56px;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-start;scroll-snap-align:start;scroll-margin-top:72px}
+.hero,.logos,.counters{scroll-snap-align:start;scroll-margin-top:72px}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 .logos{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 @media(max-width:820px){html{scroll-snap-type:none}.pad,.hero,.logos{min-height:auto}}
@@ -118,6 +118,10 @@ section{position:relative}
 .pilar .eyebrow{color:var(--grain-d)}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .pcard{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .25s,box-shadow .25s}
+.pcard.p1{background:linear-gradient(165deg,#FBF3E2,#fff);border-color:rgba(201,144,46,.32)}
+.pcard.p1 .pnum{color:var(--grain-d)} .pcard.p1 .ptag{background:#FBEFD8;color:var(--grain-d)}
+.pcard.p2{background:linear-gradient(165deg,#E8F1F5,#fff);border-color:rgba(28,110,140,.28)}
+.pcard.p2 .pnum{color:var(--sky)} .pcard.p2 .ptag{background:#DEEDF3;color:var(--sky)}
 .pcard:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(14,58,44,.1)}
 .pcard.core{background:linear-gradient(165deg,var(--rice),var(--ink));color:#EAF3EE;border-color:transparent}
 .pcard.core .ptag{background:var(--grain);color:#3a2a06}
@@ -163,12 +167,38 @@ section{position:relative}
 .scfeat .ic{width:32px;height:32px;border-radius:9px;background:var(--mist);display:grid;place-items:center;flex:none;font-size:15px}
 .scfeat b{display:block}
 .scfeat small{color:var(--muted);font-size:12.5px}
-.phones{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px}
-.phone{width:258px;height:534px;background:linear-gradient(160deg,#12251c,#0A1F17);border-radius:36px;padding:11px;box-shadow:0 40px 80px rgba(10,31,23,.4);position:relative}
-.phone:before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:86px;height:20px;background:#0A1F17;border-radius:0 0 13px 13px;z-index:3}
-.screen{width:100%;height:100%;border-radius:27px;overflow:hidden;background:#F0FDF4;position:relative}
-.phone.back{position:absolute;transform:rotate(-8deg) scale(.9) translateX(-58%);opacity:.97;z-index:1}
-.phone.front{z-index:2;transform:translateX(14%)}
+.pshow{position:relative;display:flex;justify-content:center;align-items:center;min-height:600px;padding-bottom:14px}
+.pframe{width:266px;height:552px;background:linear-gradient(160deg,#12251c,#0A1F17);border-radius:38px;padding:11px;box-shadow:0 40px 80px rgba(10,31,23,.42);position:relative}
+.pframe:before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:90px;height:21px;background:#0A1F17;border-radius:0 0 13px 13px;z-index:5}
+.pscreen{width:100%;height:100%;border-radius:29px;overflow:hidden;background:#F0FDF4;position:relative}
+.ptrack{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.pslide{min-width:100%;height:100%;overflow-y:auto}
+.pdots{position:absolute;bottom:-20px;left:0;right:0;display:flex;gap:6px;justify-content:center}
+.pdots i{width:7px;height:7px;border-radius:50%;background:rgba(14,58,44,.18);cursor:pointer;transition:all .3s}
+.pdots i.on{background:var(--sprout);width:20px;border-radius:4px}
+.parrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;z-index:6;box-shadow:0 4px 12px rgba(14,58,44,.14);font-size:16px;color:var(--rice);user-select:none}
+.parrow.l{left:-4px} .parrow.r{right:-4px}
+.parrow:hover{background:var(--mist)}
+.stores{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.store{display:inline-flex;align-items:center;gap:9px;background:#0A1F17;color:#fff;border-radius:11px;padding:9px 15px;text-decoration:none;transition:transform .2s}
+.store:hover{transform:translateY(-2px)}
+.store small{display:block;font-size:8.5px;opacity:.85;letter-spacing:.02em;line-height:1.1}
+.store b{display:block;font-size:14px;font-weight:600;line-height:1.15}
+.store svg{width:22px;height:22px;flex:none}
+.pricebig{background:linear-gradient(160deg,#EAF6EF,#fff);border:1px solid #cfe9d8;border-radius:11px;padding:13px;text-align:center;margin-bottom:8px}
+.pricebig .p{font-family:var(--disp);font-size:24px;font-weight:800;color:#166534}
+.pricebig .u{font-size:11px;color:#16a34a;font-weight:700}
+.pricebig .s{font-size:8px;color:#888;margin-top:2px}
+.lrow{background:#fff;border:1px solid #dbe7dd;border-radius:9px;padding:9px 10px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
+.lrow b{font-size:11px} .lrow small{font-size:8.5px;color:#888} .lrow .yy{background:#fef9c3;color:#854d0e;font-size:8px;font-weight:700;padding:2px 6px;border-radius:6px;flex:none}
+.qrm{width:66px;height:66px;display:grid;grid-template-columns:repeat(9,1fr);gap:1px;background:#fff;padding:3px;border:1px solid #dbe7dd;border-radius:7px;flex:none}
+.qrm i{background:#0A1F17;border-radius:1px}.qrm i.w{background:#fff}
+.minitl{display:flex;align-items:center;gap:2px;margin-top:10px}
+.minitl .m{width:14px;height:14px;border-radius:50%;background:#e2e8f0;display:grid;place-items:center;font-size:7px;color:#94a3b8;flex:none}
+.minitl .m.on{background:#16a34a;color:#fff}.minitl .ln{flex:1;height:2px;background:#e2e8f0}
+.mapm{height:150px;border-radius:10px;background:linear-gradient(135deg,#1C6E8C,#0e3a2c);position:relative;overflow:hidden;border:1px solid #dbe7dd}
+.mapm .zone{position:absolute;background:rgba(57,169,107,.5);border:1px solid #2B8354;border-radius:5px}
+.mapm .pin{position:absolute;width:9px;height:9px;border-radius:50%;background:#E7B24C;border:2px solid #fff;transform:translate(-50%,-50%)}
 .appbar{background:linear-gradient(135deg,#14532d,#166534);color:#EAF3EE;padding:34px 15px 14px}
 .appbar .eb{font-size:7.5px;letter-spacing:.12em;opacity:.7;font-family:var(--mono);text-transform:uppercase}
 .appbar h5{font-family:var(--disp);font-size:15px;margin-top:3px;font-weight:700}
@@ -187,7 +217,7 @@ section{position:relative}
 .stat3 small{font-size:6.5px;color:#888;letter-spacing:.03em}
 .barm{display:flex;align-items:flex-end;gap:5px;height:64px;padding:8px;background:#fff;border:1px solid #dbe7dd;border-radius:9px;margin-top:8px}
 .barm i{flex:1;background:linear-gradient(#39A96B,#2B8354);border-radius:3px 3px 0 0}
-@media(max-width:860px){.scgrid{grid-template-columns:1fr}.phones{min-height:520px}.phone.back{display:none}.phone.front{transform:none}}
+@media(max-width:860px){.scgrid{grid-template-columns:1fr}.pshow{min-height:600px}}
 /* GOVERNANCE (dark) */
 .gov{background:var(--ink);color:#EAF3EE}
 .gov .eyebrow{color:var(--deficit)}
@@ -246,7 +276,7 @@ section{position:relative}
 .vcard{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .22s,box-shadow .22s}
 .vcard:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(14,58,44,.12)}
 .vcard:hover .vphoto svg,.vcard:hover .vimg{transform:scale(1.06)}
-.vphoto{position:relative;height:150px;background:linear-gradient(150deg,var(--c1),var(--c2));display:grid;place-items:center;overflow:hidden}
+.vphoto{position:relative;height:126px;background:linear-gradient(150deg,var(--c1),var(--c2));display:grid;place-items:center;overflow:hidden}
 .vphoto:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.28),transparent 58%),linear-gradient(0deg,rgba(0,0,0,.14),transparent 45%)}
 .vphoto svg{width:64px;height:64px;opacity:.95;transition:transform .3s;filter:drop-shadow(0 3px 7px rgba(0,0,0,.22))}
 .vimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
@@ -366,18 +396,17 @@ section{position:relative}
               fill="none" stroke="url(#path)" stroke-width="2.5" stroke-dasharray="10 640" opacity=".9">
           <animate attributeName="stroke-dashoffset" from="650" to="0" dur="4s" repeatCount="indefinite"/>
         </path>
-        <!-- truk pengangkut data -->
+        <!-- truk pengangkut data (tampak atas, menghadap arah jalan) -->
         <g>
-          <g transform="translate(-9,-6)">
-            <rect x="0" y="2" width="11" height="8" rx="1.5" fill="#2B8354"/>
-            <rect x="1.4" y="3.4" width="8.2" height="2.2" rx="1" fill="#39A96B" opacity=".85"/>
-            <rect x="11" y="4" width="5" height="6" rx="1.2" fill="#39A96B"/>
-            <rect x="12" y="5" width="2.6" height="2.6" rx=".5" fill="#CFF3E0"/>
-            <circle cx="3.6" cy="11" r="1.9" fill="#0A1F17"/><circle cx="3.6" cy="11" r=".7" fill="#7FA592"/>
-            <circle cx="13" cy="11" r="1.9" fill="#0A1F17"/><circle cx="13" cy="11" r=".7" fill="#7FA592"/>
-          </g>
-          <animateMotion dur="4.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1"
+          <animateMotion dur="4.6s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1"
             path="M60,40 L60,90 Q60,110 90,110 L250,110 Q280,110 280,130 L280,180 Q280,200 250,200 L90,200 Q60,200 60,220 L60,262"/>
+          <rect x="-9" y="-5" width="12" height="10" rx="2.4" fill="#2B8354"/>
+          <rect x="-6.5" y="-6.6" width="3.6" height="1.6" rx=".6" fill="#0A1F17"/>
+          <rect x="-6.5" y="5" width="3.6" height="1.6" rx=".6" fill="#0A1F17"/>
+          <rect x="1.6" y="-3.8" width="6" height="7.6" rx="2.2" fill="#39A96B"/>
+          <rect x="4" y="-6.6" width="2.4" height="1.6" rx=".6" fill="#0A1F17"/>
+          <rect x="4" y="5" width="2.4" height="1.6" rx=".6" fill="#0A1F17"/>
+          <rect x="6.1" y="-2.4" width="1.6" height="4.8" rx=".5" fill="#CFF3E0"/>
         </g>
         <!-- nodes -->
         <g class="pnode n0"><circle class="ring" cx="60" cy="40" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="60" cy="40" r="8" fill="#39A96B"/><text class="plabel" x="82" y="37">Petani</text><text class="psub" x="82" y="49">verifikasi lapangan</text></g>
@@ -410,7 +439,7 @@ section{position:relative}
     <div class="lead reveal">
       <div class="eyebrow">Sumber Data Resmi</div>
       <h2>Dibangun di atas data resmi negara</h2>
-      <p>Setiap angka di NusaPangan bersumber dari lembaga resmi — bukan asumsi. Logo ditampilkan sebagai atribusi sumber, bukan afiliasi.</p>
+      <p>Setiap angka di NusaPangan bersumber dari lembaga resmi.</p>
     </div>
     <div class="logrid reveal">
       <div class="logo-cell"><img src="https://nusapangan.my.id/logo-bi.png" alt="Bank Indonesia"><span>Bank Indonesia<br>Inflasi</span></div>
@@ -420,7 +449,7 @@ section{position:relative}
       <div class="logo-cell"><img src="https://nusapangan.my.id/badan-pangan.png" alt="Badan Pangan Nasional"><span>Badan Pangan Nasional<br>Cadangan pangan</span></div>
       <div class="logo-cell"><img src="https://nusapangan.my.id/logo-kemendikdasmen.png" alt="Kemendikdasmen"><span>Kemendikdasmen<br>Satpen MBG</span></div>
     </div>
-    <p class="attrib">Sumber: SP2KP Kementerian Perdagangan · Badan Pusat Statistik · Kemendikdasmen · Bank Indonesia · Kementerian ATR/BPN (Lahan Sawah Dilindungi, 2021). Nama dan logo institusi ditampilkan sebagai atribusi sumber data, bukan bentuk afiliasi atau dukungan resmi.</p>
+    <p class="attrib">Sumber: SP2KP Kementerian Perdagangan · Badan Pusat Statistik · Kemendikdasmen · Bank Indonesia · Kementerian ATR/BPN (Lahan Sawah Dilindungi, 2021).</p>
   </div>
 </section>
 
@@ -433,13 +462,13 @@ section{position:relative}
       <p>Semakin banyak petani bergabung, semakin kaya data — akurasi AI meningkat, prediksi membaik, dan seluruh ekosistem memperoleh manfaat.</p>
     </div>
     <div class="pgrid">
-      <div class="pcard reveal">
+      <div class="pcard p1 reveal">
         <div class="pnum">PILAR 01 · TRANSAKSI</div>
         <h3>AgriMart</h3>
         <p>Petani jual langsung ke SPPG tanpa tengkulak. Escrow menjamin pembayaran — dana ditahan pihak berizin sampai barang dikonfirmasi diterima.</p>
         <span class="ptag">Mesin pengumpul data</span>
       </div>
-      <div class="pcard reveal">
+      <div class="pcard p2 reveal">
         <div class="pnum">PILAR 02 · PERANGKAT LUNAK</div>
         <h3>Command Center · QR Trace · SmartDistrib</h3>
         <p>Dashboard harga, traceability QR dari sawah ke sekolah, dan monitoring logistik untuk SPPG, Bulog, dan pemerintah.</p>
@@ -523,26 +552,27 @@ section{position:relative}
         <a class="btn btn-primary" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Buka Aplikasi →</a>
         <a class="btn btn-line" style="color:var(--rice);border-color:var(--line)" href="https://nusapangan.streamlit.app/Pendaftaran" target="_blank" rel="noopener">Coba Pendaftaran</a>
       </div>
+      <div class="stores">
+        <a class="store" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener" aria-label="App Store">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.05 12.9c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.41-.92-2.43-3.65zM14.79 5.9c.64-.77 1.07-1.85.95-2.9-.92.04-2.03.61-2.69 1.38-.59.68-1.11 1.78-.97 2.82 1.02.08 2.07-.52 2.71-1.3z"/></svg>
+          <span><small>Unduh di</small><b>App Store</b></span></a>
+        <a class="store" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener" aria-label="Google Play">
+          <svg viewBox="0 0 24 24"><path d="M3.6 2.3C3.3 2.6 3.2 3 3.2 3.6v16.8c0 .6.1 1 .4 1.3l.1.1L13 12.6v-.2L3.7 2.2z" fill="#00d0ff"/><path d="M16.3 15.9l-3.3-3.3v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.6 0 2.3z" fill="#ffc107"/><path d="M16.4 15.8L13 12.5 3.6 21.9c.4.4 1 .4 1.7.1z" fill="#ff3d47"/><path d="M16.4 9.2L5.3 3C4.6 2.6 4 2.7 3.6 3.1l9.4 9.4z" fill="#00e676"/></svg>
+          <span><small>Dapatkan di</small><b>Google Play</b></span></a>
+      </div>
     </div>
-    <div class="phones reveal">
-      <div class="phone back"><div class="screen">
-        <div class="appbar"><div class="eb">Dashboard Petani</div><h5>Selamat datang, Budi</h5><p>NP-BTN-4821 · Kab. Serang</p></div>
-        <div class="appbody">
-          <div class="stat3"><div><b>2,4</b><small>TON PANEN</small></div><div><b>1,5</b><small>HA LAHAN</small></div><div><b>32</b><small>SKOR</small></div></div>
-          <div class="barm"><i style="height:40%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:95%"></i></div>
-          <div class="appbtn">Jual di AgriMart →</div>
-        </div>
-      </div></div>
-      <div class="phone front"><div class="screen">
-        <div class="appbar"><div class="eb">NusaPangan · Onboarding</div><h5>📝 Pendaftaran Petani</h5><p>Buat identitas digital & Rice ID</p></div>
-        <div class="appbody">
-          <div class="stepsm"><i class="on"></i><i></i><i></i><i></i></div>
-          <div class="fld">Nama lengkap</div><div class="inp"></div>
-          <div class="fld">NIK (16 digit)</div><div class="inp"></div>
-          <div class="pdpm">🔒 NIK di-hash & dilindungi sesuai UU No.27/2022 (PDP).</div>
-          <div class="appbtn">Lanjut →</div>
-        </div>
-      </div></div>
+    <div class="pshow reveal">
+      <div class="parrow l" onclick="scSlide(-1)">‹</div>
+      <div class="parrow r" onclick="scSlide(1)">›</div>
+      <div class="pframe"><div class="pscreen"><div class="ptrack" id="ptrack">
+        <div class="pslide"><div class="appbar"><div class="eb">NusaPangan · Onboarding</div><h5>📝 Pendaftaran Petani</h5><p>Buat identitas digital & Rice ID</p></div><div class="appbody"><div class="stepsm"><i class="on"></i><i></i><i></i><i></i></div><div class="fld">Nama lengkap</div><div class="inp"></div><div class="fld">NIK (16 digit)</div><div class="inp"></div><div class="pdpm">🔒 NIK di-hash & dilindungi sesuai UU No.27/2022 (PDP).</div><div class="appbtn">Lanjut →</div></div></div>
+        <div class="pslide"><div class="appbar"><div class="eb">Dashboard Petani</div><h5>Selamat datang, Budi</h5><p>NP-BTN-4821 · Kab. Serang</p></div><div class="appbody"><div class="stat3"><div><b>2,4</b><small>TON PANEN</small></div><div><b>1,5</b><small>HA LAHAN</small></div><div><b>32</b><small>SKOR</small></div></div><div class="barm"><i style="height:40%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:95%"></i></div><div class="appbtn">Jual di AgriMart →</div></div></div>
+        <div class="pslide"><div class="appbar"><div class="eb">Harga Hari Ini</div><h5>💰 Harga Gabah</h5><p>Serang, Banten · hari ini</p></div><div class="appbody"><div class="pricebig"><div class="p">Rp 6.800<span style="font-size:12px">/kg</span></div><div class="u">↑ +Rp 200 dari kemarin</div><div class="s">Sumber: PIHPS Kemendag</div></div><div class="barm"><i style="height:55%"></i><i style="height:60%"></i><i style="height:50%"></i><i style="height:72%"></i><i style="height:66%"></i><i style="height:85%"></i></div></div></div>
+        <div class="pslide"><div class="appbar"><div class="eb">AgriMart</div><h5>🛒 Lapak Saya</h5><p>Jual langsung ke SPPG</p></div><div class="appbody"><div class="lrow"><div><b>Gabah Inpari 32</b><br><small>500 kg · Rp 6.800/kg</small></div><span class="yy">Menunggu</span></div><div class="lrow"><div><b>Ciherang</b><br><small>300 kg · Rp 6.500/kg</small></div><span class="yy">Menunggu</span></div><div class="appbtn">+ Terbitkan lapak</div></div></div>
+        <div class="pslide"><div class="appbar"><div class="eb">Batch Saya</div><h5>🔍 Traceability</h5><p>NP-BTN-2026-0847</p></div><div class="appbody"><div style="display:flex;gap:10px;align-items:center"><div class="qrm" id="scqr"></div><div style="font-size:9px;color:#555;line-height:1.5">Gabah Inpari 32<br>500 kg · panen 12 Jul<br><b style="color:#166534">✓ Terverifikasi</b></div></div><div class="minitl"><div class="m on">✓</div><div class="ln"></div><div class="m">2</div><div class="ln"></div><div class="m">3</div><div class="ln"></div><div class="m">4</div><div class="ln"></div><div class="m">5</div></div><div class="appbtn">Lihat perjalanan →</div></div></div>
+        <div class="pslide"><div class="appbar"><div class="eb">LahanMap</div><h5>🗺️ Sawah Dilindungi</h5><p>LSD Banten · citra satelit</p></div><div class="appbody"><div class="mapm"><div class="zone" style="left:14%;top:30%;width:34%;height:40%"></div><div class="zone" style="left:52%;top:22%;width:30%;height:34%"></div><div class="zone" style="left:30%;top:60%;width:40%;height:26%"></div><div class="pin" style="left:26%;top:44%"></div><div class="pin" style="left:62%;top:36%"></div></div><div class="stat3" style="margin-top:8px"><div><b>149rb</b><small>HA LSD</small></div><div><b>5</b><small>WILAYAH</small></div><div><b>3</b><small>PETANI</small></div></div></div></div>
+      </div></div></div>
+      <div class="pdots" id="pdots"></div>
     </div>
   </div>
 </section>
@@ -730,7 +760,7 @@ section{position:relative}
         <a href="https://youtu.be/zj8OxZgMMEA" target="_blank" rel="noopener">Video Demo</a>
       </div>
     </div>
-    <p class="fsrc">Sumber data: SP2KP Kementerian Perdagangan (harga pangan) · Badan Pusat Statistik (produksi padi) · Kemendikdasmen (satuan pendidikan MBG) · Bank Indonesia (inflasi) · Kementerian ATR/BPN (Lahan Sawah Dilindungi, 2021). Nama dan logo institusi ditampilkan sebagai atribusi sumber data, bukan bentuk afiliasi atau dukungan resmi. Angka petani tervalidasi mencerminkan hasil wawancara lapangan; data lain pada prototype merupakan simulasi berlabel.</p>
+    <p class="fsrc">Sumber data: SP2KP Kementerian Perdagangan (harga pangan) · Badan Pusat Statistik (produksi padi) · Kemendikdasmen (satuan pendidikan MBG) · Bank Indonesia (inflasi) · Kementerian ATR/BPN (Lahan Sawah Dilindungi, 2021). Angka petani tervalidasi mencerminkan hasil wawancara lapangan; data lain pada prototype merupakan simulasi berlabel.</p>
     <div class="fbot">
       <span>🌾 NusaPangan · Tim We Are Solution</span>
       <span>PIDI DIGDAYA × HACKATHON 2026 · nusapangan.my.id</span>
@@ -768,6 +798,18 @@ const pc=document.getElementById('pricechart'); if(pc)pio.observe(pc);
 const nodes=document.querySelectorAll('.pnode');
 let ni=0;
 setInterval(()=>{nodes.forEach(n=>n.classList.remove('act'));if(nodes[ni])nodes[ni].classList.add('act');ni=(ni+1)%nodes.length;},800);
+// showcase carousel
+(function(){
+  const track=document.getElementById('ptrack'); if(!track)return;
+  const n=track.children.length; let idx=0; const dots=document.getElementById('pdots');
+  for(let i=0;i<n;i++){const d=document.createElement('i');if(i===0)d.className='on';d.addEventListener('click',()=>{idx=i;upd();rst();});dots.appendChild(d);}
+  function upd(){track.style.transform='translateX('+(-idx*100)+'%)';[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===idx));}
+  window.scSlide=function(dir){idx=(idx+dir+n)%n;upd();rst();};
+  let t=setInterval(()=>{idx=(idx+1)%n;upd();},3800);
+  function rst(){clearInterval(t);t=setInterval(()=>{idx=(idx+1)%n;upd();},3800);}
+  const qr=document.getElementById('scqr');
+  if(qr){const s=[1,1,1,0,1,0,1,1,1,1,0,1,1,0,0,0,0,1,1,0,1,0,1,1,1,0,1,0,0,0,1,0,1,0,1,0,1,1,0,0,1,0,1,1,1,0,1,0,1,0,0,1,0,0,1,0,1,1,1,0,1,0,1,1,0,0,0,1,1,0,1,1,1,1,1,0,1,0,0,0,1];s.forEach(c=>{const i=document.createElement('i');if(!c)i.className='w';qr.appendChild(i);});}
+})();
 </script>
 </body>
 </html>
