@@ -156,6 +156,25 @@ section{position:relative}
 .fcard li:before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:var(--sprout)}
 .fnote{font-family:var(--mono);font-size:11px;color:var(--sky);background:var(--sky-l);padding:8px 12px;border-radius:8px;margin-top:8px}
 
+/* ABOUT US */
+.about{background:linear-gradient(180deg,var(--rice),#0A2A1F);color:#DDECE3}
+.about .shead h2{color:#fff}
+.about .shead p{color:#9FC2B2}
+.aboutgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
+.astory{border-left:3px solid var(--grain);padding-left:22px}
+.astory p{font-size:15.5px;line-height:1.75;color:#CFE6DA;font-style:italic}
+.astory .sign{font-style:normal;font-size:12.5px;color:var(--grain);font-weight:700;margin-top:14px;letter-spacing:.03em}
+.avision p{font-size:14.5px;line-height:1.72;color:#BFD8CC;margin-bottom:16px}
+.avision p b{color:#fff;font-weight:700}
+.amission{background:rgba(57,169,107,.1);border:1px solid rgba(57,169,107,.24);border-radius:14px;padding:18px 20px;margin-top:6px}
+.amission .lb{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--sprout);font-weight:600;margin-bottom:8px}
+.amission p{font-size:14.5px;line-height:1.7;color:#EAF3EE;margin:0}
+@media(max-width:900px){.aboutgrid{grid-template-columns:1fr;gap:28px}}
+/* rapikan agar tiap seksi muat satu layar */
+.pad{padding:72px 0 48px}
+.shead{margin-bottom:32px}
+.gov .ggrid{gap:16px}
+.varietas .vgrid{gap:14px}
 /* SHOWCASE (mockup app) */
 .showcase{background:linear-gradient(180deg,var(--mist),#fff)}
 .scgrid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
@@ -171,7 +190,10 @@ section{position:relative}
 .pframe{width:266px;height:552px;background:linear-gradient(160deg,#12251c,#0A1F17);border-radius:38px;padding:11px;box-shadow:0 40px 80px rgba(10,31,23,.42);position:relative}
 .pframe:before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:90px;height:21px;background:#0A1F17;border-radius:0 0 13px 13px;z-index:5}
 .pscreen{width:100%;height:100%;border-radius:29px;overflow:hidden;background:#F0FDF4;position:relative}
-#appFrame{width:100%;height:100%;border:0;display:block;background:#F7F4EC}
+#appFrame{width:calc(100% + 18px);height:100%;border:0;display:block;background:#F7F4EC;
+scrollbar-width:none;-ms-overflow-style:none}
+.pscreen{scrollbar-width:none}
+.pscreen::-webkit-scrollbar,#appFrame::-webkit-scrollbar{display:none;width:0;height:0}
 .livedot{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--rice);color:#EAF3EE;
 font-family:var(--mono);font-size:9px;letter-spacing:.12em;font-weight:600;padding:5px 12px;border-radius:999px;
 display:flex;align-items:center;gap:6px;z-index:8;white-space:nowrap;box-shadow:0 4px 14px rgba(10,31,23,.28)}
@@ -358,6 +380,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       <a href="#tatakelola">Tata Kelola</a>
       <a href="#lahanmap">LahanMap</a>
       <a href="#validasi">Validasi</a>
+      <a href="#about">About</a>
       <a href="#demo">Demo</a>
     </div>
     <a class="nbtn" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Buka Prototype →</a>
@@ -373,11 +396,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       <h1>Kami tidak menjual beras.<br><span class="em">Kami menjual kepastian</span> tentang beras.</h1>
       <p class="hlead">NusaPangan membangun identitas digital petani, lahan, dan hasil panen — siapa yang menanam, di lahan mana, dan berapa yang akan panen.</p>
       <p class="htag">From Farm Data to Indonesia's Food Security</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Jelajahi Platform →</a>
-        <a class="btn btn-ghost" href="#demo">▶ Tonton Demo</a>
-        <a class="btn btn-line" href="#partnership">Ajukan Kemitraan</a>
-      </div>
+
     </div>
 
     <!-- SIGNATURE: animated supply-chain pipeline -->
@@ -414,8 +433,8 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
         <!-- nodes -->
         <g class="pnode n0"><circle class="ring" cx="60" cy="40" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="60" cy="40" r="8" fill="#39A96B"/><text class="plabel" x="82" y="37">Petani</text><text class="psub" x="82" y="49">verifikasi lapangan</text></g>
         <g class="pnode n1"><circle class="ring" cx="90" cy="110" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="90" cy="110" r="8" fill="#39A96B"/><text class="plabel" x="112" y="107">Polygon Lahan</text><text class="psub" x="112" y="119">koordinat & luas (LSD)</text></g>
-        <g class="pnode n2"><circle class="ring" cx="280" cy="130" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="280" cy="130" r="8" fill="#39A96B"/><text class="plabel" x="200" y="146" text-anchor="end" style="fill:#CFE6DA">Rice ID</text><text class="psub" x="200" y="158" text-anchor="end">QR traceability</text></g>
-        <g class="pnode n3"><circle class="ring" cx="250" cy="200" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="250" cy="200" r="8" fill="#39A96B"/><text class="plabel" x="230" y="222" text-anchor="end">Gudang / SPPG</text><text class="psub" x="230" y="234" text-anchor="end">escrow & distribusi</text></g>
+        <g class="pnode n2"><circle class="ring" cx="280" cy="130" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="280" cy="130" r="8" fill="#39A96B"/><text class="plabel" x="262" y="127" text-anchor="end" style="fill:#CFE6DA">Rice ID</text><text class="psub" x="262" y="139" text-anchor="end">QR traceability</text></g>
+        <g class="pnode n3"><circle class="ring" cx="250" cy="200" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="250" cy="200" r="8" fill="#39A96B"/><text class="plabel" x="250" y="226" text-anchor="middle">Gudang / SPPG</text><text class="psub" x="250" y="238" text-anchor="middle">escrow &amp; distribusi</text></g>
         <g class="pnode n4"><circle class="ring" cx="60" cy="262" r="14" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><circle class="core" cx="60" cy="262" r="8" fill="#E7B24C"/><text class="plabel" x="82" y="259" style="fill:#E7B24C;font-weight:700">Dashboard Pemerintah</text><text class="psub" x="82" y="271">intelijen pangan</text></g>
       </svg>
       <div class="hstats">
@@ -428,11 +447,18 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 </header>
 
 <!-- COUNTERS -->
-<section class="counters">
+<section class="counters pad">
   <div class="wrap">
-    <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
-    <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
-    <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
+    <div class="shead reveal" style="text-align:center;max-width:640px;margin:0 auto 40px">
+      <div class="eyebrow" style="justify-content:center;display:flex">Angka Awal</div>
+      <h2>Dimulai dari lapangan, bukan dari asumsi</h2>
+      <p>Tiga angka yang menjadi titik berangkat NusaPangan di Banten.</p>
+    </div>
+    <div class="cgrid">
+      <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
+      <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
+      <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
+    </div>
   </div>
 </section>
 
@@ -452,7 +478,6 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       <div class="logo-cell"><img src="https://nusapangan.my.id/badan-pangan.png" alt="Badan Pangan Nasional"><span>Badan Pangan Nasional<br>Cadangan pangan</span></div>
       <div class="logo-cell"><img src="https://nusapangan.my.id/logo-kemendikdasmen.png" alt="Kemendikdasmen"><span>Kemendikdasmen<br>Satpen MBG</span></div>
     </div>
-    <p class="attrib">Sumber: SP2KP Kementerian Perdagangan · Badan Pusat Statistik · Kemendikdasmen · Bank Indonesia · Kementerian ATR/BPN (Lahan Sawah Dilindungi, 2021).</p>
   </div>
 </section>
 
@@ -589,7 +614,6 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK memiliki aset logistik</h3><p>Tidak ada armada, tidak ada gudang. Data kami mengalir dari hulu ke hilir — operasi fisik tetap milik mitra. Model asset-light menjaga biaya rendah.</p></div>
       <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK menyimpan dana pengguna</h3><p>Escrow dijalankan melalui mitra penyedia jasa pembayaran berizin — bukan oleh NusaPangan.</p></div>
     </div>
-    <div class="gcompliance reveal">Kepatuhan UU PDP · NIK ter-hash · Consent eksplisit · Audit trail permanen</div>
   </div>
 </section>
 
@@ -689,25 +713,28 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
   </div>
 </section>
 
-<!-- REVENUE -->
-<section class="rev pad">
+<!-- ABOUT US -->
+<section class="about pad" id="about">
   <div class="wrap">
     <div class="shead reveal">
-      <div class="eyebrow">Model Pendapatan</div>
-      <h2>Lima aliran, satu mesin data</h2>
-      <p>Marketplace sengaja bermargin tipis — nilai sesungguhnya ada di lapisan data.</p>
+      <div class="eyebrow">About Us</div>
+      <h2>Teknologi tidak menggantikan petani — ia menguatkan mereka</h2>
+      <p>Mengapa NusaPangan ada, dan ke mana kami membawanya.</p>
     </div>
-    <div class="rtwrap reveal">
-      <table class="rtable">
-        <thead><tr><th>Sumber</th><th>Pelanggan</th><th>Model</th><th>Margin</th></tr></thead>
-        <tbody>
-          <tr><td>Komisi transaksi</td><td>Petani–SPPG</td><td>1–2% dari GMV</td><td><span class="mtag m-low">Rendah (disengaja)</span></td></tr>
-          <tr><td>Langganan dashboard</td><td>SPPG, Bulog, Pemda</td><td>Rp 5–15 juta/bulan</td><td><span class="mtag m-mid">Sedang, berulang</span></td></tr>
-          <tr><td>Verifikasi petani</td><td>Bank, asuransi</td><td>Rp 25–50 ribu/verifikasi</td><td><span class="mtag m-hi">Tinggi</span></td></tr>
-          <tr><td>Prediksi panen</td><td>BGN, Bulog, industri pangan</td><td>Langganan data</td><td><span class="mtag m-hi">Tinggi</span></td></tr>
-          <tr><td>Lisensi traceability</td><td>Eksportir, ritel premium</td><td>Per volume</td><td><span class="mtag m-mid">Sedang</span></td></tr>
-        </tbody>
-      </table>
+    <div class="aboutgrid">
+      <div class="astory reveal">
+        <p>“Growing up, I spent countless mornings traveling to school through vast rice fields, watching farmers work tirelessly under the sun. Behind every grain of rice, I saw resilience, patience, and the livelihoods of millions of Indonesian families. Those experiences shaped my belief that technology should not replace farmers — it should empower them.”</p>
+        <div class="sign">— Pendiri NusaPangan</div>
+      </div>
+      <div class="avision reveal">
+        <p>NusaPangan didirikan dengan satu visi sederhana: membangun <b>Rice Intelligence Infrastructure</b> Indonesia.</p>
+        <p>Ketahanan pangan dimulai dari memberdayakan orang-orang yang memproduksi pangan kita. Dengan menghubungkan petani langsung ke pembeli institusi — didukung data tepercaya, wawasan berbasis AI, dan infrastruktur digital yang transparan — kami mempersempit kesenjangan informasi, memangkas rantai pasok yang tidak efisien, dan memperluas akses pasar bagi petani.</p>
+        <p>Lebih dari sekadar menaikkan pendapatan petani, ekosistem beras yang efisien memperkuat makroekonomi Indonesia: biaya transaksi menurun, harga pangan lebih stabil, dan ketahanan pangan nasional menguat.</p>
+        <div class="amission">
+          <div class="lb">MISI KAMI</div>
+          <p>Kami tidak sekadar mendigitalkan pertanian. Kami membangun infrastruktur data yang memungkinkan keputusan lebih cerdas, pasar lebih adil, dan sistem pangan yang lebih tangguh bagi Indonesia.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
