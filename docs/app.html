@@ -3,16 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#0E3A2C">
 <title>App NusaPangan — Demo</title>
 <link rel="icon" href="logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0A1F17;--rice:#0E3A2C;--rice2:#175C41;--sprout:#39A96B;--sprout-d:#2B8354;
+:root{color-scheme:light only;--ink:#0A1F17;--rice:#0E3A2C;--rice2:#175C41;--sprout:#39A96B;--sprout-d:#2B8354;
 --grain:#E7B24C;--grain-d:#C9902E;--sky:#1C6E8C;--paper:#F7F4EC;--mist:#EAF1EC;
 --muted:#5A6B62;--line:#DCE3DE;--red:#dc2626;--purple:#7C3AED;--blue:#2563EB;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--rice);color:var(--ink);
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--rice);color:var(--ink);forced-color-adjust:none;
 display:flex;align-items:center;justify-content:center;min-height:100vh;padding:26px 14px}
 .device{width:390px;height:844px;max-height:94vh;background:var(--paper);border-radius:44px;
 border:10px solid var(--ink);box-shadow:0 40px 90px rgba(10,31,23,.34);overflow:hidden;position:relative}
@@ -255,10 +257,10 @@ font-size:13px;background:#fff;color:var(--ink);margin-bottom:9px}
 .gauge .track{fill:none;stroke:#E7EDEA;stroke-width:13}
 .gauge .val{fill:none;stroke:url(#gd);stroke-width:13;stroke-linecap:round;
 stroke-dasharray:339.3;stroke-dashoffset:339.3;transition:stroke-dashoffset 1.3s cubic-bezier(.2,.7,.2,1)}
-.gauge .center{margin-top:-112px;text-align:center;pointer-events:none}
+.gauge .center{margin-top:-110px;text-align:center;pointer-events:none}
 .gauge .num{font-size:40px;font-weight:800;color:var(--rice);line-height:1}
 .gauge .of{font-size:11px;color:var(--muted)}
-.gauge .grade{display:inline-block;margin-top:44px;background:#DCF5E6;color:#166534;
+.gauge .grade{display:inline-block;margin-top:76px;background:#DCF5E6;color:#166534;
 font-size:11.5px;font-weight:800;padding:5px 14px;border-radius:999px}
 .comp{padding:10px 0;border-bottom:1px solid #F0F4F1}
 .comp:last-child{border:0}
@@ -808,11 +810,11 @@ transition:all .3s;pointer-events:none}
     <div class="fld">Kargo (kg)</div>
     <div class="num" style="margin-bottom:9px"><button onclick="rqty(-100)">−</button><input id="r_qty" value="500" readonly><button onclick="rqty(100)">+</button></div>
     <div class="fld">Prioritas</div>
-    <select class="sel" id="r_pri" onchange="renderRoutes()"><option>⚡ Waktu tercepat</option><option>💰 Biaya termurah</option><option>🛡️ Risiko terendah</option></select>
+    <select class="sel" id="r_pri" onchange="renderRoutes()"><option>⚡ Waktu tercepat</option><option>📏 Jarak terpendek</option><option>🛡️ Risiko terendah</option></select>
 
     <div class="sect">🤖 Hasil Optimasi AI</div>
     <div id="routes"></div>
-    <div class="note">Skor dihitung dari jarak, estimasi waktu tempuh, biaya, dan risiko keterlambatan. Model berjalan pada data simulasi untuk demo.</div>
+    <div class="note">Skor dihitung dari jarak, estimasi waktu tempuh, dan risiko keterlambatan. Biaya transportasi sudah termasuk saat pembeli memilih armada di tahap pembayaran. Model berjalan pada data simulasi untuk demo.</div>
   </div>
 </section>
 
@@ -1188,14 +1190,14 @@ const ROUTES=[
 function renderRoutes(){
   const pri=document.getElementById('r_pri').value;
   let list=[...ROUTES];
-  if(pri.includes('Biaya')) list.sort((a,b)=>a.rp-b.rp);
+  if(pri.includes('Jarak')) list.sort((a,b)=>a.km-b.km);
   else if(pri.includes('Risiko')) list.sort((a,b)=>(a.r==='Rendah'?0:1)-(b.r==='Rendah'?0:1)||b.s-a.s);
   else list.sort((a,b)=>a.j-b.j);
   document.getElementById('routes').innerHTML=list.map((r,i)=>`
     <div class="rt ${i===0?'best':''}">
       <div class="top"><b>${r.n}${i===0?' 🏆 REKOMENDASI':''}</b><span class="score">Skor ${r.s}</span></div>
       <div class="path">📍 ${r.p}</div>
-      <div class="meta"><span>📦 ${r.km} km</span><span>🕐 ${r.j} jam</span><span>💵 ${fmt(r.rp)}</span><span>🛡️ Risiko: ${r.r}</span></div>
+      <div class="meta"><span>📦 ${r.km} km</span><span>🕐 ${r.j} jam</span><span>🛡️ Risiko: ${r.r}</span></div>
     </div>`).join('');
 }
 function rqty(d){const i=document.getElementById('r_qty');i.value=Math.max(100,+i.value+d);}
