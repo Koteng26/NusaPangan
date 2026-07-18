@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App NusaPangan — Demo</title>
+<link rel="icon" href="logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A1F17;--rice:#0E3A2C;--rice2:#175C41;--sprout:#39A96B;--sprout-d:#2B8354;
+--grain:#E7B24C;--grain-d:#C9902E;--sky:#1C6E8C;--paper:#F7F4EC;--mist:#EAF1EC;
+--muted:#5A6B62;--line:#DCE3DE;--red:#dc2626;--purple:#7C3AED;--blue:#2563EB;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--rice);color:var(--ink);
+display:flex;align-items:center;justify-content:center;min-height:100vh;padding:26px 14px}
+.device{width:390px;height:844px;max-height:94vh;background:var(--paper);border-radius:44px;
+border:10px solid var(--ink);box-shadow:0 40px 90px rgba(10,31,23,.34);overflow:hidden;position:relative}
+.viewport{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden}
+.scr{display:none;min-height:100%;animation:fade .32s ease}
+.scr.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+img{max-width:100%;display:block}
+
+/* ---------- SPLASH ---------- */
+.splash{min-height:824px;background:linear-gradient(170deg,#EAF1EC,#8FD1A8);display:flex;
+flex-direction:column;padding:0 28px 40px;position:relative;overflow:hidden}
+.splash .orb{position:absolute;border-radius:50%;background:var(--sprout);opacity:.13}
+.splash .o1{top:-70px;right:-70px;width:230px;height:230px}
+.splash .o2{bottom:-90px;left:-90px;width:260px;height:260px}
+.splash .mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+gap:14px;position:relative;z-index:1;animation:rise .9s ease}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.splash img{width:210px}
+.splash .tag{font-size:13.5px;font-weight:600;color:var(--rice);text-align:center;letter-spacing:.01em}
+.fld{font-size:12.5px;font-weight:600;color:var(--rice);margin-bottom:6px}
+.inp{display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);
+border-radius:14px;padding:0 14px;height:52px}
+.inp span{font-weight:700;color:var(--rice);margin-right:8px}
+.inp input{border:0;outline:none;background:transparent;font:inherit;font-size:15px;flex:1;color:var(--ink)}
+.btn{height:54px;border:0;border-radius:14px;background:var(--rice);color:#fff;font:inherit;
+font-size:16px;font-weight:700;cursor:pointer;width:100%;transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn.gold{background:var(--grain);color:#3a2a06}
+.btn.blue{background:var(--blue)}
+.btn.sm{height:42px;font-size:13.5px;border-radius:11px}
+.btn:disabled{background:#c7d6cc;cursor:not-allowed}
+.linkline{text-align:center;font-size:13px;color:#3A4A43;margin-top:12px}
+.linkline b{color:var(--sky);cursor:pointer}
+
+/* ---------- HEADER ---------- */
+.hd{background:linear-gradient(135deg,var(--rice),var(--rice2));padding:20px 18px 22px;
+border-radius:0 0 26px 26px;color:#EAF3EE;position:relative}
+.hd .row{display:flex;align-items:center;gap:11px}
+.hd img.mk{width:34px}
+.hd .greet small{font-size:11px;opacity:.8;display:block}
+.hd .greet b{font-size:16px;color:#fff}
+.hd .back{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.16);
+border:0;color:#fff;font-size:17px;cursor:pointer;flex:none}
+.hd h3{font-size:17px;color:#fff;font-weight:800}
+.hd .sub{font-size:11.5px;opacity:.82;margin-top:2px}
+.subsbadge{display:inline-flex;align-items:center;gap:6px;background:var(--grain);color:#3a2a06;
+font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;margin-top:10px}
+
+/* Rice ID card */
+.ridcard{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+border-radius:16px;padding:14px;margin-top:14px;backdrop-filter:blur(4px)}
+.ridcard .lb{font-size:9.5px;letter-spacing:.14em;opacity:.75;font-weight:700}
+.ridcard .id{font-family:ui-monospace,monospace;font-size:19px;font-weight:800;color:#fff;margin:3px 0 6px}
+.ridcard .nik{font-family:ui-monospace,monospace;font-size:12px;opacity:.9}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;
+padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff}
+.chip.ok{background:#DCF5E6;color:#166534}
+.chip.pend{background:rgba(255,255,255,.14);color:#DDECE3}
+.dot{width:7px;height:7px;border-radius:50%;flex:none}
+.dot.g{background:#16a34a}.dot.blank{background:transparent;border:1.5px solid #C4D6CA}
+
+/* ---------- BODY ---------- */
+.body{padding:16px 16px 92px}
+.sect{font-size:13.5px;font-weight:800;color:var(--rice);margin:16px 0 9px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}
+.stat4{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.st{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.st .ic{font-size:19px}
+.st b{display:block;font-size:17px;color:var(--rice);font-weight:800;margin-top:2px}
+.st small{font-size:9.5px;color:var(--muted);display:block}
+.st .ex{font-size:9px;color:var(--sprout-d);font-weight:700;margin-top:3px;display:block}
+
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mc{border-radius:15px;padding:14px;color:#fff;cursor:pointer;transition:transform .16s;min-height:96px;
+display:flex;flex-direction:column;justify-content:space-between}
+.mc:active{transform:scale(.97)}
+.mc .ic{font-size:21px}
+.mc b{font-size:13.5px;display:block;margin-top:6px}
+.mc small{font-size:10px;opacity:.9;display:block;line-height:1.35}
+.mc .go{font-size:10px;font-weight:800;opacity:.95;margin-top:6px}
+.m-green{background:linear-gradient(150deg,#166534,#0E3A2C)}
+.m-blue{background:linear-gradient(150deg,#2563EB,#1C6E8C)}
+.m-purple{background:linear-gradient(150deg,#7C3AED,#5B21B6)}
+.m-orange{background:linear-gradient(150deg,#EA8C0B,#C9902E)}
+.m-teal{background:linear-gradient(150deg,#0E9488,#115E59)}
+.m-rose{background:linear-gradient(150deg,#E11D48,#9F1239)}
+
+.price{background:linear-gradient(160deg,#F0FBF4,#fff);border:1px solid #CFE9D8;border-radius:15px;padding:14px;text-align:center}
+.price .p{font-size:27px;font-weight:800;color:#166534}
+.price .u{font-size:11.5px;color:#16a34a;font-weight:700}
+.price .grid3{display:flex;gap:7px;margin-top:10px}
+.price .grid3 div{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 4px}
+.price .grid3 b{display:block;font-size:11.5px;color:var(--rice)}
+.price .grid3 small{font-size:8.5px;color:var(--muted)}
+.src{font-size:9px;color:var(--muted);margin-top:7px}
+
+.wx{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.wx .t{font-size:24px;font-weight:800;color:var(--rice);margin-left:auto}
+.wx small{font-size:10.5px;color:var(--muted);display:block}
+
+.actv{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #F0F4F1}
+.actv:last-child{border:0}
+.actv .ai{width:28px;height:28px;border-radius:9px;background:var(--mist);display:grid;place-items:center;font-size:13px;flex:none}
+.actv b{font-size:12.5px;display:block}
+.actv small{font-size:10.5px;color:var(--muted)}
+
+/* bottom nav */
+.nav{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);
+display:flex;justify-content:space-around;padding:8px 0 10px;z-index:20}
+.nav div{font-size:9.5px;color:var(--muted);text-align:center;cursor:pointer;flex:1}
+.nav div.on{color:var(--sprout-d);font-weight:800}
+.nav .ni{font-size:17px;display:block;margin-bottom:1px}
+
+/* lahan cards */
+.lah{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:11px}
+.lah .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.lah b{font-size:14px}
+.lah .loc{font-size:10.5px;color:var(--muted);margin-top:1px}
+.tag{font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:999px;flex:none}
+.tag.aktif{background:#DCF5E6;color:#166534}
+.tag.panen{background:#FEF3C7;color:#92400E}
+.tag.bera{background:#E7EDEA;color:#5A6B62}
+.mini3{display:flex;gap:7px;margin:10px 0 8px}
+.mini3 div{flex:1;background:var(--mist);border-radius:9px;padding:7px 5px;text-align:center}
+.mini3 b{display:block;font-size:12px;color:var(--rice)}
+.mini3 small{font-size:8.5px;color:var(--muted)}
+.prog{height:8px;background:#E7EDEA;border-radius:5px;overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--sprout),var(--sprout-d))}
+.progl{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);margin-top:4px}
+.lah .acts{display:flex;gap:7px;margin-top:10px}
+.lah .acts button{flex:1;height:36px;border-radius:10px;border:1px solid var(--line);background:#fff;
+font:inherit;font-size:11.5px;font-weight:700;color:var(--rice);cursor:pointer}
+.lah .acts button.pri{background:var(--grain);border-color:var(--grain);color:#3a2a06}
+
+/* timeline musim */
+.tmline{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px}
+.tmc{min-width:88px;border-radius:13px;padding:12px 9px;text-align:center;color:#fff}
+.tmc .ic{font-size:20px}
+.tmc b{display:block;font-size:12px;margin-top:4px}
+.tmc small{font-size:9px;opacity:.92;display:block;line-height:1.3}
+.tmc .dt{font-size:11px;font-weight:800;margin-top:5px}
+.t1{background:#4CAF50}.t2{background:#66BB6A}.t3{background:#F5B301}.t4{background:#F57C1F}
+.t-next{background:#E7EDEA;color:var(--muted)}
+.vgrow{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #F0F4F1}
+.vgrow:last-child{border:0}
+.vgrow .n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
+.vgrow .n.done{background:var(--sprout);color:#fff}
+.vgrow .n.now{background:var(--grain);color:#3a2a06}
+.vgrow .n.next{background:#E7EDEA;color:var(--muted)}
+.vgrow b{font-size:12.5px;display:block}
+.vgrow small{font-size:10.5px;color:var(--muted)}
+
+/* jual / buyer */
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{flex:1;height:36px;border-radius:10px;border:0;font:inherit;font-size:11.5px;
+font-weight:700;cursor:pointer;background:var(--mist);color:var(--sky)}
+.tabs button.on{background:var(--sky);color:#fff}
+.sppg{border:1.5px solid var(--line);border-radius:13px;padding:12px;margin-bottom:9px;cursor:pointer}
+.sppg.sel{border-color:var(--sky);background:#F2F8FA}
+.sppg .top{display:flex;justify-content:space-between;gap:8px}
+.sppg b{font-size:13px}
+.sppg small{font-size:10.5px;color:var(--muted);display:block;margin-top:2px}
+.sppg .st{background:#DCF5E6;color:#166534;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;flex:none;border:0}
+.sppg .st.full{background:#FEF3C7;color:#92400E}
+.opts{display:flex;gap:7px;margin:8px 0}
+.opts button{flex:1;height:52px;border-radius:11px;border:1.5px solid var(--line);background:#fff;
+font:inherit;font-size:11px;font-weight:700;color:var(--rice);cursor:pointer;display:flex;
+flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.opts button.on{border-color:var(--sprout);background:#F0FBF4;color:var(--sprout-d)}
+.num{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}
+.num button{width:42px;height:44px;border:0;background:var(--mist);font-size:18px;font-weight:700;color:var(--rice);cursor:pointer}
+.num input{flex:1;border:0;outline:none;text-align:center;font:inherit;font-size:15px;font-weight:700}
+.sumrow{display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.sumrow.total{border:0;font-size:15px;font-weight:800;color:var(--rice);padding-top:10px}
+.sumrow small{color:var(--muted)}
+.note{background:var(--mist);border-radius:11px;padding:10px;font-size:10.5px;color:var(--muted);line-height:1.55;margin-top:10px}
+.redbox{background:#FEF2F2;border:1.5px solid var(--red);border-radius:12px;padding:12px;margin-top:10px}
+.redbox b{color:var(--red);font-size:12.5px;display:block;margin-bottom:4px}
+.redbox p{font-size:11px;color:#7f1d1d;line-height:1.55}
+
+/* QR */
+.qrbox{background:#fff;border-radius:16px;padding:16px;text-align:center;border:1px solid var(--line)}
+.qr{width:150px;height:150px;margin:0 auto;display:grid;grid-template-columns:repeat(11,1fr);gap:1.5px;
+background:#fff;padding:8px;border:1px solid var(--line);border-radius:10px}
+.qr i{background:var(--ink);border-radius:1px}.qr i.w{background:#fff}
+.info{display:flex;justify-content:space-between;font-size:11.5px;padding:5px 0;border-bottom:1px dotted var(--line)}
+.info:last-child{border:0}
+.info small{color:var(--muted)}.info b{font-family:ui-monospace,monospace;font-weight:600}
+.stage{display:flex;gap:11px;padding-bottom:14px;position:relative}
+.stage .col{display:flex;flex-direction:column;align-items:center}
+.stage .sd{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:#fff;flex:none}
+.stage .rail{width:2px;flex:1;background:var(--line);margin-top:2px}
+.stage:last-child .rail{display:none}
+.stage b{font-size:12.5px}
+.stage .w{font-size:10.5px;color:var(--muted);margin-top:1px}
+.stage .dt{font-size:10px;color:var(--sprout-d);font-weight:700;margin-top:2px}
+.vchips{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.vchips span{font-size:8.5px;font-weight:700;background:#DCF5E6;color:#166534;padding:2px 7px;border-radius:6px}
+.vchips span.blue{background:#DBEAFE;color:#1E40AF}
+
+/* map */
+.mapwrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);height:210px;
+background:linear-gradient(140deg,#2F7A4E,#1B5E3A 50%,#14532d)}
+.mapwrap .plot{position:absolute;border:1.5px solid rgba(255,255,255,.65);border-radius:6px;
+display:grid;place-items:center;font-size:9px;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.mapwrap .river{position:absolute;background:rgba(120,190,225,.55)}
+.zoomctl{position:absolute;top:9px;right:9px;display:flex;flex-direction:column;gap:5px;z-index:3}
+.zoomctl button{width:30px;height:30px;border-radius:8px;border:0;background:rgba(255,255,255,.94);
+font-size:14px;font-weight:800;color:var(--rice);cursor:pointer}
+.maplbl{position:absolute;left:9px;top:9px;background:rgba(255,255,255,.92);border-radius:8px;
+padding:4px 9px;font-size:9.5px;font-weight:700;color:var(--rice);z-index:3}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px;font-size:10.5px;color:var(--muted)}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
+
+/* route */
+.rt{border:1.5px solid var(--line);border-radius:13px;padding:12px;margin-bottom:9px}
+.rt.best{border-color:var(--sprout);background:#F0FBF4}
+.rt .top{display:flex;justify-content:space-between;align-items:center}
+.rt b{font-size:13px}
+.rt .score{font-size:11px;font-weight:800;color:var(--sprout-d);background:#DCF5E6;padding:3px 9px;border-radius:999px}
+.rt .path{font-size:10.5px;color:var(--muted);margin:6px 0}
+.rt .meta{display:flex;gap:9px;flex-wrap:wrap;font-size:10px;color:var(--rice);font-weight:600}
+.sel{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:11px;font:inherit;
+font-size:13px;background:#fff;color:var(--ink);margin-bottom:9px}
+
+/* klaim */
+.voucher{background:linear-gradient(150deg,var(--grain),var(--grain-d));border-radius:16px;padding:16px;color:#3a2a06}
+.voucher b{font-size:16px;font-weight:800;display:block}
+.voucher .code{font-family:ui-monospace,monospace;font-size:18px;font-weight:800;background:rgba(255,255,255,.55);
+border-radius:10px;padding:9px;text-align:center;margin:10px 0;letter-spacing:.08em}
+.voucher small{font-size:10.5px;display:block;line-height:1.5}
+
+/* profil */
+.prow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #F0F4F1;font-size:13px}
+.prow:last-child{border:0}
+.sw{width:42px;height:24px;border-radius:13px;background:#CBD5E1;position:relative;cursor:pointer;flex:none;transition:background .2s}
+.sw.on{background:var(--sprout)}
+.sw:after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw.on:after{transform:translateX(18px)}
+.toast{position:absolute;left:16px;right:16px;bottom:84px;background:var(--rice);color:#fff;border-radius:12px;
+padding:12px 14px;font-size:12.5px;font-weight:600;z-index:40;opacity:0;transform:translateY(10px);
+transition:all .3s;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="device"><div class="viewport" id="vp">
+
+<!-- ========== 1. SPLASH ========== -->
+<section class="scr on" id="s-splash">
+  <div class="splash">
+    <div class="orb o1"></div><div class="orb o2"></div>
+    <div class="mid">
+      <img src="logo-app.png" alt="NusaPangan">
+      <div class="tag">From Farm Data to Indonesia's Food Security</div>
+    </div>
+    <div style="position:relative;z-index:1">
+      <div class="fld">Nomor HP</div>
+      <div class="inp"><span>+62</span><input value="812-3456-7890" readonly></div>
+      <button class="btn" style="margin-top:14px" onclick="go('home')">Masuk</button>
+      <div class="linkline">Belum punya akun? <b onclick="go('home')">Daftar</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2. BERANDA ========== -->
+<section class="scr" id="s-home">
+  <div class="hd">
+    <div class="row">
+      <img class="mk" src="logo-mark.png" alt="">
+      <div class="greet"><small>Selamat datang,</small><b>Pak Budi Santoso</b></div>
+    </div>
+    <span class="subsbadge">⭐ Program Musim</span>
+    <div class="ridcard">
+      <div class="lb">RICE ID</div>
+      <div class="id">NP-BTN-2026-0847</div>
+      <div class="nik">NIK: 360711••••5622</div>
+      <div class="chips">
+        <span class="chip ok">✓ Terverifikasi Petugas Lapangan</span>
+        <span class="chip pend"><i class="dot g"></i>Pasca Panen</span>
+      </div>
+      <div class="chips">
+        <span class="chip pend" style="font-size:9px">Integrasi Dukcapil · dalam proses</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="wx">
+      <div style="font-size:26px">⛅</div>
+      <div><b style="font-size:13px">Cerah Berawan</b><small>Kramatwatu, Serang · lembap 72%</small></div>
+      <div class="t">31°</div>
+    </div>
+
+    <div class="sect">Ringkasan Usaha Tani</div>
+    <div class="stat4">
+      <div class="st"><div class="ic">🌾</div><b>0,59 ha</b><small>Total Lahan</small><span class="ex">Situ Bagendit</span></div>
+      <div class="st"><div class="ic">🌱</div><b>Padi</b><small>Tanaman Aktif</small><span class="ex">● Pasca Panen</span></div>
+      <div class="st"><div class="ic">🌾</div><b>3,0 ton</b><small>Est. Panen</small><span class="ex">5,08 ton/ha</span></div>
+      <div class="st"><div class="ic">💰</div><b>Rp 17,0jt</b><small>Est. Pendapatan</small><span class="ex">Rp 5.657/kg</span></div>
+    </div>
+
+    <div class="sect">Menu Utama</div>
+    <div class="menu">
+      <div class="mc m-green" onclick="go('lahan')"><div><div class="ic">🌾</div><b>Dashboard Lahan</b><small>Kondisi & hasil per lahan</small></div><div class="go">Buka →</div></div>
+      <div class="mc m-teal" onclick="go('timeline')"><div><div class="ic">📅</div><b>Timeline Musim</b><small>Tanam → panen</small></div><div class="go">Buka →</div></div>
+      <div class="mc m-blue" onclick="go('sell')"><div><div class="ic">🏫</div><b>Jual ke SPPG</b><small>Posting harga tawaran</small></div><div class="go">Buka →</div></div>
+      <div class="mc m-purple" onclick="go('qr')"><div><div class="ic">🔍</div><b>QR Traceability</b><small>Lacak perjalanan beras</small></div><div class="go">Buka →</div></div>
+      <div class="mc m-green" onclick="go('map')"><div><div class="ic">🗺️</div><b>LahanMap</b><small>Peta & data lahan</small></div><div class="go">Buka →</div></div>
+      <div class="mc m-orange" onclick="go('klaim')"><div><div class="ic">🎁</div><b>Klaim Pestisida</b><small>Gratis 1× · Program Musim</small></div><div class="go">Klaim →</div></div>
+      <div class="mc m-rose" onclick="go('buyer')"><div><div class="ic">🛒</div><b>Portal Pembeli</b><small>SPPG / institusi</small></div><div class="go">Buka →</div></div>
+      <div class="mc m-blue" onclick="go('route')"><div><div class="ic">🚛</div><b>SmartDistrib</b><small>Optimasi rute AI</small></div><div class="go">Buka →</div></div>
+    </div>
+
+    <div class="sect">Harga Gabah Hari Ini</div>
+    <div class="price">
+      <div class="p">Rp 6.800<span style="font-size:13px">/kg</span></div>
+      <div class="u">↑ +Rp 200 dari kemarin · GKP</div>
+      <div class="grid3">
+        <div><b>Rp 7.600</b><small>GKG</small></div>
+        <div><b>Rp 12.980</b><small>Beras medium</small></div>
+        <div><b>Rp 14.000</b><small>Beras premium</small></div>
+      </div>
+      <div class="src">Sumber: PIHPS Kementerian Perdagangan</div>
+    </div>
+
+    <div class="sect">Aktivitas Terbaru</div>
+    <div class="card">
+      <div class="actv"><div class="ai">✅</div><div><b>Rice ID terverifikasi</b><small>2 hari lalu · petugas lapangan</small></div></div>
+      <div class="actv"><div class="ai">🏫</div><div><b>Penawaran ke SPPG Menteng dikirim</b><small>1 hari lalu · 500 kg GKP</small></div></div>
+      <div class="actv"><div class="ai">🏭</div><div><b>Batch masuk penggilingan</b><small>12 Juli 2026 · rendemen 64%</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. DASHBOARD LAHAN ========== -->
+<section class="scr" id="s-lahan">
+  <div class="hd"><div class="row"><button class="back" onclick="go('home')">←</button>
+    <div><h3>🌾 Dashboard Lahan</h3><div class="sub">2 lahan · total 3,2 ha</div></div></div></div>
+  <div class="body">
+    <div class="stat4" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="st"><b>1,5 ha</b><small>Aktif Tanam</small></div>
+      <div class="st"><b>1,0 ha</b><small>Siap Panen</small></div>
+      <div class="st"><b>0,7 ha</b><small>Bera</small></div>
+    </div>
+
+    <div class="sect">Lahan Saya</div>
+    <div class="lah">
+      <div class="top"><div><b>Lahan A — Kramatwatu Barat</b><div class="loc">1,5 ha · Petak 1–3 · Inpari 32</div></div><span class="tag aktif">Aktif</span></div>
+      <div class="mini3"><div><b>68 hari</b><small>Usia tanam</small></div><div><b>±42 hari</b><small>Est. panen</small></div><div><b>4,2 ton</b><small>Perkiraan</small></div></div>
+      <div class="prog"><i style="width:62%"></i></div>
+      <div class="progl"><span>62% menuju panen</span><span><i class="dot g" style="display:inline-block"></i> Fase generatif</span></div>
+      <div class="acts"><button onclick="go('timeline')">Timeline</button><button onclick="toast('Catatan kegiatan tersimpan')">Catat Kegiatan</button></div>
+    </div>
+
+    <div class="lah">
+      <div class="top"><div><b>Lahan B — Kramatwatu Timur</b><div class="loc">1,0 ha · Petak 4–5 · Ciherang</div></div><span class="tag panen">Siap Panen</span></div>
+      <div class="mini3"><div><b>105 hari</b><small>Usia tanam</small></div><div><b>Segera</b><small>Est. panen</small></div><div><b>2,8 ton</b><small>Perkiraan</small></div></div>
+      <div class="prog"><i style="width:90%"></i></div>
+      <div class="progl"><span>90% — segera panen!</span><span><i class="dot blank" style="display:inline-block"></i> Belum panen</span></div>
+      <div class="acts"><button onclick="go('timeline')">Timeline</button><button class="pri" onclick="toast('Panen tercatat — batch QR dibuat')">Catat Panen</button></div>
+    </div>
+
+    <div class="lah">
+      <div class="top"><div><b>Lahan C — Sukamaju</b><div class="loc">0,7 ha · istirahat tanam</div></div><span class="tag bera">Bera</span></div>
+      <div class="progl" style="margin-top:8px"><span>Siap tanam MT-2</span><span><i class="dot blank" style="display:inline-block"></i> Belum tanam</span></div>
+    </div>
+
+    <div class="note">Data lahan Anda menjadi dasar prediksi panen NusaPangan. Semakin rutin dicatat, semakin akurat perkiraan hasil dan harga.</div>
+  </div>
+</section>
+
+<!-- ========== 4. TIMELINE MUSIM ========== -->
+<section class="scr" id="s-timeline">
+  <div class="hd"><div class="row"><button class="back" onclick="go('home')">←</button>
+    <div><h3>📅 Timeline Musim Tanam</h3><div class="sub">MT-1 2026 · Lahan A · Inpari 32</div></div></div></div>
+  <div class="body">
+    <div class="tmline">
+      <div class="tmc t1"><div class="ic">🌱</div><b>Tanam</b><small>Bibit ditanam</small><div class="dt">04 Mar</div></div>
+      <div class="tmc t2"><div class="ic">🌿</div><b>Tumbuh</b><small>Vegetatif</small><div class="dt">03 Apr</div></div>
+      <div class="tmc t3"><div class="ic">🌾</div><b>Berbunga</b><small>Generatif</small><div class="dt">13 Mei</div></div>
+      <div class="tmc t4"><div class="ic">🧑‍🌾</div><b>Panen</b><small>Siap panen</small><div class="dt">09 Jul</div></div>
+    </div>
+
+    <div class="sect">Rincian Tahapan</div>
+    <div class="card">
+      <div class="vgrow"><div class="n done">✓</div><div><b>Tanam — 04 Mar 2026</b><small>Bibit Inpari 32 ditanam · 1,5 ha</small></div></div>
+      <div class="vgrow"><div class="n done">✓</div><div><b>Pemupukan I — 20 Mar 2026</b><small>Urea 50 kg · tercatat</small></div></div>
+      <div class="vgrow"><div class="n done">✓</div><div><b>Vegetatif — 03 Apr 2026</b><small>Tinggi tanaman normal</small></div></div>
+      <div class="vgrow"><div class="n now">●</div><div><b>Generatif — 13 Mei 2026</b><small>Fase berbunga · tahap saat ini</small></div></div>
+      <div class="vgrow"><div class="n next">4</div><div><b>Panen — perkiraan 09 Jul 2026</b><small>Estimasi 4,2 ton GKP</small></div></div>
+    </div>
+
+    <div class="sect">Prediksi</div>
+    <div class="card">
+      <div class="sumrow"><small>Estimasi hasil</small><b>4,2 ton GKP</b></div>
+      <div class="sumrow"><small>Estimasi harga saat panen</small><b>Rp 6.900/kg</b></div>
+      <div class="sumrow total"><span>Perkiraan pendapatan</span><span>Rp 28,9 jt</span></div>
+      <div class="note">Prediksi dihitung dari riwayat lahan, varietas, dan tren harga PIHPS. Angka dapat berubah mengikuti cuaca dan kondisi pasar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5. JUAL KE SPPG ========== -->
+<section class="scr" id="s-sell">
+  <div class="hd" style="background:linear-gradient(135deg,#1C6E8C,#2563EB)">
+    <div class="row"><button class="back" onclick="go('home')">←</button>
+      <div><h3>🏫 Jual ke SPPG</h3><div class="sub">Posting harga tawaran Anda</div></div></div>
+    <div class="mini3" style="margin-bottom:0;margin-top:12px">
+      <div style="background:rgba(255,255,255,.15)"><b style="color:#fff">4,8 ton</b><small style="color:#DDECE3">Stok</small></div>
+      <div style="background:rgba(255,255,255,.15)"><b style="color:#fff">Rp 6.200</b><small style="color:#DDECE3">Harga SPPG</small></div>
+      <div style="background:rgba(255,255,255,.15)"><b style="color:#fff">3</b><small style="color:#DDECE3">Transaksi aktif</small></div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="tabs">
+      <button class="on" onclick="tab(this,'t-buat')">Buat Penawaran</button>
+      <button onclick="tab(this,'t-riwayat')">Riwayat</button>
+      <button onclick="tab(this,'t-dekat')">SPPG Terdekat</button>
+    </div>
+
+    <div id="t-buat">
+      <div class="sect" style="margin-top:0">Pilih SPPG Tujuan</div>
+      <div class="sppg sel" onclick="pickSppg(this)"><div class="top"><div><b>SPPG SDN 03 Menteng</b><small>Jakarta Pusat · 92 km · 450 kg/hari</small></div><span class="st">Menerima</span></div></div>
+      <div class="sppg" onclick="pickSppg(this)"><div class="top"><div><b>SPPG Tanah Abang</b><small>Jakarta Pusat · 96 km · 360 kg/hari</small></div><span class="st full">Hampir Penuh</span></div></div>
+
+      <div class="sect">Jenis & Jumlah</div>
+      <div class="opts">
+        <button class="on" onclick="pickOpt(this)"><span>🌾</span>GKP</button>
+        <button onclick="pickOpt(this)"><span>🌾</span>GKG</button>
+        <button onclick="pickOpt(this)"><span>🍚</span>Beras</button>
+      </div>
+      <div class="fld">Jumlah (kg)</div>
+      <div class="num"><button onclick="qtyStep(-100)">−</button><input id="q_sell" value="500" readonly><button onclick="qtyStep(100)">+</button></div>
+      <div class="fld" style="margin-top:10px">Harga tawaran Anda (Rp/kg)</div>
+      <div class="num"><button onclick="prcStep(-100)">−</button><input id="p_sell" value="6800" readonly><button onclick="prcStep(100)">+</button></div>
+
+      <div class="card" style="margin-top:12px">
+        <div class="sumrow"><small>Nilai penawaran</small><b id="sell_sub">Rp 3.400.000</b></div>
+        <div class="sumrow"><small>Estimasi diterima petani</small><b id="sell_net">Rp 3.400.000</b></div>
+      </div>
+      <div class="note">Dana pembeli ditahan <b>escrow oleh mitra penyedia jasa pembayaran berizin</b> — bukan oleh NusaPangan — sampai barang dikonfirmasi diterima.</div>
+      <button class="btn blue" style="margin-top:12px" onclick="toast('Penawaran terkirim ke SPPG Menteng')">Kirim Penawaran ke SPPG</button>
+    </div>
+
+    <div id="t-riwayat" style="display:none">
+      <div class="card">
+        <div class="actv"><div class="ai">✅</div><div><b>500 kg GKP → SPPG Menteng</b><small>14 Jul 2026 · Rp 3.400.000 · Selesai</small></div></div>
+        <div class="actv"><div class="ai">🚛</div><div><b>1.200 kg GKP → SPPG Tanah Abang</b><small>10 Jul 2026 · Rp 8.160.000 · Dikirim</small></div></div>
+        <div class="actv"><div class="ai">⏳</div><div><b>300 kg Beras → SPPG Menteng</b><small>08 Jul 2026 · Menunggu konfirmasi</small></div></div>
+      </div>
+    </div>
+
+    <div id="t-dekat" style="display:none">
+      <div class="sppg"><div class="top"><div><b>SPPG SDN 03 Menteng</b><small>92 km · 3.000 porsi/hari</small></div><span class="st">Menerima</span></div></div>
+      <div class="sppg"><div class="top"><div><b>SPPG Tanah Abang</b><small>96 km · 2.400 porsi/hari</small></div><span class="st full">Hampir Penuh</span></div></div>
+      <div class="sppg"><div class="top"><div><b>SPPG Serang Kota</b><small>12 km · 1.800 porsi/hari</small></div><span class="st">Menerima</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. QR TRACEABILITY ========== -->
+<section class="scr" id="s-qr">
+  <div class="hd" style="background:linear-gradient(135deg,#5B21B6,#7C3AED)">
+    <div class="row"><button class="back" onclick="go('home')">←</button>
+      <div><h3>🔍 QR Traceability</h3><div class="sub">Batch NP-BTN-2026-0847</div></div></div>
+  </div>
+  <div class="body">
+    <div class="qrbox">
+      <div class="qr" id="qrgrid"></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:10px">Pindai atau bagikan QR ini</div>
+    </div>
+
+    <div class="sect">Info Batch</div>
+    <div class="card">
+      <div class="info"><small>Varietas</small><b>Inpari 32 Premium</b></div>
+      <div class="info"><small>Berat total</small><b>2.000 kg</b></div>
+      <div class="info"><small>Tanggal panen</small><b>10 Jul 2026</b></div>
+      <div class="info"><small>Petani</small><b>Budi S. · NP-BTN-2026-0847</b></div>
+    </div>
+
+    <div class="sect">Rantai Perjalanan Beras</div>
+    <div class="card">
+      <div class="stage"><div class="col"><div class="sd" style="background:#4CAF50">🌱</div><div class="rail"></div></div>
+        <div><b>Tanam</b><div class="w">Ds. Sukamaju, Kramatwatu, Serang · 1,5 ha</div><div class="dt">04 Mar 2026</div>
+        <div class="vchips"><span>✓ GPS tercatat</span><span>✓ Foto lahan</span></div></div></div>
+      <div class="stage"><div class="col"><div class="sd" style="background:#66BB6A">💧</div><div class="rail"></div></div>
+        <div><b>Pemupukan & Perawatan</b><div class="w">Urea 50 kg · NPK 30 kg</div><div class="dt">Apr–Jun 2026</div>
+        <div class="vchips"><span>✓ 3 kegiatan tercatat</span></div></div></div>
+      <div class="stage"><div class="col"><div class="sd" style="background:#F5B301">🌾</div><div class="rail"></div></div>
+        <div><b>Panen</b><div class="w">GKP 2.000 kg · kadar air 25%</div><div class="dt">10 Jul 2026</div>
+        <div class="vchips"><span>✓ Uji kadar air</span><span>✓ QR dibuat</span></div></div></div>
+      <div class="stage"><div class="col"><div class="sd" style="background:#C9902E">🏭</div><div class="rail"></div></div>
+        <div><b>Penggilingan</b><div class="w">RMU Maju Jaya, Serang · hasil 1.280 kg beras</div><div class="dt">12 Juli 2026</div>
+        <div class="vchips"><span>✓ Rendemen 64% — wajar</span></div></div></div>
+      <div class="stage"><div class="col"><div class="sd" style="background:#2563EB">🏫</div></div>
+        <div><b>Listing Dashboard SPPG</b><div class="w">Tampil di Portal Pembeli institusi · SPPG Menteng</div><div class="dt">13 Juli 2026</div>
+        <div class="vchips"><span class="blue">● Aktif — menunggu pembeli</span></div>
+        <button class="btn sm blue" style="margin-top:8px;width:auto;padding:0 14px" onclick="go('buyer')">Lihat di Portal Pembeli →</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. LAHANMAP ========== -->
+<section class="scr" id="s-map">
+  <div class="hd"><div class="row"><button class="back" onclick="go('home')">←</button>
+    <div><h3>🗺️ LahanMap</h3><div class="sub">Peta digital sawah Anda</div></div></div></div>
+  <div class="body">
+    <div class="mapwrap" id="mapv">
+      <div class="maplbl" id="maplbl">Tampilan: Petak Lahan</div>
+      <div class="zoomctl"><button onclick="zoomMap(1)">+</button><button onclick="zoomMap(-1)">−</button></div>
+      <!-- view petak -->
+      <div id="v-petak">
+        <div class="river" style="left:0;top:52%;width:100%;height:9px;transform:rotate(-4deg)"></div>
+        <div class="plot" style="left:8%;top:14%;width:36%;height:32%;background:rgba(76,175,80,.62)">Lahan A</div>
+        <div class="plot" style="left:52%;top:20%;width:34%;height:30%;background:rgba(245,124,31,.55)">Lahan B</div>
+        <div class="plot" style="left:22%;top:62%;width:38%;height:26%;background:rgba(120,140,130,.5)">Lahan C</div>
+      </div>
+      <!-- view wilayah (zoom out) -->
+      <div id="v-wilayah" style="display:none">
+        <div class="river" style="left:0;top:64%;width:100%;height:7px;transform:rotate(-6deg)"></div>
+        <div class="plot" style="left:4%;top:10%;width:26%;height:34%;background:rgba(57,169,107,.5);font-size:8px">Pandeglang</div>
+        <div class="plot" style="left:33%;top:8%;width:28%;height:30%;background:rgba(57,169,107,.62);font-size:8px">Lebak</div>
+        <div class="plot" style="left:64%;top:14%;width:28%;height:32%;background:rgba(231,178,76,.6);font-size:8px">Serang</div>
+        <div class="plot" style="left:20%;top:52%;width:24%;height:24%;background:rgba(57,169,107,.45);font-size:8px">Kota Serang</div>
+        <div class="plot" style="left:52%;top:56%;width:26%;height:22%;background:rgba(57,169,107,.4);font-size:8px">Cilegon</div>
+        <div style="position:absolute;left:70%;top:22%;width:9px;height:9px;border-radius:50%;background:#E7B24C;border:2px solid #fff"></div>
+      </div>
+    </div>
+    <div class="legend" id="legend">
+      <span><i style="background:rgba(76,175,80,.8)"></i>Aktif tanam</span>
+      <span><i style="background:rgba(245,124,31,.8)"></i>Siap panen</span>
+      <span><i style="background:rgba(120,140,130,.8)"></i>Bera</span>
+    </div>
+
+    <div class="sect">Ringkasan Lahan</div>
+    <div class="stat4" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="st"><b>1,5 ha</b><small>Aktif Tanam</small></div>
+      <div class="st"><b>1,0 ha</b><small>Siap Panen</small></div>
+      <div class="st"><b>0,7 ha</b><small>Bera</small></div>
+    </div>
+    <div class="note" id="mapnote">Tekan <b>−</b> untuk memperluas tampilan ke seluruh wilayah Banten (kawasan Sawah Dilindungi / LSD).</div>
+  </div>
+</section>
+
+<!-- ========== 8. KLAIM PESTISIDA ========== -->
+<section class="scr" id="s-klaim">
+  <div class="hd" style="background:linear-gradient(135deg,#C9902E,#EA8C0B)">
+    <div class="row"><button class="back" onclick="go('home')">←</button>
+      <div><h3>🎁 Benefit Program Musim</h3><div class="sub">Aktif · musim tanam MT-1 2026</div></div></div>
+  </div>
+  <div class="body">
+    <div class="voucher">
+      <b>Pestisida Gratis 1×</b>
+      <small>Berlaku untuk peserta Program Musim, satu kali per musim tanam.</small>
+      <div class="code" id="vcode">••••-••••-••••</div>
+      <small id="vnote">Tekan tombol di bawah untuk menerbitkan kode voucher Anda.</small>
+    </div>
+    <button class="btn gold" style="margin-top:12px" id="vbtn" onclick="claimVoucher()">Klaim Sekarang</button>
+
+    <div class="sect">Benefit Lain</div>
+    <div class="card">
+      <div class="actv"><div class="ai">👨‍🌾</div><div><b>Pendampingan agronom 20 jam</b><small>Terpakai 6 jam · sisa 14 jam</small></div></div>
+      <div class="actv"><div class="ai">🌦️</div><div><b>Prediksi cuaca & waktu tanam</b><small>Aktif sepanjang musim</small></div></div>
+      <div class="actv"><div class="ai">📈</div><div><b>Prioritas listing ke SPPG</b><small>Aktif</small></div></div>
+    </div>
+
+    <div class="note">◆ Benefit fisik (pestisida, pupuk) <b>disediakan dan didanai mitra input</b>, ditukar di toko tani mitra. NusaPangan tidak membeli, menyimpan, atau menjual barang.</div>
+
+    <div class="sect">Paket Anda</div>
+    <div class="card">
+      <div class="sumrow"><small>Petani (dasar)</small><b>Gratis</b></div>
+      <div class="sumrow"><small>Program Musim — aktif</small><b style="color:var(--sprout-d)">✓ Gratis · didanai mitra</b></div>
+      <div class="sumrow"><small>NusaTani+ (opsional)</small><b>Rp 49rb/musim</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. PORTAL PEMBELI (SPPG) ========== -->
+<section class="scr" id="s-buyer">
+  <div class="hd" style="background:linear-gradient(135deg,#9F1239,#E11D48)">
+    <div class="row"><button class="back" onclick="go('home')">←</button>
+      <div><h3>🛒 Portal Pembeli</h3><div class="sub">SPPG SDN 03 Menteng · institusi</div></div></div>
+    <span class="subsbadge" style="background:#fff;color:#9F1239">Langganan Dashboard · Rp 5jt/bln</span>
+  </div>
+  <div class="body">
+    <div class="sect" style="margin-top:0">Pasokan Terverifikasi</div>
+
+    <div class="card" style="margin-bottom:10px">
+      <div class="top" style="display:flex;justify-content:space-between"><div><b style="font-size:13.5px">Gabah Inpari 32 — Pak Budi</b><div class="loc" style="font-size:10.5px;color:var(--muted)">Serang, Banten · stok 2.000 kg</div></div><span class="tag aktif">✓ Terverifikasi</span></div>
+      <div class="fld" style="margin-top:10px">Jumlah beli (kg)</div>
+      <div class="num"><button onclick="bqty(-100)">−</button><input id="b_qty" value="500" readonly><button onclick="bqty(100)">+</button></div>
+
+      <div class="fld" style="margin-top:10px">Transportasi</div>
+      <div class="opts">
+        <button class="on" onclick="pickTrans(this,150000)"><span>🚐</span>Pick Up Sedang<br><small style="font-weight:600">Rp 150.000</small></button>
+        <button onclick="pickTrans(this,350000)"><span>🚛</span>Pick Truk<br><small style="font-weight:600">Rp 350.000</small></button>
+      </div>
+
+      <div style="margin-top:12px">
+        <div class="sumrow"><small>Harga satuan</small><b>Rp 6.800/kg</b></div>
+        <div class="sumrow"><small>Subtotal</small><b id="b_sub">Rp 3.400.000</b></div>
+        <div class="sumrow"><small>Komisi platform 5%</small><b id="b_com">Rp 170.000</b></div>
+        <div class="sumrow"><small>Transportasi</small><b id="b_trans">Rp 150.000</b></div>
+        <div class="sumrow total"><span>Total</span><span id="b_total">Rp 3.720.000</span></div>
+      </div>
+      <button class="btn" style="background:#E11D48;margin-top:12px" onclick="toast('Ditambahkan ke keranjang — menunggu escrow')">+ Tambah ke Keranjang</button>
+    </div>
+
+    <div class="card">
+      <div class="top" style="display:flex;justify-content:space-between"><div><b style="font-size:13.5px">Ciherang — KT Maju</b><div class="loc" style="font-size:10.5px;color:var(--muted)">Serang, Banten · stok 1.200 kg</div></div><span class="tag aktif">✓ Terverifikasi</span></div>
+      <div class="sumrow" style="margin-top:8px"><small>Harga satuan</small><b>Rp 6.500/kg</b></div>
+      <button class="btn sm" style="background:#E11D48;color:#fff;margin-top:10px" onclick="toast('Ditambahkan ke keranjang')">+ Tambah ke Keranjang</button>
+    </div>
+
+    <div class="note">Komisi platform 5% menjadi pendapatan NusaPangan. Dana pembeli ditahan escrow oleh mitra penyedia jasa pembayaran berizin sampai barang dikonfirmasi diterima.</div>
+    <button class="btn blue" style="margin-top:10px" onclick="go('route')">Lanjut ke Optimasi Rute →</button>
+  </div>
+</section>
+
+<!-- ========== 10. SMARTDISTRIB ROUTE ========== -->
+<section class="scr" id="s-route">
+  <div class="hd" style="background:linear-gradient(135deg,#1C6E8C,#2563EB)">
+    <div class="row"><button class="back" onclick="go('home')">←</button>
+      <div><h3>🚛 SmartDistrib</h3><div class="sub">Optimasi rute berbasis AI</div></div></div>
+  </div>
+  <div class="body">
+    <div class="sect" style="margin-top:0">📍 Parameter Rute</div>
+    <div class="fld">Asal</div>
+    <select class="sel"><option>Gudang Regional Serang</option><option>Penggilingan Maju Jaya, Serang</option></select>
+    <div class="fld">Tujuan</div>
+    <select class="sel"><option>SPPG SDN 03 Menteng, Jakarta Pusat</option><option>SPPG Tanah Abang, Jakarta Pusat</option></select>
+    <div class="fld">Kargo (kg)</div>
+    <div class="num" style="margin-bottom:9px"><button onclick="rqty(-100)">−</button><input id="r_qty" value="500" readonly><button onclick="rqty(100)">+</button></div>
+    <div class="fld">Prioritas</div>
+    <select class="sel" id="r_pri" onchange="renderRoutes()"><option>⚡ Waktu tercepat</option><option>💰 Biaya termurah</option><option>🛡️ Risiko terendah</option></select>
+
+    <div class="sect">🤖 Hasil Optimasi AI</div>
+    <div id="routes"></div>
+    <div class="note">Skor dihitung dari jarak, estimasi waktu tempuh, biaya, dan risiko keterlambatan. Model berjalan pada data simulasi untuk demo.</div>
+  </div>
+</section>
+
+<!-- ========== 11. PROFIL ========== -->
+<section class="scr" id="s-profil">
+  <div class="hd"><div class="row"><button class="back" onclick="go('home')">←</button>
+    <div><h3>👤 Profil & Verifikasi</h3><div class="sub">Budi Santoso · NP-BTN-2026-0847</div></div></div>
+    <span class="subsbadge">⭐ Program Musim</span></div>
+  <div class="body">
+    <div class="card">
+      <div class="info"><small>NIK</small><b>360711••••5622</b></div>
+      <div class="info"><small>Wilayah</small><b>Kramatwatu, Serang</b></div>
+      <div class="info"><small>Total lahan</small><b>3,2 ha · 3 lahan</b></div>
+      <div class="info"><small>Musim tercatat</small><b>4 musim</b></div>
+    </div>
+
+    <div class="sect">Status Verifikasi</div>
+    <div class="card">
+      <div class="prow"><span>✓ Verifikasi petugas lapangan</span><span class="tag aktif">Selesai</span></div>
+      <div class="prow"><span>✓ Foto KTP & kecocokan NIK</span><span class="tag aktif">Selesai</span></div>
+      <div class="prow"><span>Integrasi Dukcapil</span><span class="tag bera">Dalam proses</span></div>
+    </div>
+
+    <div class="sect">Berbagi Data</div>
+    <div class="card">
+      <div class="prow"><span>Izinkan bank mitra melihat profil saya</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div class="prow"><span>Izinkan SPPG melihat stok saya</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+
+    <div class="redbox">
+      <b>⚠️ NusaPangan TIDAK menyalurkan pinjaman</b>
+      <p>Kami tidak memberi kredit, tidak menagih utang, dan tidak menyimpan uang Anda. Kami hanya menyediakan data verifikasi kepada bank mitra — keputusan dan risiko kredit sepenuhnya ada pada bank.</p>
+    </div>
+
+    <div class="note">NIK Anda disimpan ter-hash sesuai UU No. 27/2022 tentang Pelindungan Data Pribadi, dan tidak pernah ditampilkan utuh.</div>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav" id="nav">
+  <div class="on" data-s="home" onclick="go('home')"><span class="ni">🏠</span>Beranda</div>
+  <div data-s="lahan" onclick="go('lahan')"><span class="ni">🌾</span>Lahan</div>
+  <div data-s="sell" onclick="go('sell')"><span class="ni">🏫</span>Jual</div>
+  <div data-s="qr" onclick="go('qr')"><span class="ni">🔍</span>QR</div>
+  <div data-s="profil" onclick="go('profil')"><span class="ni">👤</span>Profil</div>
+</div>
+</div>
+
+<script>
+const fmt=n=>'Rp '+Math.round(n).toLocaleString('id-ID');
+
+function go(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s-'+id).classList.add('on');
+  document.getElementById('vp').scrollTop=0;
+  document.getElementById('nav').style.display = (id==='splash')?'none':'flex';
+  document.querySelectorAll('#nav div').forEach(d=>d.classList.toggle('on',d.dataset.s===id));
+}
+document.getElementById('nav').style.display='none';
+
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');
+  clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('on'),2600);}
+
+function tab(btn,id){
+  btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  ['t-buat','t-riwayat','t-dekat'].forEach(x=>document.getElementById(x).style.display = (x===id)?'block':'none');
+}
+function pickSppg(el){el.parentNode.querySelectorAll('.sppg').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');}
+function pickOpt(el){el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+
+/* jual */
+function qtyStep(d){const i=document.getElementById('q_sell');i.value=Math.max(100,+i.value+d);sellCalc();}
+function prcStep(d){const i=document.getElementById('p_sell');i.value=Math.max(1000,+i.value+d);sellCalc();}
+function sellCalc(){const q=+document.getElementById('q_sell').value,p=+document.getElementById('p_sell').value;
+  document.getElementById('sell_sub').textContent=fmt(q*p);
+  document.getElementById('sell_net').textContent=fmt(q*p);}
+sellCalc();
+
+/* buyer */
+let transCost=150000;
+function bqty(d){const i=document.getElementById('b_qty');i.value=Math.max(100,+i.value+d);buyCalc();}
+function pickTrans(el,c){el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');transCost=c;buyCalc();}
+function buyCalc(){const q=+document.getElementById('b_qty').value,p=6800,sub=q*p,com=sub*.05;
+  document.getElementById('b_sub').textContent=fmt(sub);
+  document.getElementById('b_com').textContent=fmt(com);
+  document.getElementById('b_trans').textContent=fmt(transCost);
+  document.getElementById('b_total').textContent=fmt(sub+com+transCost);}
+buyCalc();
+
+/* voucher */
+function claimVoucher(){
+  const c='NP-PST-'+Math.floor(1000+Math.random()*9000);
+  document.getElementById('vcode').textContent=c;
+  document.getElementById('vnote').textContent='Tunjukkan kode ini di toko tani mitra. Berlaku sampai 30 hari.';
+  const b=document.getElementById('vbtn');b.textContent='✓ Voucher Diterbitkan';b.disabled=true;
+  toast('Voucher pestisida berhasil diklaim');
+}
+
+/* map zoom */
+let mz=1;
+function zoomMap(d){
+  mz=Math.max(0,Math.min(1,mz+d));
+  const petak=mz===1;
+  document.getElementById('v-petak').style.display=petak?'block':'none';
+  document.getElementById('v-wilayah').style.display=petak?'none':'block';
+  document.getElementById('maplbl').textContent=petak?'Tampilan: Petak Lahan':'Tampilan: Wilayah Banten (LSD)';
+  document.getElementById('legend').innerHTML=petak
+    ?'<span><i style="background:rgba(76,175,80,.8)"></i>Aktif tanam</span><span><i style="background:rgba(245,124,31,.8)"></i>Siap panen</span><span><i style="background:rgba(120,140,130,.8)"></i>Bera</span>'
+    :'<span><i style="background:rgba(57,169,107,.8)"></i>Kawasan LSD</span><span><i style="background:rgba(231,178,76,.9)"></i>Wilayah Anda</span>';
+  document.getElementById('mapnote').innerHTML=petak
+    ?'Tekan <b>−</b> untuk memperluas tampilan ke seluruh wilayah Banten (kawasan Sawah Dilindungi / LSD).'
+    :'Kawasan Sawah Dilindungi Banten: <b>149.163 ha · 47.937 bidang · 5 wilayah</b> (SK ATR/BPN 2021). Tekan <b>+</b> untuk kembali ke petak lahan Anda.';
+}
+
+/* routes */
+const ROUTES=[
+  {n:'Rute 1',p:'Serang → Tol Tangerang → Tol Dalam Kota → Menteng',km:92,j:2.2,rp:1248000,r:'Rendah',s:94},
+  {n:'Rute 2',p:'Serang → Jl. Raya Serang → Tangerang → Menteng',km:98,j:3.4,rp:1105000,r:'Sedang',s:78},
+  {n:'Rute 3',p:'Serang → Tol Merak-Jakarta → Slipi → Menteng',km:95,j:2.5,rp:1296000,r:'Rendah',s:87}
+];
+function renderRoutes(){
+  const pri=document.getElementById('r_pri').value;
+  let list=[...ROUTES];
+  if(pri.includes('Biaya')) list.sort((a,b)=>a.rp-b.rp);
+  else if(pri.includes('Risiko')) list.sort((a,b)=>(a.r==='Rendah'?0:1)-(b.r==='Rendah'?0:1)||b.s-a.s);
+  else list.sort((a,b)=>a.j-b.j);
+  document.getElementById('routes').innerHTML=list.map((r,i)=>`
+    <div class="rt ${i===0?'best':''}">
+      <div class="top"><b>${r.n}${i===0?' 🏆 REKOMENDASI':''}</b><span class="score">Skor ${r.s}</span></div>
+      <div class="path">📍 ${r.p}</div>
+      <div class="meta"><span>📦 ${r.km} km</span><span>🕐 ${r.j} jam</span><span>💵 ${fmt(r.rp)}</span><span>🛡️ Risiko: ${r.r}</span></div>
+    </div>`).join('');
+}
+function rqty(d){const i=document.getElementById('r_qty');i.value=Math.max(100,+i.value+d);}
+renderRoutes();
+
+/* QR pattern */
+(function(){
+  const g=document.getElementById('qrgrid');
+  const seed=[1,1,1,0,1,0,1,0,1,1,1, 1,0,1,1,0,1,1,0,1,0,1, 1,0,1,0,1,1,0,1,1,1,1, 0,0,0,1,0,0,1,0,0,0,0,
+  1,1,0,0,1,1,0,1,1,0,1, 0,1,1,1,0,0,1,0,1,1,0, 1,0,1,0,1,1,0,1,0,1,1, 0,1,0,1,1,0,1,0,1,0,0,
+  1,1,1,0,1,0,1,1,0,1,1, 1,0,1,1,0,1,0,0,1,0,1, 1,1,1,0,1,1,1,0,1,1,1];
+  seed.forEach(c=>{const i=document.createElement('i');if(!c)i.className='w';g.appendChild(i);});
+})();
+</script>
+</body>
+</html>
