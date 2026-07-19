@@ -184,7 +184,7 @@ with tab1:
         st.markdown("""
         <div class="arch-box purple">
             <div class="arch-title">🔗 Hyperledger</div>
-            <div class="arch-sub">Blockchain Fabric<br>PBFT Consensus</div>
+            <div class="arch-sub">Hash-Chain Ledger<br>Append-Only</div>
         </div>""", unsafe_allow_html=True)
     with d4:
         st.markdown("""
@@ -200,7 +200,7 @@ with tab1:
     with e1:
         st.markdown("""
         <div class="arch-box orange">
-            <div class="arch-title">🆔 Dukcapil</div>
+            <div class="arch-title">🆔 Dukcapil <span style="font-size:.6em;opacity:.7">(roadmap)</span></div>
             <div class="arch-sub">NIK Verification</div>
         </div>""", unsafe_allow_html=True)
     with e2:
@@ -323,8 +323,8 @@ with tab3:
     security_items = [
         {"icon": "🔐", "title": "Enkripsi AES-256", "detail": "Seluruh data at-rest dan in-transit terenkripsi dengan standar militer AES-256. TLS 1.3 untuk komunikasi API."},
         {"icon": "🔑", "title": "OAuth2 + JWT + Zero Trust", "detail": "Autentikasi multi-factor. Setiap request diverifikasi ulang — tidak ada trusted zone. Token JWT dengan expiry 15 menit."},
-        {"icon": "🔗", "title": "Blockchain Immutability", "detail": "Hyperledger Fabric (PBFT consensus). Data subsidi dan transaksi tidak bisa diubah sepihak. OJK/BPK sebagai auditor node independen."},
-        {"icon": "🆔", "title": "Biometrik & Dukcapil", "detail": "Cek NIK langsung ke Dukcapil dalam hitungan detik. Bantu pastikan penerima subsidi benar-benar petani aktif."},
+        {"icon": "🔗", "title": "Catatan Tak Terubah (Hash-Chain)", "detail": "Setiap serah terima dicatat berantai-hash, append-only — tidak bisa diubah setelah dikonfirmasi. Arsitektur siap diaudit pihak independen."},
+        {"icon": "🆔", "title": "Verifikasi Identitas", "detail": "Saat ini: verifikasi KTP oleh petugas lapangan + NIK di-hash (UU PDP). Roadmap: integrasi API Dukcapil untuk cek NIK real-time."},
         {"icon": "📡", "title": "IoT Security (MQTT TLS)", "detail": "Sensor IoT berkomunikasi lewat MQTT dengan TLS encryption. Device authentication per armada. Anomaly detection pada telemetri."},
         {"icon": "🗄️", "title": "Database Sharding", "detail": "PostgreSQL di-shard per wilayah. Backup otomatis setiap 6 jam. Disaster recovery RTO < 4 jam, RPO < 1 jam."},
     ]
@@ -439,7 +439,7 @@ with tab5:
         {"phase": "Fase 1", "title": "MVP Launch", "period": "Bulan 2-3", "color": "#4CAF50",
          "items": "Closed-beta AgriMart + Price Radar, 200 petani pilot, integrasi API BI/Bapanas, 10 armada IoT"},
         {"phase": "Fase 2", "title": "AI & Subsidi", "period": "Bulan 4-6", "color": "#2196F3",
-         "items": "PanganLink launch, smart contract AgriFinance, API Dukcapil live, demo purifikasi e-RDKK ke Kementan"},
+         "items": "Integrasi API Dukcapil, escrow via mitra PJP berizin, demo purifikasi e-RDKK ke Kementan"},
         {"phase": "Fase 3", "title": "Skalasi Nasional", "period": "Bulan 7-12", "color": "#FF9800",
          "items": "5 provinsi, credit score digital untuk bank mitra, monetisasi B2B analytics, target 50.000 user"},
     ]
@@ -508,7 +508,7 @@ with tab6:
     
     onboard_steps = [
         {"num": "1", "title": "Field Agent Datang ke Desa", "detail": "Agent NusaPangan mengunjungi kelompok tani. Bawa tablet, printer mini untuk cetak QR. Koordinasi dengan ketua kelompok tani.", "icon": "🏘️"},
-        {"num": "2", "title": "Registrasi + Verifikasi NIK", "detail": "Petani tunjukkan KTP, agent input NIK. Sistem cek ke Dukcapil dalam 3 detik. Foto lahan diambil + titik GPS.", "icon": "🆔"},
+        {"num": "2", "title": "Registrasi + Verifikasi NIK", "detail": "Petani tunjukkan KTP, field agent memverifikasi & meng-hash NIK. Foto lahan diambil + titik GPS di lokasi.", "icon": "🆔"},
         {"num": "3", "title": "Profil Digital Tercipta", "detail": "Otomatis: identitas digital, luas lahan, varietas, credit score awal. Petani dapat QR code personal yang dicetak di tempat.", "icon": "📱"},
         {"num": "4", "title": "WhatsApp Terhubung", "detail": "Petani daftar WhatsApp ke bot NusaPangan. Semua notifikasi (harga, order, pembayaran) via WA. Tidak perlu download app.", "icon": "💬"},
         {"num": "5", "title": "Listing Pertama di AgriMart", "detail": "Agent bantu petani listing produk pertama. Harga otomatis sesuai Price Radar. Dalam 24 jam, produk sudah visible ke buyer SPPG.", "icon": "🛒"},

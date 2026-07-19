@@ -108,7 +108,7 @@ st.markdown(f"""
             <div style="font-size:1.3rem;font-weight:800;color:#1B5E20;">{salam}, {farmer["nama"].split()[0]} 👋</div>
             <div style="font-size:0.85rem;color:#666;margin-top:2px;">{farmer["nama"]} · {farmer["farmer_id"]}</div>
             <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
-                <span style="background:#E8F5E9;color:#1B5E20;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">✅ Verified Dukcapil</span>
+                <span style="background:#E8F5E9;color:#1B5E20;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">✅ Terverifikasi Petugas Lapangan</span>
                 <span style="background:#E3F2FD;color:#0D47A1;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">🌾 {farmer["varietas"]}</span>
                 <span style="background:#FFF3E0;color:#E65100;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:600;">🟢 {farmer["status"]}</span>
             </div>
@@ -252,7 +252,8 @@ with col_left:
         | Parameter | Nilai |
         |---|---|
         | Luas Lahan | **{farmer['luas_lahan_ha']} ha** |
-        | Verified Dukcapil | ✅ Ya |
+        | Terverifikasi petugas lapangan | ✅ Ya |
+        | Integrasi Dukcapil | 🕓 Dalam proses |
         | Kelompok Tani | **{farmer['kelompok_tani']}** |
         | Est. Produksi | **{farmer['estimasi_produksi_ton']} ton** |
         """)
@@ -266,7 +267,7 @@ with col_right:
         {"icon": "💧", "bg": "#E3F2FD", "title": "Penyiraman dilakukan", "loc": f"Lahan Padi - {farmer['desa']}", "time": "2 jam lalu"},
         {"icon": "🧪", "bg": "#F3E5F5", "title": "Pemupukan dilakukan", "loc": f"Lahan Padi - {farmer['desa']}", "time": "1 hari lalu"},
         {"icon": "📸", "bg": "#FFF3E0", "title": "Foto lahan diupload", "loc": "Verifikasi GPS", "time": "2 hari lalu"},
-        {"icon": "✅", "bg": "#E8F5E9", "title": "NIK diverifikasi", "loc": "API Dukcapil", "time": "3 hari lalu"},
+        {"icon": "✅", "bg": "#E8F5E9", "title": "NIK diverifikasi (hash)", "loc": "Petugas lapangan", "time": "3 hari lalu"},
         {"icon": "📊", "bg": "#E0F2F1", "title": "Credit score diupdate", "loc": f"Score: {farmer['credit_score']}", "time": "5 hari lalu"},
     ]
     
