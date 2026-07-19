@@ -61,7 +61,7 @@ section{position:relative}
 .hbadge-dot{width:7px;height:7px;border-radius:50%;background:var(--grain);animation:pulse-dot 2.2s infinite;flex:none}
 .hero h1{font-size:clamp(40px,5.8vw,70px);color:#fff;letter-spacing:-.038em;line-height:1.04;margin-bottom:20px}
 .hero h1 .em{display:inline;background:linear-gradient(94deg,#F5CD7B 0%,#E7B24C 55%,#D2952B 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hlead{font-size:clamp(16px,1.6vw,19px);color:#BFD8CC;max-width:540px;margin-bottom:16px;line-height:1.65}
+.hlead{font-size:clamp(13.5px,2vh,18px);color:#BFD8CC;max-width:540px;margin-bottom:14px;line-height:1.6}
 .htag{font-family:var(--mono);font-size:13px;color:var(--sprout);letter-spacing:.04em;margin-bottom:28px}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:12px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:0}
@@ -155,7 +155,7 @@ mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
 .shead{max-width:680px;margin-bottom:44px}
 .shead h2{font-size:clamp(26px,3.6vw,40px);margin:12px 0 12px}
 .shead p{color:var(--muted);font-size:16px}
-.pad{padding:92px 0 44px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
+.pad{padding:74px 0 28px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
 .hero,.logos,.counters,.foot{scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 .logos{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
@@ -360,7 +360,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 .vcard{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .22s,box-shadow .22s}
 .vcard:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(14,58,44,.12)}
 .vcard:hover .vphoto svg,.vcard:hover .vimg{transform:scale(1.06)}
-.vphoto{position:relative;height:126px;background:linear-gradient(150deg,var(--c1),var(--c2));display:grid;place-items:center;overflow:hidden}
+.vphoto{position:relative;height:min(126px,13.5vh);background:linear-gradient(150deg,var(--c1),var(--c2));display:grid;place-items:center;overflow:hidden}
 .vphoto:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.28),transparent 58%),linear-gradient(0deg,rgba(0,0,0,.14),transparent 45%)}
 .vphoto svg{width:64px;height:64px;opacity:.95;transition:transform .3s;filter:drop-shadow(0 3px 7px rgba(0,0,0,.22))}
 .vimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
@@ -426,8 +426,8 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
 /* ===== SLIDE MODE: tiap seksi satu layar, warna berbeda ===== */
-.shead h2{font-size:clamp(24px,3vw,36px)}
-.shead p{font-size:15px}
+.shead h2{font-size:clamp(20px,4.4vh,34px)}
+.shead p{font-size:clamp(12.5px,1.9vh,15px)}
 .bento{grid-template-rows:repeat(2,minmax(148px,auto));gap:14px}
 .bt{padding:20px}
 .bt.big h3{font-size:20px}
@@ -436,11 +436,14 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 .hero{height:100vh;min-height:0;display:flex;flex-direction:column;padding:66px 0 0;overflow:hidden}
 .hero .wrap.hgrid{flex:1;min-height:0;align-items:center;padding-bottom:20px}
 .pipe-svg{width:100%;height:auto;max-height:calc(100vh - 330px)}
-.hero h1{font-size:clamp(34px,4.6vw,56px)}
-.logos{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:92px 0 44px}
+.hero h1{font-size:clamp(30px,6.6vh,54px)}
+.logos{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:74px 0 28px}
 .shead{margin-bottom:26px}
-.pshow{min-height:540px}
-.mapframe iframe{height:min(56vh,460px)}
+.pshow{min-height:0}
+.pframe{height:min(552px,62vh);aspect-ratio:268/556;width:auto}
+.cnt b{font-size:clamp(30px,6.5vh,54px)}
+.vidbox{max-width:min(760px,calc((100vh - 300px)*1.55));margin-left:auto;margin-right:auto}
+.mapframe iframe{height:min(50vh,440px)}
 .foot{scroll-snap-align:end}
 /* palet per slide */
 .counters{background:radial-gradient(100% 120% at 50% 0%,#123528,var(--ink) 70%)}
@@ -453,7 +456,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 .varietas{background:#FBF2DF}
 .valid{background:#EDF6F0}
 /* layar pendek / HP: snap longgar agar konten tak terjebak */
-@media (max-height:660px),(max-width:860px){
+@media (max-height:500px),(max-width:860px){
   html{scroll-snap-type:y proximity}
   .pad,.logos,.counters{scroll-snap-stop:normal;min-height:auto}
   .hero{height:auto;min-height:100svh;overflow:visible;scroll-snap-stop:normal}
