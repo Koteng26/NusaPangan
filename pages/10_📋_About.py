@@ -183,7 +183,7 @@ with tab1:
     with d3:
         st.markdown("""
         <div class="arch-box purple">
-            <div class="arch-title">🔗 Hyperledger</div>
+            <div class="arch-title">🔗 Hash-Chain</div>
             <div class="arch-sub">Hash-Chain Ledger<br>Append-Only</div>
         </div>""", unsafe_allow_html=True)
     with d4:
