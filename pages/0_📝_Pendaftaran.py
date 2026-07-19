@@ -43,6 +43,15 @@ if ss.get("petani") and ss.reg_step >= 99:
         <div style="font-family:monospace;font-size:1.4rem;color:#15803d;background:#f0fdf4;border:1px dashed #4CAF50;border-radius:10px;padding:10px;margin:14px auto;max-width:280px;">{p['rice_id']}</div>
         <div style="color:#555;font-size:0.9rem;">{p['luas']} ha · {p['kabupaten']} · {p['varietas']} · Paket {p['paket']}</div>
     </div>""", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="np-card" style="padding:16px 18px;margin-top:8px;">
+      <b>Status verifikasi</b>
+      <div style="margin-top:10px;font-size:.9rem;line-height:2.0;">
+        ✅ Persetujuan &amp; tanda tangan digital — <b style="color:#15803d;">selesai</b><br>
+        🧑‍🌾 Kunjungan petugas lapangan (pengambilan titik GPS lahan) — <b style="color:#B45309;">dijadwalkan</b><br>
+        🕓 <b>Menunggu Verifikasi Dukcapil</b> — <span style="color:#92400E;font-size:.82rem;">integrasi API dalam proses; saat ini identitas diverifikasi petugas lapangan &amp; NIK di-hash (UU PDP)</span>
+      </div>
+    </div>""", unsafe_allow_html=True)
     st.page_link("pages/1_👨‍🌾_Farmer_Dashboard.py", label="Masuk Dashboard Petani →", icon="👨‍🌾")
     if st.button("Daftar petani lain"):
         ss.reg_step = 0
@@ -83,7 +92,7 @@ elif ss.reg_step == 1:
     c2.number_input("Luas lahan (ha)", min_value=0.0, step=0.1, key="reg_luas")
     st.selectbox("Varietas utama", VAR, key="reg_var")
     lat, lon = KAB_LATLON.get(ss.get("reg_kab", KAB[0]), (-6.4, 106.1))
-    st.caption("Titik lahan (otomatis mendekati wilayah terpilih — di produksi diambil dari GPS/peta):")
+    st.caption("Titik lahan (perkiraan wilayah). Titik GPS resmi diambil oleh **petugas lapangan saat kunjungan verifikasi** — bukan digambar sendiri — lalu diuji terhadap poligon Lahan Sawah Dilindungi.")
     st.map({"lat": [lat], "lon": [lon]}, zoom=9)
     b1, b2 = st.columns([1, 2])
     if b1.button("← Kembali", use_container_width=True):

@@ -60,12 +60,27 @@ m2.metric("📐 Jumlah Bidang", f"{TOTAL_BIDANG:,}", "5 wilayah")
 m3.metric("✅ Petani Tervalidasi", "3", "wawancara lapangan")
 m4.metric("📍 Titik Jaringan", f"{len(df_farmers)}", "koordinat nyata")
 
-# ---------- KONTROL ----------
-cc1, cc2 = st.columns([1, 1])
-with cc1:
-    basemap = st.radio("Basemap", ["Citra Satelit", "Peta jalan"], horizontal=True, index=0)
-with cc2:
-    show_farmers = st.checkbox("Tampilkan 156 titik jaringan petani", value=True)
+# ---------- PANEL LAPISAN (gaya GIS) ----------
+st.markdown('<div style="font-family:monospace;font-size:.72rem;letter-spacing:.1em;color:#166534;font-weight:700;margin-bottom:4px;">⬒ PANEL LAPISAN</div>', unsafe_allow_html=True)
+pc1, pc2, pc3 = st.columns([1.15, 1.5, 1.1])
+with pc1:
+    basemap = st.radio("Base map", ["Citra Satelit", "OSM", "Tanpa Latar"], index=0)
+with pc2:
+    st.caption("Lapisan data")
+    show_lsd = st.checkbox("Lahan Sawah Dilindungi (ATR/BPN)", value=True)
+    show_farmers = st.checkbox("Titik jaringan petani (156)", value=True)
+    show_verified = st.checkbox("Petani tervalidasi lapangan (3)", value=True)
+with pc3:
+    FOKUS = {"Banten (semua)": (-6.75, 106.15, 8.1)}
+    for _k in sorted(df_lsd["KABUPATEN"]):
+        _lab = _k if str(_k).startswith("Kota") else "Kab. " + str(_k)
+        FOKUS[_lab] = None
+    _FZ = {"Kab. Serang": (-6.20, 106.05, 9.6), "Kab. Pandeglang": (-6.63, 105.93, 9.2),
+           "Kab. Lebak": (-6.65, 106.25, 9.1), "Kab. Tangerang": (-6.20, 106.47, 9.8),
+           "Kota Serang": (-6.11, 106.16, 11.0), "Kota Cilegon": (-6.00, 106.02, 11.0)}
+    fokus = st.selectbox("Fokus wilayah", list(FOKUS.keys()))
+    ctr_lat, ctr_lon, zm = FOKUS["Banten (semua)"] if FOKUS.get(fokus) else _FZ.get(fokus, (-6.75, 106.15, 8.1))
+    if FOKUS.get(fokus): ctr_lat, ctr_lon, zm = FOKUS[fokus]
 
 STCOL = {"Siap Panen": "#39A96B", "Pasca Panen": "#8AA79A", "Masa Tanam": "#59B3D6", "Masa Tumbuh": "#3E9E8E"}
 
@@ -73,7 +88,8 @@ STCOL = {"Siap Panen": "#39A96B", "Pasca Panen": "#8AA79A", "Masa Tanam": "#59B3
 fig = go.Figure()
 
 # Layer 1: polygon LSD (choropleth by luas)
-fig.add_trace(go.Choroplethmapbox(
+if show_lsd:
+    fig.add_trace(go.Choroplethmapbox(
     geojson=gj_lsd, locations=df_lsd["KABUPATEN"], featureidkey="properties.KABUPATEN",
     z=df_lsd["LUAS"], colorscale="Greens", marker_opacity=0.5, marker_line_width=1,
     marker_line_color="#1B5E20",
@@ -81,7 +97,7 @@ fig.add_trace(go.Choroplethmapbox(
     customdata=df_lsd[["BIDANG"]].values,
     hovertemplate="<b>%{location}</b><br>Sawah dilindungi: %{z:,.0f} ha<br>Bidang: %{customdata[0]:,}<extra>LSD resmi</extra>",
     name="Sawah Dilindungi"
-))
+    ))
 
 # Layer 2: 156 titik jaringan (per status, koordinat nyata / atribut sintetis)
 if show_farmers:
@@ -98,13 +114,14 @@ if show_farmers:
         ))
 
 # Layer 3: 3 petani tervalidasi (emas, di atas)
-fig.add_trace(go.Scattermapbox(
+if show_verified:
+    fig.add_trace(go.Scattermapbox(
     lat=VERIFIED["lat"], lon=VERIFIED["lon"], mode="markers",
     marker=dict(size=17, color="#E7B24C"),
     text=VERIFIED["nama"] + " · " + VERIFIED["varietas"] + "<br>" + VERIFIED["wil"] + " · " + VERIFIED["luas"] + "<br>Harga: " + VERIFIED["harga"],
     hovertemplate="%{text}<extra>✓ tervalidasi lapangan</extra>",
     name="✓ Petani tervalidasi (3)"
-))
+    ))
 
 # Basemap
 if basemap == "Citra Satelit":
@@ -112,10 +129,12 @@ if basemap == "Citra Satelit":
         style="white-bg",
         layers=[dict(below="traces", sourcetype="raster", sourceattribution="Esri, Maxar, Earthstar Geographics",
                      source=["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"])],
-        center=dict(lat=-6.75, lon=106.15), zoom=8.1
+        center=dict(lat=ctr_lat, lon=ctr_lon), zoom=zm
     )
+elif basemap == "OSM":
+    mapbox = dict(style="open-street-map", center=dict(lat=ctr_lat, lon=ctr_lon), zoom=zm)
 else:
-    mapbox = dict(style="open-street-map", center=dict(lat=-6.75, lon=106.15), zoom=8.1)
+    mapbox = dict(style="white-bg", center=dict(lat=ctr_lat, lon=ctr_lon), zoom=zm)
 
 fig.update_layout(
     mapbox=mapbox, margin=dict(l=0, r=0, t=0, b=0), height=560,
