@@ -107,7 +107,7 @@ st.markdown(f"""
     <div style="flex:1;min-width:140px;background:linear-gradient(135deg,#1B5E20,#2E7D32);border-radius:14px;padding:18px;color:#fff;box-shadow:0 4px 16px rgba(27,94,32,0.2);">
         <div style="font-size:0.75rem;opacity:0.8;">👨‍🌾 Petani Seller</div>
         <div style="font-size:1.8rem;font-weight:900;margin-top:4px;">125</div>
-        <div style="font-size:0.7rem;opacity:0.7;">verified Dukcapil</div>
+        <div style="font-size:0.7rem;opacity:0.7;">terverifikasi lapangan</div>
     </div>
     <div style="flex:1;min-width:140px;background:linear-gradient(135deg,#0D47A1,#1565C0);border-radius:14px;padding:18px;color:#fff;box-shadow:0 4px 16px rgba(13,71,161,0.2);">
         <div style="font-size:0.75rem;opacity:0.8;">🏫 Buyer Institusi</div>
@@ -262,7 +262,7 @@ with tab_order:
             st.markdown(f"""
             **Petani {i+1}:** {m['petani']} ({m['farmer_id']})  
             Desa {m['desa']}, {m['kab']} — Alokasi: {alloc} kg @ Rp {m['harga_f2c']:,}/kg  
-            ⭐ {m['rating']} · ✅ Dukcapil Verified · Credit Score {int(m['rating']*165)}
+            ⭐ {m['rating']} · ✅ Terverifikasi Lapangan · Skor {int(m['rating']*16.5)}/100
             """)
     
     if st.button("🛒 Buat Order", type="primary", use_container_width=True):

@@ -1,5 +1,5 @@
 """
-🔍 QR Trace — Lacak Perjalanan Beras dari Sawah ke Piring Siswa
+🔍 QR Trace — Lacak Perjalanan Beras dari Sawah ke Dapur SPPG
 """
 import streamlit as st
 import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -109,7 +109,7 @@ with col_journey:
             <strong>Tanggal Panen:</strong> {j['tanggal_panen']}<br>
             <strong>Hasil Panen:</strong> {j['jumlah_gabah_kg']:,} kg Gabah (GKG)<br>
             <strong>Varietas:</strong> {j['varietas']}<br>
-            ✅ <em>Verified via API Dukcapil — Petani tervalidasi</em>
+            ✅ <em>Terverifikasi petugas lapangan · Integrasi Dukcapil: dalam proses</em>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -173,11 +173,11 @@ with col_journey:
     st.markdown(f"""
     <div class="journey-step">
         <div class="step-icon">🍽️</div>
-        <div class="step-title">TAHAP 5 — Piring Siswa MBG</div>
+        <div class="step-title">TAHAP 5 — Dapur SPPG MBG</div>
         <div class="step-detail">
             <strong>Sekolah:</strong> {j['sekolah']}, {j['sekolah_kota']}<br>
             <strong>Jumlah Porsi:</strong> {j['jumlah_porsi']:,} porsi<br>
-            <strong>Verifikasi:</strong> ✅ Seluruh journey tercatat di blockchain<br>
+            <strong>Verifikasi:</strong> ✅ Seluruh journey tercatat permanen (hash-chain)<br>
             🍚 <em>Nasi di piring siswa ini berasal dari sawah {j['petani_nama']}</em>
         </div>
     </div>
@@ -255,10 +255,10 @@ st.markdown(f"""
 
 st.markdown("---")
 
-# Blockchain
-st.markdown("### 🔗 Blockchain Verification — Hyperledger Fabric")
+# hash-chain
+st.markdown("### 🔗 Rantai Catatan Terkunci (Hash-Chain)")
 st.markdown("""
-> **Apa itu Blockchain di NusaPangan?** Bayangkan buku catatan yang dipegang bersama oleh banyak pihak 
+> **Apa itu hash-chain di NusaPangan?** Bayangkan buku catatan yang dipegang bersama oleh banyak pihak 
 > (Kementan, Bank, Bulog, BPK, Bapanas). Setiap kali beras berpindah tangan — dari petani ke penggilingan, 
 > dari gudang ke sekolah — catatan otomatis tertulis dan **tidak bisa dihapus atau diubah** oleh siapapun. 
 > Artinya tidak ada satu pihak pun yang bisa mengubah data sepihak — semuanya tercatat dan bisa dicek.
@@ -287,7 +287,7 @@ blocks = [
         "icon": "👨‍🌾",
         "data": f"farmer_id={j['petani_id']}, nik=VERIFIED, dukcapil=TRUE",
         "timestamp": j['tanggal_tanam'] + " 08:15:22",
-        "validator": "API Dukcapil + Kementan Node",
+        "validator": "Petugas lapangan + penerima batch",
     },
     {
         "block": 2,
@@ -339,7 +339,7 @@ for b in blocks:
     b["hash"] = make_hash(block_data)
     prev_hash = b["hash"]
 
-# Render blockchain
+# Render hash-chain
 for b in blocks:
     color = "#4CAF50" if b["block"] > 0 else "#1565C0"
     st.markdown(f"""
@@ -365,7 +365,7 @@ for b in blocks:
         st.markdown(f"<div style='text-align:center;font-size:1rem;color:{color};'>🔗</div>", unsafe_allow_html=True)
 
 st.markdown("""
-> **Hyperledger Fabric (Permissioned Blockchain):** Setiap transaksi divalidasi oleh minimal 
+> **Hash-chain (catatan berantai terkunci):** Setiap transaksi divalidasi oleh minimal 
 > 3 node (BPK Auditor, BGN, Kementan) menggunakan konsensus PBFT. Data tidak dapat diubah 
 > setelah tercatat — sehingga seluruh perjalanan beras bisa dilacak siapa saja — dari petani sampai piring siswa.
 """)

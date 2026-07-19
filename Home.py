@@ -19,7 +19,7 @@ with st.sidebar:
         st.image("assets/logo.png", use_container_width=True)
     st.markdown("""
     <p style="text-align:center;font-size:1.05rem;color:#1B5E20;font-weight:700;margin-top:0;line-height:1.4;">
-        "Dari Sawah ke Piring<br>Anak Indonesia"
+        "From Farm Data to<br>Indonesia's Food Security"
     </p>
     """, unsafe_allow_html=True)
 
@@ -76,7 +76,7 @@ st.markdown("---")
 # STATS
 st.markdown("### 📊 Data Real — Banten vs DKI Jakarta")
 c1, c2, c3, c4 = st.columns(4)
-c1.metric("👨‍🌾 Petani Banten", f"{total_farmers}", "Verified Dukcapil")
+c1.metric("👨‍🌾 Petani Banten", f"{total_farmers}", "Terverifikasi lapangan")
 c2.metric("🔍 Journey Tracked", f"{total_journeys}", "Banten → DKI")
 c3.metric("🏫 Satpen MBG", f"{total_mbg_dki + total_mbg_banten:,}", "DKI + Banten")
 c4.metric("💰 Gap Harga", f"+Rp {gap_harga:,.0f}", "DKI lebih mahal/kg")
