@@ -426,6 +426,13 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
 /* ===== SLIDE MODE: tiap seksi satu layar, warna berbeda ===== */
+.shead h2{font-size:clamp(24px,3vw,36px)}
+.shead p{font-size:15px}
+.bento{grid-template-rows:repeat(2,minmax(148px,auto));gap:14px}
+.bt{padding:20px}
+.bt.big h3{font-size:20px}
+.bt.big p{font-size:12.5px}
+.btstats b{font-size:18px}
 .hero{height:100vh;min-height:0;display:flex;flex-direction:column;padding:66px 0 0;overflow:hidden}
 .hero .wrap.hgrid{flex:1;min-height:0;align-items:center;padding-bottom:20px}
 .pipe-svg{width:100%;height:auto;max-height:calc(100vh - 330px)}
@@ -542,7 +549,6 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       </div>
     </div>
   </div>
-  <div class="ticker" aria-hidden="true"><div class="tk"><span><b>GKP Serang</b> Rp 6.800/kg <i class="up">↑ +200</i></span><span><b>GKG</b> Rp 7.600/kg</span><span><b>Beras medium</b> Rp 12.980/kg</span><span><b>Beras premium</b> Rp 14.000/kg</span><span><b>LSD Banten</b> 149.163 ha</span><span><b>Bidang terpetakan</b> 47.937</span><span><b>Surplus Banten</b> 1,04 jt ton · Jan–Jun</span><span>Sumber: PIHPS Kemendag · ATR/BPN</span><span><b>GKP Serang</b> Rp 6.800/kg <i class="up">↑ +200</i></span><span><b>GKG</b> Rp 7.600/kg</span><span><b>Beras medium</b> Rp 12.980/kg</span><span><b>Beras premium</b> Rp 14.000/kg</span><span><b>LSD Banten</b> 149.163 ha</span><span><b>Bidang terpetakan</b> 47.937</span><span><b>Surplus Banten</b> 1,04 jt ton · Jan–Jun</span><span>Sumber: PIHPS Kemendag · ATR/BPN</span></div></div>
 </header>
 
 <!-- COUNTERS -->
@@ -765,8 +771,6 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
       <div class="bar-track"><span class="lab">Banten</span><div class="bar-out"><div class="bar-in b" data-w="92" data-label="Rp 12.980"></div></div></div>
       <div class="bar-track"><span class="lab">DKI</span><div class="bar-out"><div class="bar-in d" data-w="100" data-label="Rp 14.061"></div></div></div>
     </div>
-    <div class="gapnote reveal">Gap harga Rp 1.080/kg · Banten surplus + DKI defisit = koridor pasokan yang NusaPangan verifikasi</div>
-    <p class="src reveal">Sumber: BPS dan PIHPS Kementerian Perdagangan, 2026.</p>
   </div>
 </section>
 
@@ -839,15 +843,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <p class="reveal">Perjalanan beras dari sawah Banten hingga dapur SPPG di DKI Jakarta.</p>
     <div class="vidbox reveal"><div class="ratio"><iframe src="https://www.youtube.com/embed/zj8OxZgMMEA" title="NusaPangan Demo" allowfullscreen loading="lazy"></iframe></div></div>
 
-    <div class="partner reveal" id="partnership">
-      <h3>Ajukan kemitraan</h3>
-      <p>Bank, asuransi, Bulog, Pemda, atau eksportir yang ingin memakai lapisan verifikasi & intelijen data kami — mari bicara.</p>
-      <div class="cta-row" style="justify-content:center">
-        <a class="btn btn-primary" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Jelajahi Platform</a>
-        <a class="btn btn-ghost" href="https://github.com/Koteng26/NusaPangan" target="_blank" rel="noopener">Lihat GitHub</a>
       </div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
@@ -866,18 +862,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
         <a href="https://nusapangan.streamlit.app/PanganLink" target="_blank" rel="noopener">PanganLink</a>
         <a href="https://nusapangan.streamlit.app/SmartDistrib" target="_blank" rel="noopener">SmartDistrib</a>
       </div>
-      <div>
-        <h5>Tautan</h5>
-        <a href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Prototype</a>
-        <a href="lahanmap.html" target="_blank" rel="noopener">LahanMap</a>
-        <a href="scan.html" target="_blank" rel="noopener">Demo: Scan QR</a>
-        <a href="app.html?v=4" target="_blank" rel="noopener">Demo: App NusaPangan</a>
-        <a href="app-petani.html" target="_blank" rel="noopener">Demo: App Petani</a>
-        <a href="sppg.html" target="_blank" rel="noopener">Demo: Portal SPPG</a>
-        <a href="serah-terima.html" target="_blank" rel="noopener">Demo: Serah Terima</a>
-        <a href="https://github.com/Koteng26/NusaPangan" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://youtu.be/zj8OxZgMMEA" target="_blank" rel="noopener">Video Demo</a>
-      </div>
+      
     </div>
     <div class="fbot">
       <span>🌾 NusaPangan · Tim We Are Solution</span>
