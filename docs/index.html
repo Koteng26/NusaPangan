@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NusaPangan — From Farm Data to Indonesia's Food Security</title>
-<meta name="description" content="NusaPangan adalah Rice Intelligence Infrastructure — identitas digital petani, lahan, dan hasil panen untuk ketahanan pangan Indonesia.">
+<title>NusaPangan · From Farm Data to Indonesia's Food Security</title>
+<meta name="description" content="NusaPangan adalah Rice Intelligence Infrastructure, identitas digital petani, lahan, dan hasil panen untuk ketahanan pangan Indonesia.">
 <link rel="icon" href="https://nusapangan.my.id/logo-main.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -425,6 +425,20 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
+.cntwrap{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+.cntleft .cgrid{grid-template-columns:1fr;gap:14px}
+.cntleft .cnt{text-align:left;display:flex;align-items:baseline;gap:14px}
+.cntleft .cnt b{min-width:170px}
+.cntleft .cnt span{margin:0}
+.cntphoto{margin:0;position:relative;border-radius:20px;overflow:hidden;
+box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12)}
+.cntphoto img{width:100%;height:min(60vh,470px);object-fit:cover;display:block}
+.cntphoto figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 12px;
+font-size:11.5px;color:#DDECE3;background:linear-gradient(180deg,transparent,rgba(10,31,23,.85))}
+@media(max-width:900px){.cntwrap{grid-template-columns:1fr;gap:24px}.cntphoto img{height:230px}}
+/* teks rata kanan-kiri */
+.hlead,.shead p,.avision p,.pcard p,.bt p,.gcard p,.vcard p,.astory p,.amission p,.sctext p{
+text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
 /* ===== SLIDE MODE: tiap seksi satu layar, warna berbeda ===== */
 .shead h2{font-size:clamp(20px,4.4vh,34px)}
 .shead p{font-size:clamp(12.5px,1.9vh,15px)}
@@ -502,7 +516,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="reveal in">
       <span class="hbadge"><i class="hbadge-dot"></i>Rice Intelligence Infrastructure</span>
       <h1>Kami tidak menjual beras.<br><span class="em">Kami menjual kepastian</span> tentang beras.</h1>
-      <p class="hlead">NusaPangan membangun identitas digital petani, lahan, dan hasil panen — siapa yang menanam, di lahan mana, dan berapa yang akan panen.</p>
+      <p class="hlead">NusaPangan membangun identitas digital petani, lahan, dan hasil panen, siapa yang menanam, di lahan mana, dan berapa yang akan panen.</p>
       <p class="htag">From Farm Data to Indonesia's Food Security</p>
 
     </div>
@@ -513,7 +527,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
         <span>Alur data · farm → food security</span>
         <span class="pipe-live"><i></i>LIVE</span>
       </div>
-      <svg class="pipe-svg" viewBox="0 0 340 348" role="img" aria-label="Alur data NusaPangan: Petani, Polygon Lahan, Rice ID, Penggilingan, SPPG dan pembeli institusi — seluruhnya mengalirkan data ke Dashboard Pemerintah">
+      <svg class="pipe-svg" viewBox="0 0 340 348" role="img" aria-label="Alur data NusaPangan: Petani, Polygon Lahan, Rice ID, Penggilingan, SPPG dan pembeli institusi, seluruhnya mengalirkan data ke Dashboard Pemerintah">
         <defs>
           <linearGradient id="path" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#39A96B"/><stop offset="1" stop-color="#E7B24C"/>
@@ -566,17 +580,23 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 
 <!-- COUNTERS -->
 <section class="counters pad">
-  <div class="wrap">
-    <div class="shead reveal" style="text-align:center;max-width:640px;margin:0 auto 40px">
-      <div class="eyebrow" style="justify-content:center;display:flex">Angka Awal</div>
-      <h2>Dimulai dari lapangan, bukan dari asumsi</h2>
-      <p>Tiga angka yang menjadi titik berangkat NusaPangan di Banten.</p>
+  <div class="wrap cntwrap">
+    <div class="cntleft">
+      <div class="shead reveal" style="margin-bottom:26px">
+        <div class="eyebrow">Angka Awal</div>
+        <h2>Dimulai dari lapangan, bukan dari asumsi</h2>
+        <p>Tiga angka yang menjadi titik berangkat NusaPangan di Banten.</p>
+      </div>
+      <div class="cgrid">
+        <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
+        <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
+        <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
+      </div>
     </div>
-    <div class="cgrid">
-      <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
-      <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
-      <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
-    </div>
+    <figure class="cntphoto reveal">
+      <img src="foto-panen.webp" alt="Petani memanen padi di sawah Indonesia" loading="lazy">
+      <figcaption>Panen padi, sentra produksi Indonesia</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -598,13 +618,13 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="shead reveal">
       <div class="eyebrow">Struktur Bisnis</div>
       <h2>Petani gratis. Institusi yang membayar.</h2>
-      <p>Petani adalah sumber data, bukan sumber pendapatan. Yang membayar adalah pihak yang membutuhkan kepastian — pembeli institusi dan lembaga yang menanggung risiko.</p>
+      <p>Petani adalah sumber data, bukan sumber pendapatan. Yang membayar adalah pihak yang membutuhkan kepastian, pembeli institusi dan lembaga yang menanggung risiko.</p>
     </div>
     <div class="pgrid">
       <div class="pcard p1 reveal">
         <div class="pnum">01 · PETANI</div>
         <h3>Gratis selamanya</h3>
-        <p>Rice ID, pencatatan lahan, harga harian, dan akses ke pembeli institusi — tanpa biaya. Setiap panen yang dicatat memperkaya mesin data kami.</p>
+        <p>Rice ID, pencatatan lahan, harga harian, dan akses ke pembeli institusi, tanpa biaya. Setiap panen yang dicatat memperkaya mesin data kami.</p>
         <span class="ptag">Rp 0 · mesin pengumpul data</span>
       </div>
       <div class="pcard p2 reveal">
@@ -633,12 +653,12 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="sctext reveal">
       <div class="eyebrow">Aplikasi · Demo Langsung</div>
       <h2>NusaPangan dalam genggaman</h2>
-      <p>Bukan sekadar konsep — ini aplikasinya, berjalan langsung di halaman ini. 14 layar: daftar, catat lahan, jual ke SPPG, lacak QR, sampai skor kelayakan untuk bank. Silakan klik dan coba.</p>
+      <p>Bukan sekadar konsep, ini aplikasinya, berjalan langsung di halaman ini. 14 layar: daftar, catat lahan, jual ke SPPG, lacak QR, sampai skor kelayakan untuk bank. Silakan klik dan coba.</p>
       <ul class="scfeat">
         <li><span class="ic">📝</span><span><b>Daftar & dapat Rice ID</b><small>identitas digital + persetujuan sesuai UU PDP</small></span></li>
         <li><span class="ic">🛒</span><span><b>Jual langsung ke SPPG</b><small>AgriMart, tanpa tengkulak</small></span></li>
         <li><span class="ic">🔍</span><span><b>QR traceability</b><small>lacak dari sawah sampai penerima</small></span></li>
-        <li><span class="ic">📊</span><span><b>Skor kelayakan petani</b><small>profil verifikasi untuk bank — bukan pinjaman</small></span></li>
+        <li><span class="ic">📊</span><span><b>Skor kelayakan petani</b><small>profil verifikasi untuk bank, bukan pinjaman</small></span></li>
       </ul>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://nusapangan.streamlit.app" target="_blank" rel="noopener">Buka Aplikasi →</a>
@@ -671,12 +691,12 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="shead reveal">
       <div class="eyebrow">Tata Kelola</div>
       <h2>Kami belajar dari kegagalan orang lain</h2>
-      <p>Industri agritech Indonesia baru menyaksikan runtuhnya beberapa pemain besar. Kami membangun dengan batasan yang jelas sejak awal.</p>
+      <p style="max-width:none;text-align:justify">Industri agritech Indonesia baru menyaksikan runtuhnya beberapa pemain besar. Kami membangun dengan batasan yang jelas sejak awal.</p>
     </div>
     <div class="ggrid">
       <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK menyalurkan kredit</h3><p>Kami menjual data verifikasi petani ke bank. Bank yang memutuskan dan menanggung risiko. Kami biro data pertanian, bukan pemberi pinjaman.</p></div>
-      <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK memiliki aset logistik</h3><p>Tidak ada armada, tidak ada gudang. Data kami mengalir dari hulu ke hilir — operasi fisik tetap milik mitra. Model asset-light menjaga biaya rendah.</p></div>
-      <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK menyimpan dana pengguna</h3><p>Escrow dijalankan melalui mitra penyedia jasa pembayaran berizin — bukan oleh NusaPangan.</p></div>
+      <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK memiliki aset logistik</h3><p>Tidak ada armada, tidak ada gudang. Data kami mengalir dari hulu ke hilir, operasi fisik tetap milik mitra. Model asset-light menjaga biaya rendah.</p></div>
+      <div class="gcard reveal"><div class="no">✕</div><h3>Kami TIDAK menyimpan dana pengguna</h3><p>Escrow dijalankan melalui mitra penyedia jasa pembayaran berizin, bukan oleh NusaPangan.</p></div>
     </div>
   </div>
 </section>
@@ -685,18 +705,18 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 <section class="lmap pad" id="lahanmap">
   <div class="wrap lmgrid">
     <div class="lmtext reveal">
-      <div class="eyebrow">LahanMap — Moat Kami</div>
+      <div class="eyebrow">LahanMap · Moat Kami</div>
       <h2>Aset yang tidak bisa disalin</h2>
-      <p>Peta Lahan Sawah Dilindungi (LSD) Provinsi Banten menjadi fondasi — petani terverifikasi ditautkan ke dalamnya.</p>
+      <p>Peta Lahan Sawah Dilindungi (LSD) Provinsi Banten menjadi fondasi, petani terverifikasi ditautkan ke dalamnya.</p>
       <div class="layerbox pub">
         <b>LAYER PUBLIK · bisa ditiru</b>
-        <small>Lahan Sawah Dilindungi resmi ATR/BPN (SK 2021): <b>149.163 ha · 47.937 bidang di 5 wilayah</b> (Lebak, Pandeglang, Serang, Kota Serang, Cilegon) — di atas citra satelit.</small>
+        <small>Lahan Sawah Dilindungi resmi ATR/BPN (SK 2021): <b>149.163 ha · 47.937 bidang di 5 wilayah</b> (Lebak, Pandeglang, Serang, Kota Serang, Cilegon), di atas citra satelit.</small>
       </div>
       <div class="layerbox moat">
         <b>LAYER NUSAPANGAN · tidak bisa ditiru</b>
         <small>Petani terverifikasi lapangan dengan koordinat lahan · riwayat panen aktual per musim · riwayat transaksi.</small>
       </div>
-      <p style="font-size:13.5px">Hari ini baru <b>3 titik tervalidasi</b>. Setiap musim panen, titik bertambah dan riwayatnya menebal — itulah aset yang tidak bisa disalin dengan membangun aplikasi serupa.</p>
+      <p style="font-size:13.5px">Hari ini baru <b>3 titik tervalidasi</b>. Setiap musim panen, titik bertambah dan riwayatnya menebal, itulah aset yang tidak bisa disalin dengan membangun aplikasi serupa.</p>
       <a class="btn btn-primary" style="margin-top:8px" href="lahanmap.html" target="_blank" rel="noopener">Buka LahanMap penuh →</a>
     </div>
     <div class="mapframe reveal">
@@ -712,17 +732,17 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="shead reveal" style="max-width:640px">
       <div class="eyebrow" style="color:var(--grain-d)">Studi Kasus Data Real</div>
       <h2>Banten surplus, DKI defisit</h2>
-      <p>Kesenjangan yang menjadi titik masuk NusaPangan — berdasarkan data resmi 2026.</p>
+      <p>Kesenjangan yang menjadi titik masuk NusaPangan, berdasarkan data resmi 2026.</p>
     </div>
     <div class="cmpgrid">
       <div class="cmp sur reveal">
-        <h3>✅ Banten — Surplus</h3>
+        <h3>✅ Banten · Surplus</h3>
         <div class="cmprow"><small>Produksi Jan–Jun 2026</small><b>1,04 juta ton</b></div>
         <div class="cmprow"><small>Harga rata-rata</small><b>Rp 12.980/kg</b></div>
         <div class="cmprow"><small>Satpen MBG</small><b>15.514</b></div>
       </div>
       <div class="cmp def reveal">
-        <h3>❌ DKI Jakarta — Defisit</h3>
+        <h3>❌ DKI Jakarta · Defisit</h3>
         <div class="cmprow"><small>Produksi Jan–Jun 2026</small><b>495 ton</b></div>
         <div class="cmprow"><small>Harga rata-rata</small><b>Rp 14.061/kg</b></div>
         <div class="cmprow"><small>Satpen MBG</small><b>119.160</b></div>
@@ -741,7 +761,7 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
   <div class="wrap">
     <div class="shead reveal">
       <div class="eyebrow">Fokus Satu Komoditas</div>
-      <h2>Beras — dikuasai sampai ke akar datanya</h2>
+      <h2>Beras, dikuasai sampai ke akar datanya</h2>
       <p>Kami memilih menguasai satu rantai sampai tuntas, bukan melebar ke banyak komoditas. Varietas premium seperti beras organik justru paling membutuhkan traceability.</p>
     </div>
     <div class="vgrid">
@@ -764,13 +784,13 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="shead reveal">
       <div class="eyebrow">Validasi Lapangan</div>
       <h2>Kata mereka yang kami wawancarai</h2>
-      <p>Wawancara langsung di Banten — 3 petani dan 1 pengelola SPPG.</p>
+      <p>Wawancara langsung di Banten, 3 petani dan 1 pengelola SPPG.</p>
     </div>
     <div class="tgrid">
-      <div class="tcard reveal"><div class="tmeta">👨‍🌾 Petani · Inpari 32 · 1,5 ha</div><q>Harga sering berubah-ubah. Kami kurang tahu harga sebenarnya di pasar.</q><div class="who"><b>Petani 1</b> — menjual ke tengkulak, Rp 6.000–6.500/kg</div></div>
-      <div class="tcard reveal"><div class="tmeta">👨‍🌾 Petani · Ciherang · 2 ha</div><q>Sulit mencari pembeli besar secara langsung. Kami sering bergantung pada pengepul.</q><div class="who"><b>Petani 2</b> — menjual ke koperasi & pengepul, Rp 6.200–6.800/kg</div></div>
-      <div class="tcard reveal"><div class="tmeta">👨‍🌾 Petani · Inpari 42 · 0,8 ha</div><q>Informasi harga kurang transparan dan biaya distribusi tinggi kalau harus menjual sendiri.</q><div class="who"><b>Petani 3</b> — menjual ke tengkulak, Rp 6.000/kg</div></div>
-      <div class="tcard reveal"><div class="tmeta">🏫 SPPG · 3.000–3.500 porsi/hari</div><q>Kami belum mengetahui detail beras berasal dari petani mana. Dengan QR Traceability — sangat berguna.</q><div class="who"><b>Pengelola SPPG</b> — melayani sekolah program MBG</div></div>
+      <div class="tcard reveal"><div class="tmeta">👨‍🌾 Petani · Inpari 32 · 1,5 ha</div><q>Harga sering berubah-ubah. Kami kurang tahu harga sebenarnya di pasar.</q><div class="who"><b>Petani 1</b>, menjual ke tengkulak, Rp 6.000–6.500/kg</div></div>
+      <div class="tcard reveal"><div class="tmeta">👨‍🌾 Petani · Ciherang · 2 ha</div><q>Sulit mencari pembeli besar secara langsung. Kami sering bergantung pada pengepul.</q><div class="who"><b>Petani 2</b>, menjual ke koperasi & pengepul, Rp 6.200–6.800/kg</div></div>
+      <div class="tcard reveal"><div class="tmeta">👨‍🌾 Petani · Inpari 42 · 0,8 ha</div><q>Informasi harga kurang transparan dan biaya distribusi tinggi kalau harus menjual sendiri.</q><div class="who"><b>Petani 3</b>, menjual ke tengkulak, Rp 6.000/kg</div></div>
+      <div class="tcard reveal"><div class="tmeta">🏫 SPPG · 3.000–3.500 porsi/hari</div><q>Kami belum mengetahui detail beras berasal dari petani mana. Dengan QR Traceability, sangat berguna.</q><div class="who"><b>Pengelola SPPG</b>, melayani sekolah program MBG</div></div>
     </div>
   </div>
 </section>
@@ -780,13 +800,13 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
   <div class="wrap">
     <div class="shead reveal">
       <div class="eyebrow">About Us</div>
-      <h2>Teknologi tidak menggantikan petani — ia menguatkan mereka</h2>
+      <h2>Teknologi tidak menggantikan petani, ia menguatkan mereka</h2>
       <p>Mengapa NusaPangan ada, dan ke mana kami membawanya.</p>
     </div>
     <div class="aboutgrid">
       <div class="avision reveal">
         <p>NusaPangan didirikan dengan satu visi sederhana: membangun <b>Rice Intelligence Infrastructure</b> Indonesia.</p>
-        <p>Ketahanan pangan dimulai dari memberdayakan orang-orang yang memproduksi pangan kita. Dengan menghubungkan petani langsung ke pembeli institusi — didukung data tepercaya, wawasan berbasis AI, dan infrastruktur digital yang transparan — kami mempersempit kesenjangan informasi, memangkas rantai pasok yang tidak efisien, dan memperluas akses pasar bagi petani.</p>
+        <p>Ketahanan pangan dimulai dari memberdayakan orang-orang yang memproduksi pangan kita. Dengan menghubungkan petani langsung ke pembeli institusi, didukung data tepercaya, wawasan berbasis AI, dan infrastruktur digital yang transparan, kami mempersempit kesenjangan informasi, memangkas rantai pasok yang tidak efisien, dan memperluas akses pasar bagi petani.</p>
         <p>Lebih dari sekadar menaikkan pendapatan petani, ekosistem beras yang efisien memperkuat makroekonomi Indonesia: biaya transaksi menurun, harga pangan lebih stabil, dan ketahanan pangan nasional menguat.</p>
         <div class="amission">
           <div class="lb">MISI KAMI</div>
@@ -814,14 +834,13 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
     <div class="fgridf">
       <div>
         <img src="https://nusapangan.my.id/logo-main.png" alt="NusaPangan">
-        <p style="max-width:320px;font-size:14px">Rice Intelligence Infrastructure — identitas digital petani, lahan, dan hasil panen untuk ketahanan pangan Indonesia.</p>
+        <p style="max-width:320px;font-size:14px">Rice Intelligence Infrastructure, identitas digital petani, lahan, dan hasil panen untuk ketahanan pangan Indonesia.</p>
       </div>
       <div>
         <h5>Produk</h5>
         <a href="https://nusapangan.streamlit.app/AgriMart" target="_blank" rel="noopener">AgriMart</a>
         <a href="https://nusapangan.streamlit.app/QR_Trace" target="_blank" rel="noopener">QR Trace</a>
         <a href="https://nusapangan.streamlit.app/Command_Center" target="_blank" rel="noopener">Command Center</a>
-        <a href="https://nusapangan.streamlit.app/PanganLink" target="_blank" rel="noopener">PanganLink</a>
         <a href="https://nusapangan.streamlit.app/SmartDistrib" target="_blank" rel="noopener">SmartDistrib</a>
       </div>
       
