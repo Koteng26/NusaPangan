@@ -24,6 +24,15 @@ except:
 st.set_page_config(page_title="Farmer Dashboard", page_icon="👨‍🌾", layout="wide")
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
+st.markdown("""
+<div class="np-header" style="background:linear-gradient(135deg,#0E3A2C,#166534,#15803d);">
+    <p style="font-size:.75rem;opacity:.75;margin-bottom:6px;">RUANG PETANI</p>
+    <h2>👨‍🌾 Dashboard Petani</h2>
+    <p style="margin-top:6px;">Ringkasan lahan, musim tanam, harga, dan aktivitas Anda.
+    Versi lengkap tersedia di <b>aplikasi mobile NusaPangan</b>.</p>
+</div>
+""", unsafe_allow_html=True)
+
 # Sambutan bila datang dari pendaftaran (session)
 if st.session_state.get("petani"):
     _p = st.session_state["petani"]
