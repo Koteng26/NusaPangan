@@ -8,7 +8,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="Command Center", page_icon="🏛️", layout="wide")
+st.set_page_config(page_title="Command Center", page_icon="🏛️", layout="wide", initial_sidebar_state="collapsed")
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
 df_harga = load_data("harga_beras_pihps.csv")
@@ -179,22 +179,22 @@ with tab2:
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("##### 🏫 Cakupan Program — Satuan Pendidikan MBG")
-    col_mbg1, col_mbg2 = st.columns(2)
-    with col_mbg1:
-        fig_mbg = px.bar(df_mbg, x="jenjang", y="jumlah_satpen", color="provinsi", barmode="group",
-                         color_discrete_map={"DKI Jakarta":"#2196F3","Banten":"#4CAF50"},
-                         text="jumlah_satpen", labels={"jumlah_satpen":"Jumlah Satpen"})
-        fig_mbg.update_traces(texttemplate="%{text:,}", textposition="outside")
-        fig_mbg.update_layout(height=330, plot_bgcolor="rgba(0,0,0,0)")
-        st.plotly_chart(fig_mbg, use_container_width=True)
-    with col_mbg2:
-        mbg_total_df = df_mbg.groupby("provinsi")["jumlah_satpen"].sum().reset_index()
-        fig_pie = px.pie(mbg_total_df, values="jumlah_satpen", names="provinsi",
-                         color_discrete_sequence=["#2196F3","#4CAF50"], hole=0.4,
-                         title="Distribusi Satpen MBG")
-        fig_pie.update_layout(height=330)
-        st.plotly_chart(fig_pie, use_container_width=True)
+    with st.expander("🏫 Cakupan Program — Satuan Pendidikan MBG (konteks pasar)"):
+      col_mbg1, col_mbg2 = st.columns(2)
+      with col_mbg1:
+          fig_mbg = px.bar(df_mbg, x="jenjang", y="jumlah_satpen", color="provinsi", barmode="group",
+                           color_discrete_map={"DKI Jakarta":"#2196F3","Banten":"#4CAF50"},
+                           text="jumlah_satpen", labels={"jumlah_satpen":"Jumlah Satpen"})
+          fig_mbg.update_traces(texttemplate="%{text:,}", textposition="outside")
+          fig_mbg.update_layout(height=330, plot_bgcolor="rgba(0,0,0,0)")
+          st.plotly_chart(fig_mbg, use_container_width=True)
+      with col_mbg2:
+          mbg_total_df = df_mbg.groupby("provinsi")["jumlah_satpen"].sum().reset_index()
+          fig_pie = px.pie(mbg_total_df, values="jumlah_satpen", names="provinsi",
+                           color_discrete_sequence=["#2196F3","#4CAF50"], hole=0.4,
+                           title="Distribusi Satpen MBG")
+          fig_pie.update_layout(height=330)
+          st.plotly_chart(fig_pie, use_container_width=True)
 
 # ============ TAB 3 — PRICE RADAR PIHPS ============
 with tab3:

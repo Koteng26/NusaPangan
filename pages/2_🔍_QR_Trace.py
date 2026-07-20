@@ -186,7 +186,7 @@ with col_journey:
 st.markdown("---")
 
 # Peta journey
-st.markdown("### 🗺️ Visualisasi Peta Perjalanan — Banten → DKI Jakarta")
+st.markdown("### 🗺️ Peta Perjalanan — Banten → DKI Jakarta")
 
 fig_map = go.Figure()
 
@@ -256,7 +256,7 @@ st.markdown(f"""
 st.markdown("---")
 
 # hash-chain
-st.markdown("### 🔗 Rantai Catatan Terkunci (Hash-Chain)")
+st.markdown("##### 🔗 Rantai Catatan Terkunci (Hash-Chain) — detail teknis")
 st.markdown("""
 > **Apa itu hash-chain di NusaPangan?** Bayangkan buku catatan yang dipegang bersama oleh banyak pihak 
 > (Kementan, Bank, Bulog, BPK, Bapanas). Setiap kali beras berpindah tangan — dari petani ke penggilingan, 

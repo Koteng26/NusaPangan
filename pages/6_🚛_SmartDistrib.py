@@ -17,6 +17,13 @@ st.markdown("""
 <style>
 .stApp{background:radial-gradient(130% 110% at 75% -5%, #12261E 0%, #0B1713 48%, #070F0C 100%);}
 .stApp, .stApp p, .stApp label, .stApp span{color:#D7E5DD;}
+[data-testid="stSidebar"]{background:linear-gradient(180deg,#0D1B16,#0A1410);border-right:1px solid rgba(255,255,255,.07);}
+[data-testid="stSidebar"] *{color:#C6DBD0 !important;}
+[data-testid="stSidebarNav"] a{border-radius:8px;}
+[data-testid="stSidebarNav"] a:hover{background:rgba(74,222,128,.10);}
+[data-testid="stSidebarNav"] a[aria-current="page"]{background:rgba(74,222,128,.16);}
+[data-testid="stSidebar"] img{filter:brightness(1.15);}
+
 h1,h2,h3,h4{color:#F2F7F4 !important;}
 .ops-live{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,monospace;font-size:11px;
 letter-spacing:.14em;color:#4ADE80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);
