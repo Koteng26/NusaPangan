@@ -69,35 +69,35 @@ st.markdown("""
   box-shadow:0 4px 14px rgba(14,58,44,.06);">
     <div style="font-size:1.6rem;line-height:1;">🌱</div>
     <b style="color:#15803d;font-size:.92rem;display:block;margin-top:6px;">1 · Daftar</b>
-    <small style="color:#666;font-size:.76rem;">petani + Rice ID</small>
+    <small style="color:#666;font-size:.76rem;">Petani + Rice ID</small>
   </div>
   <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#ECFDFA;
   border:1.5px solid #0E948833;border-top:4px solid #0E9488;border-radius:14px;
   box-shadow:0 4px 14px rgba(14,58,44,.06);">
     <div style="font-size:1.6rem;line-height:1;">📊</div>
     <b style="color:#0E9488;font-size:.92rem;display:block;margin-top:6px;">2 · Dashboard</b>
-    <small style="color:#666;font-size:.76rem;">profil &amp; panen</small>
+    <small style="color:#666;font-size:.76rem;">Profil &amp; Panen</small>
   </div>
   <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#FFF1F4;
   border:1.5px solid #E11D4833;border-top:4px solid #E11D48;border-radius:14px;
   box-shadow:0 4px 14px rgba(14,58,44,.06);">
     <div style="font-size:1.6rem;line-height:1;">🛒</div>
     <b style="color:#E11D48;font-size:.92rem;display:block;margin-top:6px;">3 · AgriMart</b>
-    <small style="color:#666;font-size:.76rem;">jual ke institusi</small>
+    <small style="color:#666;font-size:.76rem;">Jual ke Institusi</small>
   </div>
   <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#EFF6FF;
   border:1.5px solid #2563EB33;border-top:4px solid #2563EB;border-radius:14px;
   box-shadow:0 4px 14px rgba(14,58,44,.06);">
     <div style="font-size:1.6rem;line-height:1;">🔍</div>
     <b style="color:#2563EB;font-size:.92rem;display:block;margin-top:6px;">4 · QR Trace</b>
-    <small style="color:#666;font-size:.76rem;">sawah → penerima</small>
+    <small style="color:#666;font-size:.76rem;">Sawah → Penerima</small>
   </div>
   <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#F6F0FC;
   border:1.5px solid #4A148C33;border-top:4px solid #4A148C;border-radius:14px;
   box-shadow:0 4px 14px rgba(14,58,44,.06);">
     <div style="font-size:1.6rem;line-height:1;">🏛️</div>
     <b style="color:#4A148C;font-size:.92rem;display:block;margin-top:6px;">5 · Command Center</b>
-    <small style="color:#666;font-size:.76rem;">intelijen pangan</small>
+    <small style="color:#666;font-size:.76rem;">Intelijen Pangan</small>
   </div>
 </div>
 """, unsafe_allow_html=True)

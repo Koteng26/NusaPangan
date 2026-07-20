@@ -153,6 +153,7 @@ mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
 
 /* ---------- generic section head ---------- */
 .shead{max-width:680px;margin-bottom:44px}
+.gov .shead,.gov .shead p{max-width:none}
 .shead h2{font-size:clamp(26px,3.6vw,40px);margin:12px 0 12px}
 .shead p{color:var(--muted);font-size:16px}
 .pad{padding:74px 0 28px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
@@ -425,17 +426,28 @@ font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:a
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
-.cntwrap{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
-.cntleft .cgrid{grid-template-columns:1fr;gap:14px}
-.cntleft .cnt{text-align:left;display:flex;align-items:baseline;gap:14px}
-.cntleft .cnt b{min-width:170px}
-.cntleft .cnt span{margin:0}
-.cntphoto{margin:0;position:relative;border-radius:20px;overflow:hidden;
-box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12)}
-.cntphoto img{width:100%;height:min(60vh,470px);object-fit:cover;display:block}
-.cntphoto figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 12px;
-font-size:11.5px;color:#DDECE3;background:linear-gradient(180deg,transparent,rgba(10,31,23,.85))}
-@media(max-width:900px){.cntwrap{grid-template-columns:1fr;gap:24px}.cntphoto img{height:230px}}
+.cntwrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:34px;align-items:center}
+.cntwrap .shead h2{font-size:clamp(20px,4vh,32px)}
+.cgrid{grid-template-columns:1fr;gap:20px}
+.counters .cnt{text-align:left}
+.counters .cnt b{font-size:clamp(28px,5.6vh,46px);display:block}
+.counters .cnt span{margin-top:4px;display:block}
+.slider{position:relative;border-radius:20px;overflow:hidden;height:min(58vh,440px);
+box-shadow:0 26px 60px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12)}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+animation:slideshow 13.5s infinite}
+.slider img:nth-of-type(1){animation-delay:0s}
+.slider img:nth-of-type(2){animation-delay:4.5s}
+.slider img:nth-of-type(3){animation-delay:9s}
+@keyframes slideshow{0%{opacity:0}3%{opacity:1}30%{opacity:1}36%{opacity:0}100%{opacity:0}}
+.slider .sdot{position:absolute;bottom:12px;width:7px;height:7px;border-radius:50%;
+background:rgba(255,255,255,.45);z-index:3;animation:dotOn 13.5s infinite}
+.slider .sdot:nth-of-type(1){left:calc(50% - 14px);animation-delay:0s}
+.slider .sdot:nth-of-type(2){left:calc(50% - 3px);animation-delay:4.5s}
+.slider .sdot:nth-of-type(3){left:calc(50% + 8px);animation-delay:9s}
+@keyframes dotOn{0%,36%,100%{background:rgba(255,255,255,.4);width:7px}
+5%,30%{background:var(--grain);width:16px;border-radius:4px}}
+@media(max-width:980px){.cntwrap{grid-template-columns:1fr;gap:22px}.slider{height:240px}}
 /* teks rata kanan-kiri */
 .hlead,.shead p,.avision p,.pcard p,.bt p,.gcard p,.vcard p,.astory p,.amission p,.sctext p{
 text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
@@ -581,22 +593,22 @@ text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;tex
 <!-- COUNTERS -->
 <section class="counters pad">
   <div class="wrap cntwrap">
-    <div class="cntleft">
-      <div class="shead reveal" style="margin-bottom:26px">
-        <div class="eyebrow">Angka Awal</div>
-        <h2>Dimulai dari lapangan, bukan dari asumsi</h2>
-        <p>Tiga angka yang menjadi titik berangkat NusaPangan di Banten.</p>
-      </div>
-      <div class="cgrid">
-        <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
-        <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
-        <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
-      </div>
+    <div class="shead reveal" style="margin:0">
+      <div class="eyebrow">Angka Awal</div>
+      <h2>Dimulai dari lapangan, bukan dari asumsi</h2>
+      <p>Tiga angka yang menjadi titik berangkat NusaPangan di Banten.</p>
     </div>
-    <figure class="cntphoto reveal">
-      <img src="foto-panen.webp" alt="Petani memanen padi di sawah Indonesia" loading="lazy">
-      <figcaption>Panen padi, sentra produksi Indonesia</figcaption>
-    </figure>
+    <div class="cgrid">
+      <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
+      <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
+      <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
+    </div>
+    <div class="slider reveal" aria-label="Foto petani padi Indonesia">
+      <img src="foto-panen.webp" alt="Petani memanen padi">
+      <img src="foto-sawah.webp" alt="Panen padi bersama di sawah">
+      <img src="foto-petani.webp" alt="Potret petani padi">
+      <i class="sdot"></i><i class="sdot"></i><i class="sdot"></i>
+    </div>
   </div>
 </section>
 
