@@ -41,12 +41,17 @@ gap_harga = avg_harga_dki - avg_harga_banten
 
 # HERO
 st.markdown("""
-<div class="np-header" style="background: linear-gradient(135deg, #14532d 0%, #166534 40%, #15803d 100%); box-shadow: 0 8px 32px rgba(20,83,45,0.3);">
-    <p style="font-size: 0.75rem; opacity: 0.6; margin-bottom: 8px;">Platform Traceability MBG · Data Real PIHPS + BPS</p>
-    <h2 style="font-size: 1.8rem; font-weight: 800;">🌾 NusaPangan</h2>
-    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 10px; font-weight: 500;">
-        <em>"Setiap porsi makan bergizi gratis yang diterima anak Indonesia<br>
-        dapat ditelusuri kembali hingga petani yang menanamnya."</em>
+<div class="np-header" style="background: linear-gradient(135deg, #0E3A2C 0%, #166534 45%, #15803d 100%); box-shadow: 0 8px 32px rgba(20,83,45,0.3);">
+    <h2 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;">NusaPangan</h2>
+    <p style="font-size: 0.95rem; opacity: 0.85; margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase;">
+        Rice Intelligence Infrastructure</p>
+    <p style="font-size: 1.12rem; line-height: 1.65; margin-top: 14px; font-weight: 500; max-width: 780px;">
+        Kami membangun <b>infrastruktur data</b> yang memungkinkan keputusan lebih cerdas,
+        pasar lebih adil, dan sistem pangan yang lebih tangguh bagi Indonesia.
+    </p>
+    <p style="font-size: 0.92rem; line-height: 1.6; margin-top: 12px; opacity: 0.9; border-left: 3px solid rgba(231,178,76,0.8); padding-left: 14px; max-width: 780px;">
+        Ketahanan pangan dimulai dari memberdayakan orang-orang yang memproduksi pangan kita:
+        petani terhubung langsung ke pembeli institusi, dengan data yang dapat diverifikasi di setiap simpulnya.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -54,16 +59,46 @@ st.markdown("""
 # WELCOME + ALUR
 if st.session_state.get("petani"):
     _p = st.session_state["petani"]
-    st.markdown(f'<div class="np-alert np-alert-green">👋 Selamat datang kembali, <b>{_p["nama"]}</b> · <span style="font-family:monospace;">{_p["rice_id"]}</span> — paket <b>{_p["paket"]}</b>.</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="np-alert np-alert-green">👋 Selamat datang kembali, <b>{_p["nama"]}</b> · <span style="font-family:monospace;">{_p["rice_id"]}</span> · paket <b>{_p["paket"]}</b>.</div>', unsafe_allow_html=True)
 
-st.markdown("### 🧭 Alur NusaPangan — dari daftar sampai tersalur")
+st.markdown("### 🧭 Alur NusaPangan · Dari Rice ID hingga Dapur SPPG")
 st.markdown("""
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#15803d;">1 · Daftar</b><br><small style="color:#666;">petani + Rice ID</small></div>
-  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#15803d;">2 · Dashboard</b><br><small style="color:#666;">profil &amp; panen</small></div>
-  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#E65100;">3 · AgriMart</b><br><small style="color:#666;">jual ke SPPG</small></div>
-  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#2196F3;">4 · QR Trace</b><br><small style="color:#666;">sawah → piring</small></div>
-  <div class="np-card" style="flex:1;min-width:110px;text-align:center;padding:12px;"><b style="color:#1A237E;">5 · Gov Dashboard</b><br><small style="color:#666;">intelijen pangan</small></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+  <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#F0FDF4;
+  border:1.5px solid #15803d33;border-top:4px solid #15803d;border-radius:14px;
+  box-shadow:0 4px 14px rgba(14,58,44,.06);">
+    <div style="font-size:1.6rem;line-height:1;">🌱</div>
+    <b style="color:#15803d;font-size:.92rem;display:block;margin-top:6px;">1 · Daftar</b>
+    <small style="color:#666;font-size:.76rem;">petani + Rice ID</small>
+  </div>
+  <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#ECFDFA;
+  border:1.5px solid #0E948833;border-top:4px solid #0E9488;border-radius:14px;
+  box-shadow:0 4px 14px rgba(14,58,44,.06);">
+    <div style="font-size:1.6rem;line-height:1;">📊</div>
+    <b style="color:#0E9488;font-size:.92rem;display:block;margin-top:6px;">2 · Dashboard</b>
+    <small style="color:#666;font-size:.76rem;">profil &amp; panen</small>
+  </div>
+  <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#FFF1F4;
+  border:1.5px solid #E11D4833;border-top:4px solid #E11D48;border-radius:14px;
+  box-shadow:0 4px 14px rgba(14,58,44,.06);">
+    <div style="font-size:1.6rem;line-height:1;">🛒</div>
+    <b style="color:#E11D48;font-size:.92rem;display:block;margin-top:6px;">3 · AgriMart</b>
+    <small style="color:#666;font-size:.76rem;">jual ke institusi</small>
+  </div>
+  <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#EFF6FF;
+  border:1.5px solid #2563EB33;border-top:4px solid #2563EB;border-radius:14px;
+  box-shadow:0 4px 14px rgba(14,58,44,.06);">
+    <div style="font-size:1.6rem;line-height:1;">🔍</div>
+    <b style="color:#2563EB;font-size:.92rem;display:block;margin-top:6px;">4 · QR Trace</b>
+    <small style="color:#666;font-size:.76rem;">sawah → penerima</small>
+  </div>
+  <div style="flex:1;min-width:132px;text-align:center;padding:16px 12px;background:#F6F0FC;
+  border:1.5px solid #4A148C33;border-top:4px solid #4A148C;border-radius:14px;
+  box-shadow:0 4px 14px rgba(14,58,44,.06);">
+    <div style="font-size:1.6rem;line-height:1;">🏛️</div>
+    <b style="color:#4A148C;font-size:.92rem;display:block;margin-top:6px;">5 · Command Center</b>
+    <small style="color:#666;font-size:.76rem;">intelijen pangan</small>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 _c1, _c2 = st.columns(2)
@@ -74,7 +109,7 @@ with _c2:
 st.markdown("---")
 
 # STATS
-st.markdown("### 📊 Data Real — Banten vs DKI Jakarta")
+st.markdown("### 📊 Data Real · Banten vs DKI Jakarta")
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("👨‍🌾 Petani Banten", f"{total_farmers}", "Terverifikasi lapangan")
 c2.metric("🔍 Journey Tracked", f"{total_journeys}", "Banten → DKI")
@@ -112,7 +147,7 @@ with p3:
 
 # BANTEN vs DKI
 st.markdown("---")
-st.markdown("### 🗺️ Studi Kasus: Banten → DKI Jakarta")
+st.markdown("### 🗺️ Studi Kasus · Banten → DKI Jakarta")
 
 prod_banten = df_produksi[df_produksi["provinsi"]=="Banten"]["produksi_ton"].sum()
 prod_dki = df_produksi[df_produksi["provinsi"]=="DKI Jakarta"]["produksi_ton"].sum()
@@ -143,58 +178,64 @@ with col_b:
 
 # KAPABILITAS — clickable cards with page links
 st.markdown("---")
-st.markdown("### 🧩 Satu Platform Traceability, Lima Kapabilitas")
+st.markdown("### 🧩 Enam Kapabilitas dalam Satu Platform")
 
-col1, col2, col3 = st.columns(3)
-with col1:
+cc0 = st.columns(3)
+with cc0[0]:
     st.markdown("""
     <a href="/Farmer_Dashboard" target="_self" style="text-decoration:none;">
-    <div class="np-card" style="text-align:center;min-height:170px;padding:20px;cursor:pointer;border-top:4px solid #4CAF50;">
-        <div style="font-size:2.5rem;">👨‍🌾</div>
-        <div style="font-size:1rem;font-weight:700;color:#1B5E20;margin-top:6px;">Identitas Petani</div>
-        <div style="font-size:0.82rem;color:#666;margin-top:4px;">Verifikasi Dukcapil, credit scoring, akses KUR digital</div>
+    <div class="np-card" style="text-align:center;min-height:178px;padding:20px;cursor:pointer;
+    border:1.5px solid #4CAF5030;border-top:4px solid #4CAF50;background:linear-gradient(160deg,#4CAF500A,#fff);">
+        <div style="font-size:2.3rem;">👨‍🌾</div>
+        <div style="font-size:1rem;font-weight:700;color:#4CAF50;margin-top:6px;">Identitas Petani</div>
+        <div style="font-size:0.82rem;color:#666;margin-top:6px;line-height:1.55;">Rice ID terverifikasi petugas lapangan, riwayat panen, dan skor kelayakan</div>
     </div></a>""", unsafe_allow_html=True)
-with col2:
+with cc0[1]:
     st.markdown("""
     <a href="/QR_Trace" target="_self" style="text-decoration:none;">
-    <div class="np-card" style="text-align:center;min-height:170px;padding:20px;cursor:pointer;border-top:4px solid #2196F3;">
-        <div style="font-size:2.5rem;">🔍</div>
-        <div style="font-size:1rem;font-weight:700;color:#0D47A1;margin-top:6px;">QR Traceability</div>
-        <div style="font-size:0.82rem;color:#666;margin-top:4px;">Lacak beras dari sawah ke piring siswa + audit trail</div>
+    <div class="np-card" style="text-align:center;min-height:178px;padding:20px;cursor:pointer;
+    border:1.5px solid #2196F330;border-top:4px solid #2196F3;background:linear-gradient(160deg,#2196F30A,#fff);">
+        <div style="font-size:2.3rem;">🔍</div>
+        <div style="font-size:1rem;font-weight:700;color:#2196F3;margin-top:6px;">QR Traceability</div>
+        <div style="font-size:0.82rem;color:#666;margin-top:6px;line-height:1.55;">Lacak tiap batch dari sawah hingga dapur SPPG, tercatat berantai</div>
     </div></a>""", unsafe_allow_html=True)
-with col3:
+with cc0[2]:
     st.markdown("""
     <a href="/Command_Center" target="_self" style="text-decoration:none;">
-    <div class="np-card" style="text-align:center;min-height:170px;padding:20px;cursor:pointer;border-top:4px solid #1A237E;">
-        <div style="font-size:2.5rem;">🏛️</div>
-        <div style="font-size:1rem;font-weight:700;color:#1A237E;margin-top:6px;">Dashboard Pemerintah</div>
-        <div style="font-size:0.82rem;color:#666;margin-top:4px;">Price Radar, MBG Monitor, early warning inflasi</div>
+    <div class="np-card" style="text-align:center;min-height:178px;padding:20px;cursor:pointer;
+    border:1.5px solid #1A237E30;border-top:4px solid #1A237E;background:linear-gradient(160deg,#1A237E0A,#fff);">
+        <div style="font-size:2.3rem;">🏛️</div>
+        <div style="font-size:1rem;font-weight:700;color:#1A237E;margin-top:6px;">Command Center</div>
+        <div style="font-size:0.82rem;color:#666;margin-top:6px;line-height:1.55;">Inflasi BI, pasokan SPPG, harga PIHPS, dan produksi BPS</div>
     </div></a>""", unsafe_allow_html=True)
 
-col4, col5, col6 = st.columns(3)
-with col4:
+cc1 = st.columns(3)
+with cc1[0]:
     st.markdown("""
     <a href="/AgriMart" target="_self" style="text-decoration:none;">
-    <div class="np-card" style="text-align:center;min-height:170px;padding:20px;cursor:pointer;border-top:4px solid #E65100;">
-        <div style="font-size:2.5rem;">🛒</div>
-        <div style="font-size:1rem;font-weight:700;color:#E65100;margin-top:6px;">Marketplace F2C</div>
-        <div style="font-size:0.82rem;color:#666;margin-top:4px;">Petani jual langsung ke SPPG, memangkas rantai distribusi</div>
+    <div class="np-card" style="text-align:center;min-height:178px;padding:20px;cursor:pointer;
+    border:1.5px solid #E11D4830;border-top:4px solid #E11D48;background:linear-gradient(160deg,#E11D480A,#fff);">
+        <div style="font-size:2.3rem;">🛒</div>
+        <div style="font-size:1rem;font-weight:700;color:#E11D48;margin-top:6px;">AgriMart</div>
+        <div style="font-size:0.82rem;color:#666;margin-top:6px;line-height:1.55;">Petani menawarkan langsung ke pembeli institusi, tanpa tengkulak</div>
     </div></a>""", unsafe_allow_html=True)
-with col5:
+with cc1[1]:
     st.markdown("""
-    <a href="/PanganLink" target="_self" style="text-decoration:none;">
-    <div class="np-card" style="text-align:center;min-height:170px;padding:20px;cursor:pointer;border-top:4px solid #7C3AED;">
-        <div style="font-size:2.5rem;">🔗</div>
-        <div style="font-size:1rem;font-weight:700;color:#7C3AED;margin-top:6px;">AI Matching</div>
-        <div style="font-size:0.82rem;color:#666;margin-top:4px;">LSTM prediksi + matching surplus Banten → defisit DKI</div>
+    <a href="/Dashboard_SPPG" target="_self" style="text-decoration:none;">
+    <div class="np-card" style="text-align:center;min-height:178px;padding:20px;cursor:pointer;
+    border:1.5px solid #0E948830;border-top:4px solid #0E9488;background:linear-gradient(160deg,#0E94880A,#fff);">
+        <div style="font-size:2.3rem;">🏢</div>
+        <div style="font-size:1rem;font-weight:700;color:#0E9488;margin-top:6px;">Dashboard Institusi</div>
+        <div style="font-size:0.82rem;color:#666;margin-top:6px;line-height:1.55;">Ruang operasi SPPG: order, inventory, pengiriman, analytics</div>
     </div></a>""", unsafe_allow_html=True)
-with col6:
+with cc1[2]:
     st.markdown("""
     <a href="/SmartDistrib" target="_self" style="text-decoration:none;">
-    <div class="np-card" style="text-align:center;min-height:170px;padding:20px;cursor:pointer;border-top:4px solid #00897B;">
-        <div style="font-size:2.5rem;">🚛</div>
-        <div style="font-size:1rem;font-weight:700;color:#00897B;margin-top:6px;">IoT Cold-Chain</div>
-        <div style="font-size:0.82rem;color:#666;margin-top:4px;">Pantau suhu dan lokasi armada, cari rute terbaik otomatis</div>
+    <div class="np-card" style="text-align:center;min-height:178px;padding:20px;cursor:pointer;
+    border:1.5px solid #C9902E30;border-top:4px solid #C9902E;background:linear-gradient(160deg,#C9902E0A,#fff);">
+        <div style="font-size:2.3rem;">🚛</div>
+        <div style="font-size:1rem;font-weight:700;color:#C9902E;margin-top:6px;">SmartDistrib</div>
+        <div style="font-size:0.82rem;color:#666;margin-top:6px;line-height:1.55;">Optimasi rute, prakiraan kebutuhan, prediksi ETA, dan efisiensi biaya</div>
     </div></a>""", unsafe_allow_html=True)
 
 # MBG CONTEXT
