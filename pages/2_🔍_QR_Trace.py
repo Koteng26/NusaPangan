@@ -51,7 +51,7 @@ df_journeys = load_data("journeys.csv")
 st.markdown("""
 <div class="trace-header">
     <h2 style="margin:0;">🔍 QR Trace — Farm to Fork</h2>
-    <p style="margin:0.3rem 0 0 0; opacity:0.8;">Lacak perjalanan beras dari sawah Pak Tani sampai piring siswa MBG</p>
+    <p style="margin:0.3rem 0 0 0; opacity:0.8;">Lacak perjalanan beras dari sawah petani sampai dapur SPPG program MBG</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -362,7 +362,7 @@ for b in blocks:
 st.markdown("""
 > **Hash-chain (catatan berantai terkunci):** Setiap transaksi divalidasi oleh minimal 
 > 3 node (BPK Auditor, BGN, Kementan) menggunakan konsensus PBFT. Data tidak dapat diubah 
-> setelah tercatat — sehingga seluruh perjalanan beras bisa dilacak siapa saja — dari petani sampai piring siswa.
+> setelah tercatat — sehingga seluruh perjalanan beras bisa dilacak siapa saja — dari petani sampai dapur SPPG.
 """)
 
 st.markdown("---")
