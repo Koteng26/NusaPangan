@@ -87,7 +87,6 @@ with col_qr:
     """, unsafe_allow_html=True)
     
     st.markdown("")
-    st.markdown("##### 📊 Ringkasan Journey")
     st.metric("Total Jarak Tempuh", "~380 km", help="Estimasi dari sawah ke sekolah")
     st.metric("Waktu Tempuh", f"{(pd.to_datetime(j['tanggal_tiba']) - pd.to_datetime(j['tanggal_panen'])).days} hari")
     st.metric("Jumlah untuk Sekolah", f"{j['jumlah_kg_sekolah']} kg")
@@ -126,7 +125,6 @@ with col_journey:
             <strong>Tanggal Giling:</strong> {j['tanggal_giling']}<br>
             <strong>Hasil Beras:</strong> {j['jumlah_beras_kg']:,} kg beras putih<br>
             <strong>Rendemen:</strong> {j['rendemen_pct']}% (GKG → Beras)<br>
-            ✅ <em>Kualitas sesuai SNI — Grade Premium</em>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -143,7 +141,6 @@ with col_journey:
             <strong>Tanggal Masuk:</strong> {j['tanggal_masuk_gudang']}<br>
             <strong>Suhu Gudang:</strong> {j['suhu_gudang_c']}°C<br>
             <strong>Kelembaban:</strong> {j['kelembaban_pct']}%<br>
-            🌡️ <em>IoT Sensor — Kondisi optimal untuk penyimpanan beras</em>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -162,7 +159,6 @@ with col_journey:
             <strong>Tanggal Tiba:</strong> {j['tanggal_tiba']}<br>
             <strong>Jumlah:</strong> {j['jumlah_kg_sekolah']} kg<br>
             <strong>Status:</strong> {'🟢' if j['status']=='Delivered' else '🟡'} {j['status']}<br>
-            🚛 <em>GPS tracked — Suhu kargo terpantau real-time</em>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -178,7 +174,6 @@ with col_journey:
             <strong>Sekolah:</strong> {j['sekolah']}, {j['sekolah_kota']}<br>
             <strong>Jumlah Porsi:</strong> {j['jumlah_porsi']:,} porsi<br>
             <strong>Verifikasi:</strong> ✅ Seluruh journey tercatat permanen (hash-chain)<br>
-            🍚 <em>Nasi di piring siswa ini berasal dari sawah {j['petani_nama']}</em>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -301,7 +296,7 @@ blocks = [
         "block": 3,
         "label": "Penggilingan",
         "icon": "🏭",
-        "data": f"beras={j['jumlah_beras_kg']}kg, rendemen={j['rendemen_pct']}%, quality=SNI",
+        "data": f"beras={j['jumlah_beras_kg']}kg, rendemen={j['rendemen_pct']}%, mutu=tercatat",
         "timestamp": j['tanggal_giling'] + " 09:12:33",
         "validator": "Mitra Giling + Bulog Node",
     },
@@ -311,7 +306,7 @@ blocks = [
         "icon": "🏪",
         "data": f"suhu={j['suhu_gudang_c']}C, kelembaban={j['kelembaban_pct']}%, IoT=active",
         "timestamp": j['tanggal_masuk_gudang'] + " 11:45:18",
-        "validator": "IoT Sensor + Bulog Node",
+        "validator": "Petugas gudang + penerima batch",
     },
     {
         "block": 5,

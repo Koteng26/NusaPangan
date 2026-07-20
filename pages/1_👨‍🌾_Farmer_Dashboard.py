@@ -222,8 +222,8 @@ with col_left:
     st.plotly_chart(fig_price, use_container_width=True)
     
     # CREDIT SCORE
-    st.markdown("##### 💳 Credit Score & Akses KUR")
-    st.markdown("*Credit Score = skor kelayakan kredit petani berdasarkan riwayat tanam, luas lahan, dan verifikasi identitas. Skor tinggi → lebih mudah mengajukan KUR (Kredit Usaha Rakyat) dari bank.*")
+    st.markdown("##### 📊 Skor Kelayakan Petani")
+    st.markdown("*Profil verifikasi dari data lapangan: riwayat tanam, luas lahan, konsistensi hasil, dan transaksi. Dipakai lembaga keuangan sebagai bahan penilaian. **NusaPangan tidak menyalurkan pinjaman.***")
     
     score = farmer["credit_score"]
     grade = "A" if score >= 700 else "B" if score >= 650 else "C" if score >= 600 else "D"
@@ -251,11 +251,11 @@ with col_left:
     
     with cs2:
         if score >= 650:
-            st.success(f"✅ **ELIGIBLE KUR Mikro** — hingga Rp {min(50, int(farmer['luas_lahan_ha']*25))} juta")
+            st.success("✅ **Profil kuat** · riwayat tanam dan transaksi konsisten")
         elif score >= 550:
-            st.warning("⚠️ **CONDITIONAL** — Perlu tambahan jaminan kelompok tani")
+            st.warning("⚠️ **Profil berkembang** · perlu tambahan riwayat transaksi")
         else:
-            st.error("❌ **BELUM ELIGIBLE** — Perlu peningkatan riwayat transaksi")
+            st.error("❌ **Profil awal** · catat lebih banyak musim untuk memperkuat skor")
         
         st.markdown(f"""
         | Parameter | Nilai |

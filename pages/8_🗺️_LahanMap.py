@@ -156,7 +156,7 @@ df_show["Luas LSD (ha)"] = df_show["Luas LSD (ha)"].round(0).astype(int)
 st.dataframe(df_show, use_container_width=True, hide_index=True)
 
 # ---------- MOAT + KEJUJURAN ----------
-cA, cB = st.columns(2)
+cA = st.container()
 with cA:
     st.markdown("""
     <div class="np-alert np-alert-green">
@@ -164,12 +164,4 @@ with cA:
         Yang tidak bisa ditiru adalah <b>petani terverifikasi lapangan</b> yang ditautkan ke atasnya,
         dan riwayat panennya yang menebal tiap musim.
     </div>""", unsafe_allow_html=True)
-with cB:
-    st.markdown("""
-    <div class="np-alert np-alert-orange">
-        <b>📋 Kejujuran data.</b> Polygon = LSD resmi ATR/BPN 2021 (disederhanakan untuk web; 149.163 ha,
-        47.937 bidang — angka utuh). <b>3 titik = petani nyata</b> hasil wawancara.
-        156 titik jaringan berkoordinat nyata namun beratribut sintetis — diganti petani nyata tiap musim.
-    </div>""", unsafe_allow_html=True)
-
 st.markdown('<p class="np-source">Sumber: Kementerian ATR/BPN — Lahan Sawah Dilindungi (SK 2021) · farmers.csv (jaringan). Citra: Esri World Imagery.</p>', unsafe_allow_html=True)

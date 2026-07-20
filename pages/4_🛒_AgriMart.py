@@ -96,4 +96,3 @@ for i,it in enumerate(items):
         if st.button("Lihat Detail →", key="btn_"+it["id"], use_container_width=True):
             ss["am_sel"] = it["id"]; st.rerun()
 
-st.markdown('<div class="np-alert np-alert-orange" style="margin-top:16px;"><b>MVP demo.</b> Alur prototipe berhenti di Request Order — tanpa checkout. Pembayaran produksi memakai escrow yang diselenggarakan <b>mitra penyedia jasa pembayaran berizin</b>, bukan NusaPangan. Listing merupakan simulasi berlabel berbasis pola petani jaringan.</div>', unsafe_allow_html=True)

@@ -96,19 +96,26 @@ with tab1:
                       margin=dict(t=20, b=10))
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("""
-    > **Episode penting dalam data:** lonjakan **2005** & **2008** (kenaikan harga BBM & krisis global,
-    > inflasi menembus dua digit), **2013** (penyesuaian BBM), lalu era stabil **2015–2021**, tekanan
-    > pangan-energi **2022**, dan kembali ke kisaran sasaran hingga **{}** ({:.2f}%).
-    """.format(inf_now["periode"], inf_now["inflasi"]))
-
-    st.markdown("""
-    <div class="np-alert np-alert-green">
-        <strong>Mengapa ini panel utama NusaPangan?</strong><br>
-        Beras adalah penyumbang bobot terbesar kelompok <em>volatile food</em> — penggerak utama gejolak inflasi.
-        Transparansi harga gabah→beras dan kepastian pasokan Banten→DKI yang dibangun NusaPangan
-        adalah instrumen langsung pengendalian inflasi pangan di tingkat daerah.
+    hi5 = df_bi[df_bi["inflasi"] > 5]
+    st.markdown(f"""
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px;">
+      <div style="flex:1;min-width:150px;background:#F1F5F9;border-left:4px solid #283593;border-radius:10px;padding:12px 14px;">
+        <div style="font-size:.72rem;color:#64748B;">DALAM SASARAN BI (1,5–3,5%)</div>
+        <div style="font-size:1.35rem;font-weight:800;color:#1A237E;">{(df_bi['inflasi'].between(1.5,3.5)).mean()*100:.0f}%</div>
+        <div style="font-size:.7rem;color:#64748B;">dari {len(df_bi)} bulan tercatat</div></div>
+      <div style="flex:1;min-width:150px;background:#FEF2F2;border-left:4px solid #DC2626;border-radius:10px;padding:12px 14px;">
+        <div style="font-size:.72rem;color:#7F1D1D;">BULAN INFLASI &gt; 5%</div>
+        <div style="font-size:1.35rem;font-weight:800;color:#DC2626;">{len(hi5)}</div>
+        <div style="font-size:.7rem;color:#7F1D1D;">puncak {hi['inflasi']:.2f}% · {hi['periode']}</div></div>
+      <div style="flex:1;min-width:150px;background:#F0FDF4;border-left:4px solid #15803d;border-radius:10px;padding:12px 14px;">
+        <div style="font-size:.72rem;color:#14532D;">SELISIH 12 BULAN</div>
+        <div style="font-size:1.35rem;font-weight:800;color:#15803d;">{df_bi.tail(12)['inflasi'].max()-df_bi.tail(12)['inflasi'].min():.2f} pp</div>
+        <div style="font-size:.7rem;color:#14532D;">rentang gejolak setahun</div></div>
     </div>
+    <p style="font-size:.8rem;color:#64748B;border-left:3px solid #CBD5E1;padding-left:12px;margin-bottom:16px;">
+      Beras menyumbang bobot terbesar kelompok <b>volatile food</b>. Transparansi harga gabah→beras dan
+      kepastian pasokan Banten→DKI adalah pengungkit langsung pengendalian inflasi pangan daerah.
+    </p>
     """, unsafe_allow_html=True)
 
     st.markdown("##### Detail 2026 — Umum vs Volatile Food (BPS)")

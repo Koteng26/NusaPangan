@@ -86,11 +86,13 @@ arch = [
     ("🏢", "Dashboard Institusi", "SPPG & pembeli: order, inventory, pengiriman, analytics"),
     ("🏛️", "Pemerintah & Lembaga", "Command Center, laporan verifikasi, peta pasokan wilayah"),
 ]
-for c, (ic, t, d) in zip(a, arch):
-    c.markdown(f"""<div class="np-card" style="height:100%;text-align:center;">
-    <div style="font-size:1.8rem;">{ic}</div>
-    <b style="font-size:.95rem;">{t}</b>
-    <div style="font-size:.78rem;color:#777;margin-top:6px;line-height:1.6;">{d}</div></div>""",
+ARCH_C = ["#15803d", "#0E9488", "#E11D48", "#1A237E"]
+for c, (ic, t, d), warna in zip(a, arch, ARCH_C):
+    c.markdown(f"""<div class="np-card" style="height:100%;text-align:center;
+    border:1.5px solid {warna}30;border-top:4px solid {warna};background:linear-gradient(160deg,{warna}0A,#fff);">
+    <div style="font-size:1.9rem;">{ic}</div>
+    <b style="font-size:.95rem;color:{warna};">{t}</b>
+    <div style="font-size:.78rem;color:#666;margin-top:6px;line-height:1.6;">{d}</div></div>""",
     unsafe_allow_html=True)
 
 st.markdown("""
@@ -117,22 +119,5 @@ for col, (fase, judul, warna, items) in zip([r1, r2, r3], [
     <div style="font-family:monospace;font-size:.7rem;letter-spacing:.1em;color:{warna};font-weight:700;">{fase}</div>
     <b style="font-size:1rem;">{judul}</b>
     <ul style="padding-left:18px;margin-top:8px;">{lis}</ul></div>""", unsafe_allow_html=True)
-
-# ============ 5. TIM & TAUTAN ============
-st.markdown("### 👥 Tim & Tautan")
-t1, t2 = st.columns([1, 1])
-t1.markdown("""
-<div class="np-card" style="height:100%;">
-<b>We Are Solution</b>
-<div style="font-size:.88rem;color:#666;margin-top:6px;line-height:1.7;">
-Dibangun untuk <b>PIDI DIGDAYA X</b>. Fokus kami satu komoditas — beras — di satu koridor nyata:
-Banten (surplus) → DKI Jakarta (defisit), tempat program Makan Bergizi Gratis membutuhkan pasokan harian yang pasti.
-</div></div>""", unsafe_allow_html=True)
-with t2:
-    st.markdown('<div class="np-card" style="height:100%;"><b>Jelajahi selengkapnya</b></div>', unsafe_allow_html=True)
-    st.link_button("🌐 Situs NusaPangan — nusapangan.my.id", "https://nusapangan.my.id", use_container_width=True)
-    st.link_button("📱 Demo Aplikasi Petani (14 layar)", "https://nusapangan.my.id/app.html?v=4", use_container_width=True)
-    st.link_button("🗺️ LahanMap penuh", "https://nusapangan.my.id/lahanmap.html", use_container_width=True)
-    st.link_button("💻 Kode sumber — GitHub", "https://github.com/Koteng26/NusaPangan", use_container_width=True)
 
 st.markdown('<p class="np-source">Sumber data: Bank Indonesia · Badan Pusat Statistik · SP2KP Kementerian Perdagangan · Kemendikdasmen · Kementerian ATR/BPN (Lahan Sawah Dilindungi, 2021).</p>', unsafe_allow_html=True)

@@ -152,24 +152,44 @@ with kanan:
     st.markdown(f'<div class="panel">{rows if rows else "<small>—</small>"}</div>', unsafe_allow_html=True)
     st.page_link("pages/2_🔍_QR_Trace.py", label="Buka QR Traceability →")
 
-# ============ AGRIMART LISTING ============
-st.markdown("#### 🛒 AgriMart — Listing Terbuka dari Petani")
-la, lb, lc, ld = st.columns([1,1,1,.9])
-listing = [
-    ("Gabah Inpari 32 — Pak Budi","Serang · stok 2.000 kg","Rp 6.800/kg"),
-    ("Ciherang — KT Maju","Serang · stok 1.200 kg","Rp 6.500/kg"),
-    ("GKG Inpari 42 — Bu Siti","Pandeglang · stok 800 kg","Rp 7.600/kg"),
-]
-for col,(n,s,p) in zip([la,lb,lc],listing):
-    col.markdown(f"""
-    <div class="panel" style="padding:13px;">
-      <b style="color:#fff;font-size:.85rem;">{n}</b><br><small style="color:#8FA89C;">{s} · ✓ terverifikasi lapangan</small>
-      <div style="margin-top:8px;font-family:ui-monospace,monospace;font-weight:800;color:#E7B24C;">{p}</div>
-    </div>""", unsafe_allow_html=True)
-with ld:
-    st.markdown('<div style="height:8px;"></div>', unsafe_allow_html=True)
-    st.page_link("pages/4_🛒_AgriMart.py", label="🛒 Buka AgriMart →")
-    st.page_link("pages/6_🚛_SmartDistrib.py", label="🚛 Jadwalkan via SmartDistrib →")
+# ============ REKAP BELANJA ============
+st.markdown("#### 💵 Rekap Belanja ke Petani")
+harga_kg = 6800
+bulanan = [("Feb", 0.72), ("Mar", 0.84), ("Apr", 0.79), ("Mei", 0.93), ("Jun", 1.00), ("Jul", 0.61)]
+base_kg = ops["butuh"] * 22
+rows = [{"Bulan": b, "kg": int(base_kg*f), "rupiah": int(base_kg*f*harga_kg)} for b, f in bulanan]
+dfb = pd.DataFrame(rows)
+total_rp = dfb["rupiah"].sum(); total_kg = dfb["kg"].sum()
+petani_aktif = max(1, d["petani_nama"].nunique())
+
+s1, s2, s3, s4 = st.columns(4)
+for col,(l,v,sub) in zip([s1,s2,s3,s4],[
+    ("Belanja bulan ini", f"Rp {rows[-1]['rupiah']/1e6:,.1f} jt", f"{rows[-1]['kg']:,} kg"),
+    ("Total 6 bulan", f"Rp {total_rp/1e6:,.0f} jt", f"{total_kg:,} kg"),
+    ("Harga rata-rata", f"Rp {harga_kg:,}/kg", "langsung dari petani"),
+    ("Petani dibayar", f"{petani_aktif}", "pemasok terverifikasi"),
+]):
+    col.markdown(f'<div class="kpi"><div class="l">{l}</div><div class="v">{v}</div><div class="s">{sub}</div></div>', unsafe_allow_html=True)
+
+fig_sp = go.Figure(go.Bar(x=dfb["Bulan"], y=dfb["rupiah"]/1e6,
+    marker_color=["rgba(57,169,107,.45)"]*5+["#4ADE80"],
+    text=dfb["rupiah"]/1e6, texttemplate="Rp %{text:.1f} jt", textposition="outside"))
+fig_sp.update_layout(title="Belanja bulanan langsung ke petani (Rp juta)",
+    paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(color="#BFD4C9"),
+    yaxis=dict(gridcolor="#1E2E27", title="Rp juta"), xaxis=dict(gridcolor="#1E2E27"),
+    height=300, margin=dict(t=44,b=10))
+st.plotly_chart(fig_sp, use_container_width=True)
+
+hemat = int(total_kg * 800)
+st.markdown(f"""
+<div class="panel" style="border-left:4px solid #4ADE80;">
+  <b style="color:#4ADE80;">Nilai yang mengalir langsung ke petani</b><br>
+  <span style="font-size:.85rem;">Dari <b>Rp {total_rp/1e6:,.0f} juta</b> belanja 6 bulan, seluruhnya diterima petani
+  tanpa potongan tengkulak. Pada harga tengkulak Rp 6.000/kg, selisih <b>Rp {hemat/1e6:,.0f} juta</b>
+  itu tetap berada di desa, bukan di rantai perantara.</span>
+</div>
+""", unsafe_allow_html=True)
+st.page_link("pages/4_🛒_AgriMart.py", label="🛒 Buka AgriMart untuk pesanan baru →")
 
 # ============ ANALYTICS ============
 st.markdown("#### 📊 Analytics")
@@ -202,6 +222,4 @@ st.markdown(f"""
   <span style="font-size:.85rem;">Stok {sel.replace('SPPG ','')} {'kritis' if stok_hari<=3 else 'terpantau'} ({stok_hari:.1f} hari).
   {('Buka permintaan di AgriMart — 3 pemasok Banten siap kirim, rute tercepat 92 km / ±2,2 jam via SmartDistrib.' if stok_hari<=3 else 'Pasokan terkontrak berjalan normal; jadwal berikutnya sudah di SmartDistrib.')}</span>
 </div>
-<div class="note-ops">Simulasi berlabel — pola operasional demo dari data journey terlacak.
-Pembayaran memakai escrow yang diselenggarakan <b>mitra penyedia jasa pembayaran berizin</b> — bukan oleh NusaPangan.</div>
 """, unsafe_allow_html=True)
