@@ -598,9 +598,9 @@ text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;tex
       <h2>Dimulai dari lapangan, bukan dari asumsi</h2>
     </div>
     <div class="cgrid">
-      <div class="cnt reveal"><b data-to="3" data-suffix="">0</b><span>Petani tervalidasi lapangan</span></div>
-      <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">0</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
-      <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">0</b><span>Satpen MBG DKI + Banten</span></div>
+      <div class="cnt reveal"><b data-to="3" data-suffix="">3</b><span>Petani tervalidasi lapangan</span></div>
+      <div class="cnt reveal"><b data-to="1.04" data-suffix=" jt ton" data-dec="2">1,04 jt ton</b><span>Surplus beras Banten Jan–Jun 2026</span></div>
+      <div class="cnt reveal"><b data-to="134" data-suffix=" rb+">134 rb+</b><span>Satpen MBG DKI + Banten</span></div>
     </div>
     <div class="slider reveal" aria-label="Foto petani padi Indonesia">
       <img src="foto-panen.webp" alt="Petani memanen padi">
@@ -885,8 +885,22 @@ function countUp(el){
   }
   requestAnimationFrame(step);
 }
-const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){countUp(e.target.querySelector('b[data-to]')||e.target);cio.unobserve(e.target)}}),{threshold:.5});
+function finalText(el){
+  const to=parseFloat(el.dataset.to), dec=parseInt(el.dataset.dec||0), suf=el.dataset.suffix||'';
+  return (dec?to.toFixed(dec).replace('.',','):Math.round(to).toLocaleString('id-ID'))+suf;
+}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    const b=e.target.querySelector('b[data-to]')||e.target;
+    if(!b.dataset.done){ b.dataset.done=1; b.textContent='0'; countUp(b); }
+    cio.unobserve(e.target);
+  }
+}),{threshold:.25});
 document.querySelectorAll('.cnt').forEach(el=>cio.observe(el));
+// jaring pengaman: kalau observer tak pernah memicu, pastikan angka akhir tetap benar
+setTimeout(()=>document.querySelectorAll('.cnt b[data-to]').forEach(b=>{
+  if(!b.dataset.done) b.textContent=finalText(b);
+}),4000);
 
 // price bars
 const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
